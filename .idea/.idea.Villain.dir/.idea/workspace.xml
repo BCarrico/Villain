@@ -8,18 +8,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="64539828-f90b-421b-b98a-b9d4e3b60545" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Villain.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Villain.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/BP_VillainCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/BP_VillainCharacter.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Blueprints/Character/BP_VillainCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Character/BP_VillainCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Game/BP_VillainGameModeBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Game/BP_VillainGameModeBase.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Private/Character/CharacterBase.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Private/Character/VillainCharacter.cpp" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Private/Player/VillainPlayerController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/Player/VillainPlayerController.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/Character/CharacterBase.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/Character/VillainCharacter.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/Player/VillainPlayerController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/Player/VillainPlayerController.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Villain.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Villain.Build.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Villain.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/Villain.uproject" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -270,7 +259,7 @@
       <option name="presentableId" value="Default" />
       <updated>1726772572200</updated>
       <workItem from="1726772574245" duration="2992000" />
-      <workItem from="1726845773785" duration="8414000" />
+      <workItem from="1726845773785" duration="8801000" />
     </task>
     <servers />
   </component>
