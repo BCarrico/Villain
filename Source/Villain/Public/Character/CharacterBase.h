@@ -3,33 +3,26 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Pawn.h"
+#include "GameFramework/Character.h"
 #include "CharacterBase.generated.h"
 
-class UCameraComponent;
-class USpringArmComponent;
-class UCapsuleComponent;
-
 UCLASS()
-class VILLAIN_API ACharacterBase : public APawn
+class VILLAIN_API ACharacterBase : public ACharacter
 {
 	GENERATED_BODY()
 
 public:
-	
+
 	ACharacterBase();
-	
+
 	virtual void Tick(float DeltaTime) override;
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-protected:
 	
+protected:
+
 	virtual void BeginPlay() override;
 
 private:	
-	UPROPERTY(EditAnywhere)
-	USkeletalMeshComponent* CharacterMesh;
 
-	UPROPERTY(EditAnywhere)
-	UCapsuleComponent* CapsuleComponent;
 
 };

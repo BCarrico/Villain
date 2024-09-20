@@ -6,7 +6,8 @@
 #include "Character/CharacterBase.h"
 #include "VillainCharacter.generated.h"
 
-class UCharacterMovementComponent;
+class UCameraComponent;
+class USpringArmComponent;
 /**
  * 
  */
@@ -14,16 +15,14 @@ UCLASS()
 class VILLAIN_API AVillainCharacter : public ACharacterBase
 {
 	GENERATED_BODY()
-public:
-	AVillainCharacter();
-private:
-	
-	UPROPERTY(VisibleAnywhere, Category="Camera")
-	USpringArmComponent* CameraBoom;
-	
-	UPROPERTY(VisibleAnywhere, Category="Camera")
-	UCameraComponent* TopDownCamera;
 
-	UPROPERTY(EditAnywhere)
-	UCharacterMovementComponent* CharacterMovementComponent;
+	AVillainCharacter();
+
+private:
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<UCameraComponent> TopDownCameraComponent;
+
+	UPROPERTY(VisibleAnywhere)
+	TObjectPtr<USpringArmComponent> CameraBoom;
 };

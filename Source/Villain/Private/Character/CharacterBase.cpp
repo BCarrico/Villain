@@ -2,20 +2,21 @@
 
 
 #include "Character/CharacterBase.h"
+
 #include "Components/CapsuleComponent.h"
 
-
+// Sets default values
 ACharacterBase::ACharacterBase()
 {
- 	
 	PrimaryActorTick.bCanEverTick = true;
 	
-	CharacterMesh = CreateDefaultSubobject<USkeletalMeshComponent>("CharacterMesh");
-	CharacterMesh->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
+	GetCapsuleComponent()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
+	GetCapsuleComponent()->SetGenerateOverlapEvents(false);
+
+	// Ensure Mesh has Physics body for collision.
 	
-	
-	CapsuleComponent = CreateDefaultSubobject<UCapsuleComponent>("CapsuleComponent");
-	RootComponent = CapsuleComponent;
+	GetMesh()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
+	GetMesh()->SetGenerateOverlapEvents(true);
 }
 
 
@@ -31,6 +32,7 @@ void ACharacterBase::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
+
 
 void ACharacterBase::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {

@@ -2,7 +2,6 @@
 
 
 #include "Character/VillainCharacter.h"
-
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -13,17 +12,16 @@ AVillainCharacter::AVillainCharacter()
 	CameraBoom->SetupAttachment(GetRootComponent());
 	CameraBoom->SetUsingAbsoluteRotation(true);
 	CameraBoom->bDoCollisionTest = false;
-	
-	TopDownCamera = CreateDefaultSubobject<UCameraComponent>("TopDownCameraComponent");
-	TopDownCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
-	TopDownCamera->bUsePawnControlRotation = false;
 
-	CharacterMovementComponent = CreateDefaultSubobject<UCharacterMovementComponent>("CharacterMovementComponent");
-	CharacterMovementComponent->bOrientRotationToMovement = true;
-	CharacterMovementComponent->RotationRate = FRotator(0.f, 400.f, 0.f);
-	CharacterMovementComponent->bConstrainToPlane = true;
-	CharacterMovementComponent->bSnapToPlaneAtStart = true;
+	TopDownCameraComponent = CreateDefaultSubobject<UCameraComponent>("TopDownCameraComponet");
+	TopDownCameraComponent->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
+	TopDownCameraComponent->bUsePawnControlRotation = false;
 	
+	GetCharacterMovement()->bOrientRotationToMovement = true;
+	GetCharacterMovement()->RotationRate = FRotator(0.f, 400.f, 0.f);
+	GetCharacterMovement()->bConstrainToPlane = true;
+	GetCharacterMovement()->bSnapToPlaneAtStart = true;
+
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationYaw = false;
