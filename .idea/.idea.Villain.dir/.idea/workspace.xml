@@ -9,13 +9,8 @@
   <component name="ChangeListManager">
     <list default="true" id="64539828-f90b-421b-b98a-b9d4e3b60545" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Villain.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Villain.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Game/BP_VillainGameModeBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Game/BP_VillainGameModeBase.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Private/Character/CharacterBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/Character/CharacterBase.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Private/Player/VillainPlayerState.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/Player/VillainPlayerState.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/Character/CharacterBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/Character/CharacterBase.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/Player/VillainPlayerState.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/Player/VillainPlayerState.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Villain.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Villain.Build.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Villain.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/Villain.uproject" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Config/DefaultInput.ini" beforeDir="false" afterPath="$PROJECT_DIR$/Config/DefaultInput.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Villain/Private/Player/VillainPlayerController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/Player/VillainPlayerController.cpp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -266,7 +261,8 @@
       <option name="presentableId" value="Default" />
       <updated>1726772572200</updated>
       <workItem from="1726772574245" duration="2992000" />
-      <workItem from="1726845773785" duration="9887000" />
+      <workItem from="1726845773785" duration="10749000" />
+      <workItem from="1726858994712" duration="287000" />
     </task>
     <servers />
   </component>

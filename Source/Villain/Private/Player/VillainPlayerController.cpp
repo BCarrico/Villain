@@ -35,9 +35,8 @@ void AVillainPlayerController::SetupInputComponent()
 {
 	Super::SetupInputComponent();
 
-	//TODO: UVillainInputComponent* VillainInputComponent = CastChecked<UVillianInputComponent>(InputComponent); -- TRY this after adding to InputConfig & tags.
-	UEnhancedInputComponent* VillainInputComponent = CastChecked<UEnhancedInputComponent>(InputComponent);
-
+	UVillainInputComponent* VillainInputComponent = CastChecked<UVillainInputComponent>(InputComponent);
+	
 	VillainInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AVillainPlayerController::Move);
 	//TODO: BindAbilityActions from InputComponent.h
 }
