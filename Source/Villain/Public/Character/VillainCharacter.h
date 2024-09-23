@@ -15,14 +15,20 @@ UCLASS()
 class VILLAIN_API AVillainCharacter : public ACharacterBase
 {
 	GENERATED_BODY()
-
+public:
 	AVillainCharacter();
+	virtual void PossessedBy(AController* NewController) override;
+	virtual void OnRep_PlayerState() override;
+	
+protected:
 
+	
 private:
-
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UCameraComponent> TopDownCameraComponent;
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USpringArmComponent> CameraBoom;
+
+	void InitAbilityActorInfo();
 };
