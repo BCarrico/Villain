@@ -3,9 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayEffectTypes.h"
 #include "GameFramework/Actor.h"
 #include "VillainEffectActor.generated.h"
 
+class UAbilitySystemComponent;
 class UGameplayEffect;
 class USphereComponent;
 
@@ -75,6 +77,8 @@ protected:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Applied Effects")
 	float ActorLevel = 1.f;
+
+	TMap<FActiveGameplayEffectHandle, UAbilitySystemComponent*> ActiveEffectHandles;
 };
 
 
