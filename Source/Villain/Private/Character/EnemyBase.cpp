@@ -28,5 +28,11 @@ void AEnemyBase::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	InitAbilityActorInfo();
+}
+
+void AEnemyBase::InitAbilityActorInfo()
+{
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	Cast<UVillainAbilitySystemComponent>(GetAbilitySystemComponent())->AbilityActorInfoSet();
 }

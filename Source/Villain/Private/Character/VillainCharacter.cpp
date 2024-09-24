@@ -4,6 +4,7 @@
 #include "Character/VillainCharacter.h"
 
 #include "AbilitySystemComponent.h"
+#include "AbilitySystem/VillainAbilitySystemComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
@@ -51,6 +52,7 @@ void AVillainCharacter::InitAbilityActorInfo()
 	AVillainPlayerState* VillainPlayerState = GetPlayerState<AVillainPlayerState>();
 	check(VillainPlayerState)
 	VillainPlayerState->GetAbilitySystemComponent()->InitAbilityActorInfo(VillainPlayerState, this);
+	Cast<UVillainAbilitySystemComponent>(VillainPlayerState->GetAbilitySystemComponent())->AbilityActorInfoSet();
 	AbilitySystemComponent = VillainPlayerState->GetAbilitySystemComponent();
 	AttributeSet = VillainPlayerState->GetAttributeSet();
 }

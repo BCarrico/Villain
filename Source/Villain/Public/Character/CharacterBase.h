@@ -28,7 +28,8 @@ public:
 	UAttributeSet* GetAttributeSet() const {return AttributeSet;}
 protected:
 	virtual void BeginPlay() override;
-
+	virtual void InitAbilityActorInfo();
+	
 	/* Ability System - Needed For Enemy Class? */
 	//TODO: Construct ASC + AS in Enemy Class
 	

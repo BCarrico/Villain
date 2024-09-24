@@ -26,6 +26,11 @@ void ACharacterBase::BeginPlay()
 	
 }
 
+void ACharacterBase::InitAbilityActorInfo()
+{
+	
+}
+
 
 void ACharacterBase::Tick(float DeltaTime)
 {
