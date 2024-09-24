@@ -18,8 +18,12 @@ public:
 
  // TEST Tags
  FGameplayTag Test_TestTag;
+ 
  // Vital Attributes
  FGameplayTag Attributes_Vital_MaxHealth;
+ 
+ // Player Tags
+ FGameplayTag Player_Block_CursorTrace;
 protected:
 private:
  static FVillainGameplayTags GameplayTags;

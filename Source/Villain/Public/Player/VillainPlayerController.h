@@ -6,6 +6,8 @@
 #include "GameFramework/PlayerController.h"
 #include "VillainPlayerController.generated.h"
 
+class UVillainAbilitySystemComponent;
+class IEnemyInterface;
 struct FInputActionValue;
 /**
  * 
@@ -23,6 +25,7 @@ public:
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
+	virtual void PlayerTick(float DeltaTime) override;
 private:
 	UPROPERTY(EditAnywhere, Category= Input)
 	TObjectPtr<UInputMappingContext> VillainInputContext;
@@ -30,5 +33,14 @@ private:
 	UPROPERTY(EditAnywhere, Category= Input)
 	TObjectPtr<UInputAction> MoveAction;
 
+	UPROPERTY()
+	TObjectPtr<UVillainAbilitySystemComponent> VillainAbilitySystemComponent;
+
+	FHitResult CursorHit;
+	TScriptInterface<IEnemyInterface> LastActor;
+	TScriptInterface<IEnemyInterface> ThisActor;
+
+	UVillainAbilitySystemComponent* GetASC();
 	void Move(const FInputActionValue& InputActionValue);
+	void CursorTrace();
 };
