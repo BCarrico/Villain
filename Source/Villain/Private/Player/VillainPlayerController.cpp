@@ -31,7 +31,7 @@ void AVillainPlayerController::BeginPlay()
 	DefaultMouseCursor = EMouseCursor::Default;
 	
 	FInputModeGameAndUI InputModeData;
-	InputModeData.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+	InputModeData.SetLockMouseToViewportBehavior(EMouseLockMode::LockAlways);
 	InputModeData.SetHideCursorDuringCapture(false);
 	SetInputMode(InputModeData);
 }
@@ -43,6 +43,7 @@ void AVillainPlayerController::SetupInputComponent()
 	UVillainInputComponent* VillainInputComponent = CastChecked<UVillainInputComponent>(InputComponent);
 	
 	VillainInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AVillainPlayerController::Move);
+	VillainInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AVillainPlayerController::Aim);
 	//TODO: BindAbilityActions from InputComponent.h
 }
 
@@ -51,7 +52,6 @@ void AVillainPlayerController::PlayerTick(float DeltaTime)
 	Super::PlayerTick(DeltaTime);
 
 	CursorTrace();
-	LookAtMouseLocation();
 }
 
 UVillainAbilitySystemComponent* AVillainPlayerController::GetASC()
@@ -81,17 +81,19 @@ void AVillainPlayerController::Move(const FInputActionValue& InputActionValue)
 	}
 }
 
-void AVillainPlayerController::LookAtMouseLocation() const
+void AVillainPlayerController::Aim(const FInputActionValue& InputActionValue)
 {
+	// TODO: Use InputActionValue bool for CombatComponent?
+	
 	if (APawn* ControlledPawn = GetPawn<APawn>())
 	{
-		const FVector PlayerLocation = ControlledPawn->GetActorLocation();
-		const FVector LookDirection = (CursorHitLocation - PlayerLocation).GetSafeNormal();
+		const FVector PawnLocation = ControlledPawn->GetActorLocation();
+
+		const FVector LookDirection = (CursorHitLocation - PawnLocation).GetSafeNormal();
 		const FRotator NewRotation = FRotationMatrix::MakeFromX(LookDirection).Rotator();
-		// add yaw input to controller
-		ControlledPawn->SetActorRotation(NewRotation);
 
 		// IF wanting smoother input or change to 3rd Person, think of using AddControllerYawInput as SetActorRotation is immediate. 
+		ControlledPawn->SetActorRotation(FRotator(NewRotation.Pitch, NewRotation.Yaw, 0.0f));
 	}
 }
 

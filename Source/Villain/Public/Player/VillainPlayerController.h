@@ -45,7 +45,7 @@ private:
 
 	UVillainAbilitySystemComponent* GetASC();
 	void Move(const FInputActionValue& InputActionValue);
-	void LookAtMouseLocation() const;
+	void Aim(const FInputActionValue& InputActionValue);
 	void CursorTrace();
 	FVector_NetQuantize CursorHitLocation;
 };
