@@ -16,7 +16,7 @@ class VILLAIN_API UVillainAbilitySystemComponent : public UAbilitySystemComponen
 	GENERATED_BODY()
 public:
 	void AbilityActorInfoSet();
-
+	void AddCharacterAbilities(const TArray<TSubclassOf<UGameplayAbility>>& StartupAbilities);
 	FEffectAssetTags EffectAssetTags;
 protected:
 	UFUNCTION(Client, Reliable)

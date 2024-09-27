@@ -3,9 +3,11 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "GameFramework/PlayerController.h"
 #include "VillainPlayerController.generated.h"
 
+class UVillainInputConfig;
 class UVillainAbilitySystemComponent;
 class IEnemyInterface;
 struct FInputActionValue;
@@ -38,12 +40,18 @@ private:
 
 	UPROPERTY()
 	TObjectPtr<UVillainAbilitySystemComponent> VillainAbilitySystemComponent;
-
+	
+	UPROPERTY(EditDefaultsOnly, Category="Input")
+	TObjectPtr<UVillainInputConfig> InputConfig;
+	
 	FHitResult CursorHit;
 	TScriptInterface<IEnemyInterface> LastActor;
 	TScriptInterface<IEnemyInterface> ThisActor;
 
 	UVillainAbilitySystemComponent* GetASC();
+	void AbilityInputTagPressed(FGameplayTag InputTag);
+	void AbilityInputTagReleased(FGameplayTag InputTag);
+	void AbilityInputTagHeld(FGameplayTag InputTag);
 	void Move(const FInputActionValue& InputActionValue);
 	void Aim(const FInputActionValue& InputActionValue);
 	void CursorTrace();

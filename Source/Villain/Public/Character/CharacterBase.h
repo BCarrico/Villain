@@ -8,6 +8,7 @@
 #include "CharacterBase.generated.h"
 
 
+class UGameplayAbility;
 class UAttributeSet;
 class UAbilitySystemComponent;
 
@@ -29,9 +30,7 @@ public:
 protected:
 	virtual void BeginPlay() override;
 	virtual void InitAbilityActorInfo();
-	
-	/* Ability System - Needed For Enemy Class? */
-	//TODO: Construct ASC + AS in Enemy Class
+	void AddCharacterAbilities();
 	
 	UPROPERTY()
 	TObjectPtr<UAbilitySystemComponent> AbilitySystemComponent;
@@ -40,5 +39,6 @@ protected:
 	TObjectPtr<UAttributeSet> AttributeSet;
 private:	
 
-
+	UPROPERTY(EditAnywhere, Category="Abilities")
+	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
 };

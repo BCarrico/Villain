@@ -37,6 +37,7 @@ void AVillainCharacter::PossessedBy(AController* NewController)
 	
 	// Init ability actor info for the Server
 	InitAbilityActorInfo();
+	AddCharacterAbilities();
 }
 
 void AVillainCharacter::OnRep_PlayerState()

@@ -31,7 +31,7 @@ void AVillainPlayerController::BeginPlay()
 	DefaultMouseCursor = EMouseCursor::Default;
 	
 	FInputModeGameAndUI InputModeData;
-	InputModeData.SetLockMouseToViewportBehavior(EMouseLockMode::LockAlways);
+	InputModeData.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
 	InputModeData.SetHideCursorDuringCapture(false);
 	SetInputMode(InputModeData);
 }
@@ -44,7 +44,7 @@ void AVillainPlayerController::SetupInputComponent()
 	
 	VillainInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AVillainPlayerController::Move);
 	VillainInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AVillainPlayerController::Aim);
-	//TODO: BindAbilityActions from InputComponent.h
+	VillainInputComponent->BindAbilityActions(InputConfig, this, &ThisClass::AbilityInputTagPressed, &ThisClass::AbilityInputTagReleased, &ThisClass::AbilityInputTagHeld);
 }
 
 void AVillainPlayerController::PlayerTick(float DeltaTime)
@@ -61,6 +61,21 @@ UVillainAbilitySystemComponent* AVillainPlayerController::GetASC()
 		VillainAbilitySystemComponent = Cast<UVillainAbilitySystemComponent>(UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(GetPawn<APawn>()));
 	}
 	return VillainAbilitySystemComponent;
+}
+
+void AVillainPlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
+{
+	GEngine->AddOnScreenDebugMessage(1, 3.f, FColor::Red, *InputTag.ToString());
+}
+
+void AVillainPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
+{
+	GEngine->AddOnScreenDebugMessage(2, 3.f, FColor::Blue, *InputTag.ToString());
+}
+
+void AVillainPlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
+{
+	GEngine->AddOnScreenDebugMessage(3, 3.f, FColor::Green, *InputTag.ToString());
 }
 
 void AVillainPlayerController::Move(const FInputActionValue& InputActionValue)

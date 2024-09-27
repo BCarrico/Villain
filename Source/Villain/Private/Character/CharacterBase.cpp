@@ -3,6 +3,7 @@
 
 #include "Character/CharacterBase.h"
 
+#include "AbilitySystem/VillainAbilitySystemComponent.h"
 #include "Components/CapsuleComponent.h"
 
 // Sets default values
@@ -29,6 +30,14 @@ void ACharacterBase::BeginPlay()
 void ACharacterBase::InitAbilityActorInfo()
 {
 	
+}
+
+void ACharacterBase::AddCharacterAbilities()
+{
+	UVillainAbilitySystemComponent* VillainASC = CastChecked<UVillainAbilitySystemComponent>(AbilitySystemComponent);
+	if (!HasAuthority()) return;
+
+	VillainASC -> AddCharacterAbilities(StartupAbilities);
 }
 
 
