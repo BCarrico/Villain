@@ -33,6 +33,9 @@ private:
 	UPROPERTY(EditAnywhere, Category= Input)
 	TObjectPtr<UInputAction> MoveAction;
 
+	UPROPERTY(EditAnywhere, Category= Input)
+	TObjectPtr<UInputAction> LookAction;
+
 	UPROPERTY()
 	TObjectPtr<UVillainAbilitySystemComponent> VillainAbilitySystemComponent;
 
@@ -42,5 +45,7 @@ private:
 
 	UVillainAbilitySystemComponent* GetASC();
 	void Move(const FInputActionValue& InputActionValue);
+	void LookAtMouseLocation() const;
 	void CursorTrace();
+	FVector_NetQuantize CursorHitLocation;
 };

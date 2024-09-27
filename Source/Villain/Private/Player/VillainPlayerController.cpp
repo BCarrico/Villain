@@ -51,6 +51,7 @@ void AVillainPlayerController::PlayerTick(float DeltaTime)
 	Super::PlayerTick(DeltaTime);
 
 	CursorTrace();
+	LookAtMouseLocation();
 }
 
 UVillainAbilitySystemComponent* AVillainPlayerController::GetASC()
@@ -80,9 +81,22 @@ void AVillainPlayerController::Move(const FInputActionValue& InputActionValue)
 	}
 }
 
+void AVillainPlayerController::LookAtMouseLocation() const
+{
+	if (APawn* ControlledPawn = GetPawn<APawn>())
+	{
+		const FVector PlayerLocation = ControlledPawn->GetActorLocation();
+		const FVector LookDirection = (CursorHitLocation - PlayerLocation).GetSafeNormal();
+		const FRotator NewRotation = FRotationMatrix::MakeFromX(LookDirection).Rotator();
+		// add yaw input to controller
+		ControlledPawn->SetActorRotation(NewRotation);
+
+		// IF wanting smoother input or change to 3rd Person, think of using AddControllerYawInput as SetActorRotation is immediate. 
+	}
+}
+
 void AVillainPlayerController::CursorTrace()
 {
-	
 	if (GetASC() && GetASC()->HasMatchingGameplayTag(FVillainGameplayTags::Get().Player_Block_CursorTrace))
 	{
 		if (LastActor) LastActor->UnHighlightActor();
@@ -102,6 +116,8 @@ void AVillainPlayerController::CursorTrace()
 	{
 		if (LastActor) LastActor->UnHighlightActor();
 		if (ThisActor) ThisActor->HighlightActor();
-	
 	}
+	
+	// Store hit location for player rotation
+	CursorHitLocation = CursorHit.Location;
 }
