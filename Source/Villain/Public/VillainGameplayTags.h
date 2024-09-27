@@ -24,6 +24,9 @@ public:
  
  // Player Tags
  FGameplayTag Player_Block_CursorTrace;
+
+ // Input Tags
+ FGameplayTag InputTag_LMB;
 protected:
 private:
  static FVillainGameplayTags GameplayTags;
