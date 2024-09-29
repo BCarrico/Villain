@@ -65,17 +65,19 @@ UVillainAbilitySystemComponent* AVillainPlayerController::GetASC()
 
 void AVillainPlayerController::AbilityInputTagPressed(FGameplayTag InputTag)
 {
-	GEngine->AddOnScreenDebugMessage(1, 3.f, FColor::Red, *InputTag.ToString());
+	// TODO: See AURA for additional functionality for Pressed, Released, and Held
+	
+	if (GetASC()) GetASC()->AbilityInputTagPressed(InputTag);
 }
 
 void AVillainPlayerController::AbilityInputTagReleased(FGameplayTag InputTag)
 {
-	GEngine->AddOnScreenDebugMessage(2, 3.f, FColor::Blue, *InputTag.ToString());
+	if (GetASC()) GetASC()->AbilityInputTagReleased(InputTag);
 }
 
 void AVillainPlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
 {
-	GEngine->AddOnScreenDebugMessage(3, 3.f, FColor::Green, *InputTag.ToString());
+	if (GetASC()) GetASC()->AbilityInputTagHeld(InputTag);
 }
 
 void AVillainPlayerController::Move(const FInputActionValue& InputActionValue)

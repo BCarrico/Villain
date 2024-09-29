@@ -13,5 +13,8 @@ UCLASS()
 class VILLAIN_API UVillainGameplayAbilityBase : public UGameplayAbility
 {
 	GENERATED_BODY()
-	
+
+public:
+	UPROPERTY(EditDefaultsOnly, Category="Input")
+	FGameplayTag StartupInputTag;
 };

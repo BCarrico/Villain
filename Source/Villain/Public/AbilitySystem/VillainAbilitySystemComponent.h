@@ -17,6 +17,9 @@ class VILLAIN_API UVillainAbilitySystemComponent : public UAbilitySystemComponen
 public:
 	void AbilityActorInfoSet();
 	void AddCharacterAbilities(const TArray<TSubclassOf<UGameplayAbility>>& StartupAbilities);
+	void AbilityInputTagPressed(const FGameplayTag& InputTag);
+	void AbilityInputTagHeld(const FGameplayTag& InputTag);
+	void AbilityInputTagReleased(const FGameplayTag& InputTag);
 	FEffectAssetTags EffectAssetTags;
 protected:
 	UFUNCTION(Client, Reliable)
