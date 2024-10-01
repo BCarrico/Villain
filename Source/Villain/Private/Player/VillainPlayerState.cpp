@@ -5,6 +5,7 @@
 
 #include "AbilitySystem/VillainAbilitySystemComponent.h"
 #include "AbilitySystem/VillainAttributeSet.h"
+#include "Net/UnrealNetwork.h"
 
 AVillainPlayerState::AVillainPlayerState()
 {
@@ -18,7 +19,18 @@ AVillainPlayerState::AVillainPlayerState()
 	NetUpdateFrequency = 100.f;
 }
 
+void AVillainPlayerState::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	DOREPLIFETIME(AVillainPlayerState, Level);
+}
+
 UAbilitySystemComponent* AVillainPlayerState::GetAbilitySystemComponent() const
 {
 	return AbilitySystemComponent;
+}
+
+void AVillainPlayerState::OnRep_Level(int32 OldLevel)
+{
+	//OnLevelChangedDelegate.Broadcast(Level);
 }

@@ -19,10 +19,13 @@ class VILLAIN_API AVillainPlayerState : public APlayerState, public IAbilitySyst
 
 public:
 	AVillainPlayerState();
-
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	
 	/* Ability System */
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	UAttributeSet* GetAttributeSet() const {return AttributeSet;}
+
+	FORCEINLINE int32 GetPlayerLevel() const {return Level;}
 protected:
 	
 	/* Ability System */
@@ -32,4 +35,12 @@ protected:
 
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
+
+private:
+
+	UPROPERTY(VisibleAnywhere, ReplicatedUsing=OnRep_Level)
+	int32 Level = 1;
+
+	UFUNCTION()
+	void OnRep_Level(int32 OldLevel);
 };

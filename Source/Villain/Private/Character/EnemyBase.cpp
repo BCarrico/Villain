@@ -43,6 +43,11 @@ void AEnemyBase::UnHighlightActor()
 	//Weapon->SetRenderCustomDepth(false);
 }
 
+int32 AEnemyBase::GetPlayerLevel_Implementation()
+{
+	return Level;
+}
+
 void AEnemyBase::BeginPlay()
 {
 	Super::BeginPlay();

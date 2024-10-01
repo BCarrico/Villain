@@ -4,6 +4,7 @@
 #include "Character/VillainCharacter.h"
 
 #include "AbilitySystemComponent.h"
+#include "EditorDirectories.h"
 #include "AbilitySystem/VillainAbilitySystemComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -46,6 +47,13 @@ void AVillainCharacter::OnRep_PlayerState()
 	
 	// Init ability actor info for the Client
 	InitAbilityActorInfo();
+}
+
+int32 AVillainCharacter::GetPlayerLevel_Implementation()
+{
+	const AVillainPlayerState* VillainPlayerState = GetPlayerState<AVillainPlayerState>();
+	check(VillainPlayerState);
+	return VillainPlayerState->GetPlayerLevel();
 }
 
 void AVillainCharacter::InitAbilityActorInfo()

@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "AbilitySystemInterface.h"
 #include "GameFramework/Character.h"
+#include "Interaction/CombatInterface.h"
 #include "CharacterBase.generated.h"
 
 
@@ -13,7 +14,7 @@ class UAttributeSet;
 class UAbilitySystemComponent;
 
 UCLASS()
-class VILLAIN_API ACharacterBase : public ACharacter, public IAbilitySystemInterface // <-- Gives ability to GetAbilitySystemComponent()
+class VILLAIN_API ACharacterBase : public ACharacter, public ICombatInterface, public IAbilitySystemInterface // <-- Gives ability to GetAbilitySystemComponent()
 {
 	GENERATED_BODY()
 
