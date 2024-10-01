@@ -39,7 +39,7 @@ protected:
 	TObjectPtr<UAudioComponent> LoopingSoundComponent;
 private:
 	UPROPERTY(EditDefaultsOnly)
-	float LifeSpan = 15.f;
+	float LifeSpan = 5.f;
 	
 	UPROPERTY(EditAnywhere)
 	TObjectPtr<USoundBase> LoopingSound;
