@@ -62,6 +62,21 @@ void ACharacterBase::AddCharacterAbilities()
 	VillainASC -> AddCharacterAbilities(StartupAbilities);
 }
 
+void ACharacterBase::ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const
+{
+	check(IsValid(GetAbilitySystemComponent()));
+	check (GameplayEffectClass);
+	FGameplayEffectContextHandle ContextHandle = GetAbilitySystemComponent()->MakeEffectContext();
+	ContextHandle.AddSourceObject(this);
+	const FGameplayEffectSpecHandle SpecHandle = GetAbilitySystemComponent()->MakeOutgoingSpec(GameplayEffectClass, 1.f, ContextHandle);
+	GetAbilitySystemComponent()->ApplyGameplayEffectSpecToTarget(*SpecHandle.Data.Get(), GetAbilitySystemComponent());
+}
+
+void ACharacterBase::InitializeDefaultAttributes() const
+{
+	ApplyEffectToSelf(DefaultVitalAttributes, 1);
+}
+
 
 void ACharacterBase::Tick(float DeltaTime)
 {

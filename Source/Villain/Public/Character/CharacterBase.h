@@ -9,6 +9,7 @@
 #include "CharacterBase.generated.h"
 
 
+class UGameplayEffect;
 class UGameplayAbility;
 class UAttributeSet;
 class UAbilitySystemComponent;
@@ -51,7 +52,12 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category= "Combat")
 	FName WeaponTipSocketName;
-	
+
+	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="Attributes")
+	TSubclassOf<UGameplayEffect> DefaultVitalAttributes;
+
+	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const;
+	virtual void InitializeDefaultAttributes() const;
 private:	
 
 	UPROPERTY(EditAnywhere, Category="Abilities")

@@ -64,4 +64,6 @@ void AVillainCharacter::InitAbilityActorInfo()
 	Cast<UVillainAbilitySystemComponent>(VillainPlayerState->GetAbilitySystemComponent())->AbilityActorInfoSet();
 	AbilitySystemComponent = VillainPlayerState->GetAbilitySystemComponent();
 	AttributeSet = VillainPlayerState->GetAttributeSet();
+	
+	InitializeDefaultAttributes();
 }

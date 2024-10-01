@@ -11,9 +11,7 @@
 
 UVillainAttributeSet::UVillainAttributeSet()
 {
-	// TODO: Test Attribute Setting. Please Remove.
-	InitHealth(100.f);
-	InitMaxHealth(125.f);
+
 }
 
 void UVillainAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
