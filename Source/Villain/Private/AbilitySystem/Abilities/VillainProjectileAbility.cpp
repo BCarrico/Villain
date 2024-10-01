@@ -11,22 +11,21 @@ void UVillainProjectileAbility::ActivateAbility(const FGameplayAbilitySpecHandle
 	Super::ActivateAbility(Handle, ActorInfo, ActivationInfo, TriggerEventData);
 }
 
-void UVillainProjectileAbility::SpawnProjectile(const FVector& ProjectileTargetLocation, const FGameplayTag& SocketTag,
-                                                bool bOverridePitch, float PitchOverride)
+void UVillainProjectileAbility::SpawnProjectile(const FVector& ProjectileTargetLocation, const FGameplayTag& SocketTag, bool bOverridePitch, float PitchOverride)
 {
 	const bool bIsServer = GetAvatarActorFromActorInfo()->HasAuthority();
 	if (!bIsServer) return;
 	
 	const FVector SocketLocation = ICombatInterface::Execute_GetCombatSocketLocation(GetAvatarActorFromActorInfo(), SocketTag);
-	//FRotator Rotation = (ProjectileTargetLocation - SocketLocation).Rotation();
+	FRotator Rotation = (ProjectileTargetLocation - SocketLocation).Rotation();
 		
 	FTransform SpawnTransform;
-	//if (bOverridePitch)
-	//{
-	//	Rotation.Pitch = PitchOverride;
-	//}
+	if (bOverridePitch)
+	{
+		Rotation.Pitch = PitchOverride;
+	}
 	SpawnTransform.SetLocation(SocketLocation);
-	//SpawnTransform.SetRotation(Rotation.Quaternion());
+	SpawnTransform.SetRotation(Rotation.Quaternion());
 	
 	AVillainProjectile* Projectile = GetWorld()->SpawnActorDeferred<AVillainProjectile>(
 		ProjectileClass,
