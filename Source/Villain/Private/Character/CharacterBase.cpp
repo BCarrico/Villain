@@ -3,6 +3,7 @@
 
 #include "Character/CharacterBase.h"
 
+#include "VillainGameplayTags.h"
 #include "AbilitySystem/VillainAbilitySystemComponent.h"
 #include "Components/CapsuleComponent.h"
 
@@ -18,8 +19,27 @@ ACharacterBase::ACharacterBase()
 	
 	GetMesh()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
 	GetMesh()->SetGenerateOverlapEvents(true);
+
+	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
+	Weapon->SetupAttachment(GetMesh(), FName("WeaponHandSocket"));
+	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 }
 
+
+FVector ACharacterBase::GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag)
+{
+	const FVillainGameplayTags& GameplayTags = FVillainGameplayTags::Get();
+	if (MontageTag.MatchesTagExact(GameplayTags.CombatSocket_Weapon) && IsValid(Weapon))
+	{
+		return Weapon->GetSocketLocation(WeaponTipSocketName);
+	}
+	return FVector();
+}
+
+TArray<FTaggedMontage> ACharacterBase::GetAttackMontages_Implementation()
+{
+	return AttackMontages;
+}
 
 void ACharacterBase::BeginPlay()
 {

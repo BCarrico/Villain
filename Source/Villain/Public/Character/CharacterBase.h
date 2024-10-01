@@ -28,6 +28,13 @@ public:
 	/* Ability System */
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	UAttributeSet* GetAttributeSet() const {return AttributeSet;}
+
+	// Combat Interface
+	virtual FVector GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag) override;
+	virtual TArray<FTaggedMontage> GetAttackMontages_Implementation() override;
+	
+	UPROPERTY(EditAnywhere, Category="Combat")
+	TArray<FTaggedMontage> AttackMontages;
 protected:
 	virtual void BeginPlay() override;
 	virtual void InitAbilityActorInfo();
@@ -38,6 +45,13 @@ protected:
 
 	UPROPERTY()
 	TObjectPtr<UAttributeSet> AttributeSet;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combat")
+	TObjectPtr<USkeletalMeshComponent> Weapon;
+
+	UPROPERTY(EditAnywhere, Category= "Combat")
+	FName WeaponTipSocketName;
+	
 private:	
 
 	UPROPERTY(EditAnywhere, Category="Abilities")

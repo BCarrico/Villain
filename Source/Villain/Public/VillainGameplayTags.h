@@ -27,6 +27,9 @@ public:
 
  // Input Tags
  FGameplayTag InputTag_LMB;
+
+ // Combat Socket Tags
+ FGameplayTag CombatSocket_Weapon;
 protected:
 private:
  static FVillainGameplayTags GameplayTags;

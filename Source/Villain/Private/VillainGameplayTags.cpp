@@ -19,4 +19,7 @@ void FVillainGameplayTags::InitializeNativeGameplayTags()
 
 	// Input Tags
 	GameplayTags.InputTag_LMB = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("InputTag.LMB"), FString("InputTag for LMB"));
+
+	// Combat Sockets
+	GameplayTags.CombatSocket_Weapon = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("CombatSocket.Weapon"), FString("Weapon"));
 }
