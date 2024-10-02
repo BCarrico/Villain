@@ -27,7 +27,7 @@ protected:
 	
 private:
 	UPROPERTY(VisibleAnywhere)
-	TObjectPtr<UCameraComponent> TopDownCameraComponent;
+	TObjectPtr<UCameraComponent> FollowCamera;
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<USpringArmComponent> CameraBoom;

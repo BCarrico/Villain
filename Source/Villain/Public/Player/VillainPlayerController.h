@@ -28,16 +28,23 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
 	virtual void PlayerTick(float DeltaTime) override;
+	virtual void OnPossess(APawn* InPawn) override;
 private:
-	UPROPERTY(EditAnywhere, Category= Input)
+	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<UInputMappingContext> VillainInputContext;
 
-	UPROPERTY(EditAnywhere, Category= Input)
+	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<UInputAction> MoveAction;
 
-	UPROPERTY(EditAnywhere, Category= Input)
+	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<UInputAction> LookAction;
 
+	UPROPERTY(EditAnywhere, Category="Input")
+	TObjectPtr<UInputAction> CrouchAction;
+
+	UPROPERTY(EditAnywhere, Category="Input")
+	TObjectPtr<UInputAction> JumpAction;
+	
 	UPROPERTY()
 	TObjectPtr<UVillainAbilitySystemComponent> VillainAbilitySystemComponent;
 	
@@ -54,6 +61,9 @@ private:
 	void AbilityInputTagHeld(FGameplayTag InputTag);
 	void Move(const FInputActionValue& InputActionValue);
 	void Aim(const FInputActionValue& InputActionValue);
+	void Look(const FInputActionValue& InputActionValue);
+	void JumpButtonPressed();
+	void CrouchButtonPressed();
 	void CursorTrace();
 	FVector_NetQuantize CursorHitLocation;
 };

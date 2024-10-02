@@ -7,6 +7,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "VillainGameplayTags.h"
 #include "AbilitySystem/VillainAbilitySystemComponent.h"
+#include "Character/VillainCharacter.h"
 #include "Interaction/EnemyInterface.h"
 #include "Input/VillainInputComponent.h"
 
@@ -27,13 +28,13 @@ void AVillainPlayerController::BeginPlay()
 	};
 
 	// Show mouse cursor, and use default arrow-shaped cursor
-	bShowMouseCursor = true;
-	DefaultMouseCursor = EMouseCursor::Default;
+	//bShowMouseCursor = true;
+	//DefaultMouseCursor = EMouseCursor::Default;
 	
-	FInputModeGameAndUI InputModeData;
-	InputModeData.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-	InputModeData.SetHideCursorDuringCapture(false);
-	SetInputMode(InputModeData);
+	//FInputModeGameAndUI InputModeData;
+	//InputModeData.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+	//InputModeData.SetHideCursorDuringCapture(false);
+	//SetInputMode(InputModeData);
 }
 
 void AVillainPlayerController::SetupInputComponent()
@@ -44,6 +45,10 @@ void AVillainPlayerController::SetupInputComponent()
 	
 	VillainInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AVillainPlayerController::Move);
 	VillainInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AVillainPlayerController::Aim);
+	VillainInputComponent->BindAction(CrouchAction, ETriggerEvent::Started, this, &AVillainPlayerController::CrouchButtonPressed); // Also set as triggered in IA_Crouch due to stuttering in game. Fixed it
+	VillainInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AVillainPlayerController::Look);
+	VillainInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &AVillainPlayerController::JumpButtonPressed);
+	
 	VillainInputComponent->BindAbilityActions(InputConfig, this, &ThisClass::AbilityInputTagPressed, &ThisClass::AbilityInputTagReleased, &ThisClass::AbilityInputTagHeld);
 }
 
@@ -52,6 +57,20 @@ void AVillainPlayerController::PlayerTick(float DeltaTime)
 	Super::PlayerTick(DeltaTime);
 
 	CursorTrace();
+}
+
+void AVillainPlayerController::OnPossess(APawn* InPawn)
+{
+	Super::OnPossess(InPawn);
+	/*AVillainCharacter* VillainCharacter = Cast<AVillainCharacter>(InPawn);
+	if (VillainCharacter)
+	{
+		SetHUDHealth(BlasterCharacter->GetHealth(), BlasterCharacter->GetMaxHealth());
+	}*/
+	if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer()))
+	{
+		Subsystem->AddMappingContext(VillainInputContext, 0);
+	}
 }
 
 UVillainAbilitySystemComponent* AVillainPlayerController::GetASC()
@@ -111,6 +130,46 @@ void AVillainPlayerController::Aim(const FInputActionValue& InputActionValue)
 
 		// IF wanting smoother input or change to 3rd Person, think of using AddControllerYawInput as SetActorRotation is immediate. 
 		ControlledPawn->SetActorRotation(FRotator(NewRotation.Pitch, NewRotation.Yaw, 0.0f));
+	}
+}
+
+void AVillainPlayerController::Look(const FInputActionValue& InputActionValue)
+{
+	FVector2D LookAxisVector = InputActionValue.Get<FVector2D>();
+	if (APawn* ControlledPawn = GetPawn<APawn>())
+	{
+		// add yaw and pitch input to controller
+		ControlledPawn->AddControllerYawInput(LookAxisVector.X);
+		ControlledPawn->AddControllerPitchInput(LookAxisVector.Y);
+	}
+}
+
+void AVillainPlayerController::JumpButtonPressed()
+{
+	if (APawn* ControlledPawn = GetPawn<APawn>())
+	{
+		if (ACharacter* ControlledCharacter = Cast<ACharacter>(ControlledPawn))
+		{
+			ControlledCharacter->Jump();
+		}
+	}
+}
+
+void AVillainPlayerController::CrouchButtonPressed()
+{
+	if (APawn* ControlledPawn = GetPawn<APawn>())
+	{
+		if (ACharacter* ControlledCharacter = Cast<ACharacter>(ControlledPawn))
+		{
+			if (ControlledCharacter->bIsCrouched)
+			{
+				ControlledCharacter->UnCrouch();
+			}
+			else
+			{
+				ControlledCharacter->Crouch();
+			}
+		}
 	}
 }
 
