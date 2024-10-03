@@ -17,25 +17,23 @@ AVillainCharacter::AVillainCharacter()
 {
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>("CameraBoom");
 	CameraBoom->SetupAttachment(GetRootComponent());
-	CameraBoom->SetUsingAbsoluteRotation(true);
-	CameraBoom->bDoCollisionTest = false;
 	CameraBoom->TargetArmLength = 320.f;
+	CameraBoom->bUsePawnControlRotation = true;
 
-	FollowCamera = CreateDefaultSubobject<UCameraComponent>("TopDownCameraComponet");
+	FollowCamera = CreateDefaultSubobject<UCameraComponent>("FollowCamera");
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	FollowCamera->bUsePawnControlRotation = false;
 	
-	bUseControllerRotationYaw = false;
-	
-	GetCharacterMovement()->bOrientRotationToMovement = true;
+	bUseControllerRotationYaw = true;
+	GetCharacterMovement()->bOrientRotationToMovement = false;
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 0.f, 850.f);
-
-	bUseControllerRotationPitch = false;
-	bUseControllerRotationRoll = false;
-	bUseControllerRotationYaw = false;
+	GetCharacterMovement()->NavAgentProps.bCanCrouch = true;
 	
 	Combat = CreateDefaultSubobject<UCombatComponent>("CombatComponent");
 	Combat->SetIsReplicated(true);  // Components do not need to be registered in GetLifetimeReplicatedProps
+
+	NetUpdateFrequency = 66.f;  // COMMON values for fast-paced games
+	MinNetUpdateFrequency = 33.f;
 }
 
 void AVillainCharacter::PossessedBy(AController* NewController)

@@ -5,10 +5,8 @@
 
 #include "AbilitySystemBlueprintLibrary.h"
 #include "EnhancedInputSubsystems.h"
-#include "VillainGameplayTags.h"
 #include "AbilitySystem/VillainAbilitySystemComponent.h"
 #include "Character/VillainCharacter.h"
-#include "Interaction/EnemyInterface.h"
 #include "Input/VillainInputComponent.h"
 #include "VillainComponents/CombatComponent.h"
 
@@ -59,8 +57,7 @@ void AVillainPlayerController::SetupInputComponent()
 void AVillainPlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
-
-	CursorTrace();
+	
 }
 
 void AVillainPlayerController::OnPossess(APawn* InPawn)
@@ -123,17 +120,17 @@ void AVillainPlayerController::Move(const FInputActionValue& InputActionValue)
 
 void AVillainPlayerController::Aim(const FInputActionValue& InputActionValue)
 {
-	// TODO: Use InputActionValue bool for CombatComponent?
-	
+	bool IsAiming = InputActionValue.Get<bool>();
 	if (APawn* ControlledPawn = GetPawn<APawn>())
 	{
-		const FVector PawnLocation = ControlledPawn->GetActorLocation();
-
-		const FVector LookDirection = (CursorHitLocation - PawnLocation).GetSafeNormal();
-		const FRotator NewRotation = FRotationMatrix::MakeFromX(LookDirection).Rotator();
-
-		// IF wanting smoother input or change to 3rd Person, think of using AddControllerYawInput as SetActorRotation is immediate. 
-		ControlledPawn->SetActorRotation(FRotator(NewRotation.Pitch, NewRotation.Yaw, 0.0f));
+		if (AVillainCharacter* VillainCharacter = Cast<AVillainCharacter>(ControlledPawn))
+		{
+			//if (VillainCharacter->bDisableGameplay) return;
+			if (UCombatComponent* CombatComponent = VillainCharacter->GetCombatComponent())
+			{
+				//CombatComponent->SetAiming(IsAiming);
+			}
+		}
 	}
 }
 
@@ -194,31 +191,4 @@ void AVillainPlayerController::EquipButtonPressed()
 			*/
 		}
 	}
-}
-
-void AVillainPlayerController::CursorTrace()
-{
-	if (GetASC() && GetASC()->HasMatchingGameplayTag(FVillainGameplayTags::Get().Player_Block_CursorTrace))
-	{
-		if (LastActor) LastActor->UnHighlightActor();
-		if (ThisActor) ThisActor->UnHighlightActor();
-		LastActor = nullptr;
-		ThisActor = nullptr;
-		return;
-	}
-
-	GetHitResultUnderCursor(ECC_Visibility, false, CursorHit);
-	if (!CursorHit.bBlockingHit) return;
-	
-	LastActor = ThisActor;
-	ThisActor = CursorHit.GetActor();
-
-	if (LastActor != ThisActor)
-	{
-		if (LastActor) LastActor->UnHighlightActor();
-		if (ThisActor) ThisActor->HighlightActor();
-	}
-	
-	// Store hit location for player rotation
-	CursorHitLocation = CursorHit.Location;
 }

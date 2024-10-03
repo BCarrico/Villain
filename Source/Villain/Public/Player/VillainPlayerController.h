@@ -68,6 +68,5 @@ private:
 	void JumpButtonPressed();
 	void CrouchButtonPressed();
 	void EquipButtonPressed();
-	void CursorTrace();
 	FVector_NetQuantize CursorHitLocation;
 };

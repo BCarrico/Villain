@@ -6,8 +6,7 @@
 #include "VillainGameplayTags.h"
 #include "AbilitySystem/VillainAbilitySystemComponent.h"
 #include "Components/CapsuleComponent.h"
-#include "GameFramework/CharacterMovementComponent.h"
-#include "Villain/Villain.h"
+
 
 // Sets default values
 ACharacterBase::ACharacterBase()
@@ -22,9 +21,9 @@ ACharacterBase::ACharacterBase()
 	
 	GetMesh()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
 	GetMesh()->SetGenerateOverlapEvents(true);
-	GetMesh()->SetCollisionResponseToChannel(ECC_Projectile, ECR_Overlap);
+	
 
-	GetCharacterMovement()->NavAgentProps.bCanCrouch = true;
+
 }
 
 
