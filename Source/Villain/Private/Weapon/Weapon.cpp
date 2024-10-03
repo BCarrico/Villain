@@ -68,7 +68,6 @@ void AWeapon::OnSphereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 	}	
 }
 
-
 void AWeapon::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -83,3 +82,75 @@ void AWeapon::ShowPickupWidget(bool bShowWidget)
 	}
 }
 
+void AWeapon::SetWeaponState(EWeaponState State)
+{
+	// All done on server
+	WeaponState = State;
+	OnWeaponStateSet();
+}
+
+void AWeapon::OnWeaponStateSet()
+{
+	switch (WeaponState)
+	{
+	case EWeaponState::EWS_Equipped:
+		OnEquipped();
+		break;
+	/*case EWeaponState::EWS_EquippedSecondary:
+		OnEquippedSecondary();
+		break;*/
+	case EWeaponState::EWS_Dropped:
+		OnDropped();
+		break;
+	}
+}
+
+void AWeapon::OnEquipped()
+{
+	ShowPickupWidget(false);
+	AreaSphere->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision); // This only needs to be changed on the server. Disables overlap events. Only generated on the server :)
+	WeaponMesh->SetSimulatePhysics(false);
+	WeaponMesh->SetEnableGravity(false);
+	WeaponMesh->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
+
+	/*
+	 *TODO: Lag Compensation
+	BlasterOwnerCharacter = BlasterOwnerCharacter == nullptr ? Cast<ABlasterCharacter>(GetOwner()) : BlasterOwnerCharacter;
+	if (BlasterOwnerCharacter && bUseServerSideRewind)
+	{
+		BlasterOwnerController = BlasterOwnerController == nullptr ? Cast<ABlasterPlayerController>(BlasterOwnerCharacter->Controller) : BlasterOwnerController;
+		if (BlasterOwnerController && HasAuthority() && !BlasterOwnerController->HighPingDelegate.IsBound())
+		{
+			BlasterOwnerController->HighPingDelegate.AddDynamic(this, &AWeapon::OnPingTooHigh);
+		}
+	}
+	* TODO: Lag Compensation
+	*/
+}
+
+void AWeapon::OnDropped()
+{
+	if(HasAuthority())
+	{
+		AreaSphere->SetCollisionEnabled(ECollisionEnabled::Type::QueryOnly);
+	}
+	WeaponMesh->SetSimulatePhysics(true);
+	WeaponMesh->SetEnableGravity(true);
+	WeaponMesh->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+	WeaponMesh->SetCollisionResponseToAllChannels(ECR_Block);
+	WeaponMesh->SetCollisionResponseToChannel(ECC_Pawn, ECR_Ignore);
+	WeaponMesh->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
+	
+	/*
+	 *TODO: Lag Compensation
+	BlasterOwnerCharacter = BlasterOwnerCharacter == nullptr ? Cast<ABlasterCharacter>(GetOwner()) : BlasterOwnerCharacter;
+	if (BlasterOwnerCharacter && bUseServerSideRewind)
+	{
+		BlasterOwnerController = BlasterOwnerController == nullptr ? Cast<ABlasterPlayerController>(BlasterOwnerCharacter->Controller) : BlasterOwnerController;
+		if (BlasterOwnerController && HasAuthority() && BlasterOwnerController->HighPingDelegate.IsBound())
+		{
+			BlasterOwnerController->HighPingDelegate.RemoveDynamic(this, &AWeapon::OnPingTooHigh);
+		}
+	}
+	*/
+}

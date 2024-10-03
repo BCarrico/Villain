@@ -9,9 +9,15 @@
   <component name="ChangeListManager">
     <list default="true" id="64539828-f90b-421b-b98a-b9d4e3b60545" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Villain.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Villain.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/StarterContent/Characters/Mannequins/Meshes/SK_Mannequin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/StarterContent/Characters/Mannequins/Meshes/SK_Mannequin.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Input/IMC_VillainContext.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Input/IMC_VillainContext.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Villain/Private/Character/CharacterBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/Character/CharacterBase.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Villain/Private/Character/VillainCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/Character/VillainCharacter.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Villain/Private/Player/VillainPlayerController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/Player/VillainPlayerController.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Villain/Private/Weapon/Weapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/Weapon/Weapon.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/Character/CharacterBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/Character/CharacterBase.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Villain/Public/Character/VillainCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/Character/VillainCharacter.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/Player/VillainPlayerController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/Player/VillainPlayerController.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Villain/Public/Weapon/Weapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/Weapon/Weapon.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -159,7 +165,7 @@
       <workItem from="1727818845967" duration="737000" />
       <workItem from="1727819859304" duration="4499000" />
       <workItem from="1727909729775" duration="5990000" />
-      <workItem from="1727968568860" duration="1770000" />
+      <workItem from="1727968568860" duration="8468000" />
     </task>
     <servers />
   </component>

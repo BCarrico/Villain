@@ -10,6 +10,7 @@
 #include "Character/VillainCharacter.h"
 #include "Interaction/EnemyInterface.h"
 #include "Input/VillainInputComponent.h"
+#include "VillainComponents/CombatComponent.h"
 
 AVillainPlayerController::AVillainPlayerController()
 {
@@ -51,7 +52,7 @@ void AVillainPlayerController::SetupInputComponent()
 	VillainInputComponent->BindAction(CrouchAction, ETriggerEvent::Started, this, &AVillainPlayerController::CrouchButtonPressed); // Also set as triggered in IA_Crouch due to stuttering in game. Fixed it
 	VillainInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AVillainPlayerController::Look);
 	VillainInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &AVillainPlayerController::JumpButtonPressed);
-	
+	VillainInputComponent->BindAction(EquipAction, ETriggerEvent::Triggered, this, &AVillainPlayerController::EquipButtonPressed);
 	VillainInputComponent->BindAbilityActions(InputConfig, this, &ThisClass::AbilityInputTagPressed, &ThisClass::AbilityInputTagReleased, &ThisClass::AbilityInputTagHeld);
 }
 
@@ -172,6 +173,25 @@ void AVillainPlayerController::CrouchButtonPressed()
 			{
 				ControlledCharacter->Crouch();
 			}
+		}
+	}
+}
+
+void AVillainPlayerController::EquipButtonPressed()
+{
+	if (APawn* ControlledPawn = GetPawn<APawn>())
+	{
+		if (AVillainCharacter* VillainCharacter = Cast<AVillainCharacter>(ControlledPawn))
+		{
+			//if (VillainCharacter->bDisableGameplay) return;
+			if (VillainCharacter->GetCombatComponent()->CombatState == ECombatState::ECS_Unoccupied) VillainCharacter->ServerEquipButtonPressed();
+			/*if (VillainCharacter->GetCombatComponent()->ShouldSwapWeapons() && !HasAuthority() && BlasterCharacter->GetCombatComponent()->CombatState == ECombatState::ECS_Unoccupied && BlasterCharacter->OverlappingWeapon == nullptr)
+			{
+				VillainCharacter->PlaySwapMontage();
+				VillainCharacter->GetCombatComponent()->CombatState = ECombatState::ECS_SwappingWeapons;
+				VillainCharacter->bFinishedSwapping = false;
+			}
+			*/
 		}
 	}
 }

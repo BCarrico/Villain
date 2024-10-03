@@ -6,6 +6,7 @@
 #include "Character/CharacterBase.h"
 #include "VillainCharacter.generated.h"
 
+class UCombatComponent;
 class AWeapon;
 class UCameraComponent;
 class USpringArmComponent;
@@ -21,12 +22,19 @@ public:
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	virtual void PostInitializeComponents() override;
+	FORCEINLINE UCombatComponent* GetCombatComponent() const {return Combat;};
 	void SetOverlappingWeapon(AWeapon* Weapon);
+	UFUNCTION(Server, Reliable)
+	void ServerEquipButtonPressed();
 	/* Combat Interface */
 	virtual int32 GetPlayerLevel_Implementation() override;
 protected:
 
+	// Villain Components
 	
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
+	UCombatComponent* Combat;
 private:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UCameraComponent> FollowCamera;

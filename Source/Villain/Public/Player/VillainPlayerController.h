@@ -45,6 +45,9 @@ private:
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<UInputAction> JumpAction;
 	
+	UPROPERTY(EditAnywhere, Category="Input")
+	TObjectPtr<UInputAction> EquipAction;
+	
 	UPROPERTY()
 	TObjectPtr<UVillainAbilitySystemComponent> VillainAbilitySystemComponent;
 	
@@ -64,6 +67,7 @@ private:
 	void Look(const FInputActionValue& InputActionValue);
 	void JumpButtonPressed();
 	void CrouchButtonPressed();
+	void EquipButtonPressed();
 	void CursorTrace();
 	FVector_NetQuantize CursorHitLocation;
 };

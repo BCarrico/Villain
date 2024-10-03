@@ -11,6 +11,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Net/UnrealNetwork.h"
 #include "Player/VillainPlayerState.h"
+#include "VillainComponents/CombatComponent.h"
 
 AVillainCharacter::AVillainCharacter()
 {
@@ -32,6 +33,9 @@ AVillainCharacter::AVillainCharacter()
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationRoll = false;
 	bUseControllerRotationYaw = false;
+	
+	Combat = CreateDefaultSubobject<UCombatComponent>("CombatComponent");
+	Combat->SetIsReplicated(true);  // Components do not need to be registered in GetLifetimeReplicatedProps
 }
 
 void AVillainCharacter::PossessedBy(AController* NewController)
@@ -55,6 +59,15 @@ void AVillainCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Ou
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME_CONDITION(AVillainCharacter, OverlappingWeapon, COND_OwnerOnly); // Condition that only the Owner of the pawn, will get this replicated to them
+}
+
+void AVillainCharacter::PostInitializeComponents()
+{
+	Super::PostInitializeComponents();
+	if (Combat)
+	{
+		Combat->Character = this; // Character variable is set on the CombatComponent when initialized
+	}
 }
 
 int32 AVillainCharacter::GetPlayerLevel_Implementation()
@@ -86,6 +99,21 @@ void AVillainCharacter::SetOverlappingWeapon(AWeapon* NewWeapon)
 	if (IsLocallyControlled() && OverlappingWeapon)
 	{
 		OverlappingWeapon->ShowPickupWidget(true);
+	}
+}
+
+void AVillainCharacter::ServerEquipButtonPressed_Implementation()
+{
+	if (Combat)
+	{
+		if (OverlappingWeapon)
+		{
+			Combat->EquipWeapon(OverlappingWeapon);
+		}
+		/*else if (Combat->ShouldSwapWeapons())
+		{
+			Combat->SwapWeapons();
+		}*/
 	}
 }
 

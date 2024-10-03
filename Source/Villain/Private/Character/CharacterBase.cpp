@@ -23,10 +23,6 @@ ACharacterBase::ACharacterBase()
 	GetMesh()->SetCollisionResponseToChannel(ECC_Camera, ECR_Ignore);
 	GetMesh()->SetGenerateOverlapEvents(true);
 	GetMesh()->SetCollisionResponseToChannel(ECC_Projectile, ECR_Overlap);
-	
-	Weapon = CreateDefaultSubobject<USkeletalMeshComponent>("Weapon");
-	Weapon->SetupAttachment(GetMesh(), FName("WeaponHandSocket"));
-	Weapon->SetCollisionEnabled(ECollisionEnabled::NoCollision);
 
 	GetCharacterMovement()->NavAgentProps.bCanCrouch = true;
 }
@@ -35,9 +31,9 @@ ACharacterBase::ACharacterBase()
 FVector ACharacterBase::GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag)
 {
 	const FVillainGameplayTags& GameplayTags = FVillainGameplayTags::Get();
-	if (MontageTag.MatchesTagExact(GameplayTags.CombatSocket_Weapon) && IsValid(Weapon))
+	if (MontageTag.MatchesTagExact(GameplayTags.CombatSocket_Weapon) && IsValid(WeaponDepreciated))
 	{
-		return Weapon->GetSocketLocation(WeaponTipSocketName);
+		return WeaponDepreciated->GetSocketLocation(WeaponTipSocketName);
 	}
 	return FVector();
 }

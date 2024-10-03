@@ -48,7 +48,7 @@ protected:
 	TObjectPtr<UAttributeSet> AttributeSet;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Combat")
-	TObjectPtr<USkeletalMeshComponent> Weapon;
+	TObjectPtr<USkeletalMeshComponent> WeaponDepreciated;
 
 	UPROPERTY(EditAnywhere, Category= "Combat")
 	FName WeaponTipSocketName;
