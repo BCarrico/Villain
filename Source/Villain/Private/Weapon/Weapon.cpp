@@ -2,8 +2,10 @@
 
 
 #include "Weapon/Weapon.h"
-#include "Components/SphereComponent.h"
 
+#include "Character/VillainCharacter.h"
+#include "Components/SphereComponent.h"
+#include "Components/WidgetComponent.h"
 
 
 AWeapon::AWeapon()
@@ -27,15 +29,45 @@ AWeapon::AWeapon()
 	AreaSphere->SetCollisionResponseToChannels(ECollisionResponse::ECR_Ignore);
 	AreaSphere->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
 
-	//PickupWidget = CreateDefaultSubobject<UWidgetComponent>("PickupWidget");
-	//PickupWidget->SetupAttachment(RootComponent);
+	PickupWidget = CreateDefaultSubobject<UWidgetComponent>("PickupWidget");
+	PickupWidget->SetupAttachment(RootComponent);
 }
 
 
 void AWeapon::BeginPlay()
 {
 	Super::BeginPlay();
+	//TODO: Check these below collision settings??
+	if (HasAuthority())
+	{
+		AreaSphere->SetCollisionEnabled(ECollisionEnabled::Type::QueryAndPhysics);
+		AreaSphere->SetCollisionResponseToChannel(ECC_Pawn, ECR_Overlap);
 	
+		AreaSphere->OnComponentBeginOverlap.AddDynamic(this, &AWeapon::OnSphereOverlap);
+		AreaSphere->OnComponentEndOverlap.AddDynamic(this, &AWeapon::OnSphereEndOverlap);
+	}
+	if (PickupWidget)
+	{
+		PickupWidget->SetVisibility(false);
+	}
+}
+
+void AWeapon::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)
+{
+	if (AVillainCharacter* VillainCharacter = Cast<AVillainCharacter>(OtherActor))
+	{
+		PickupWidget->SetVisibility(true);
+		//VillainCharacter->SetOverlappingWeapon(this);
+	}	
+}
+
+void AWeapon::OnSphereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex)
+{
+	if (AVillainCharacter* VillainCharacter = Cast<AVillainCharacter>(OtherActor))
+	{
+		PickupWidget->SetVisibility(false);
+		//VillainCharacter->SetOverlappingWeapon(this);
+	}	
 }
 
 
