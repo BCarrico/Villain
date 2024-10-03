@@ -20,7 +20,10 @@ void AVillainPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
 	check(VillainInputContext);
-
+	
+	FInputModeGameOnly InputModeData;
+	SetInputMode(InputModeData);
+	
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
 	if (Subsystem)
 	{
