@@ -56,8 +56,7 @@ void AWeapon::OnSphereOverlap(UPrimitiveComponent* OverlappedComponent, AActor* 
 {
 	if (AVillainCharacter* VillainCharacter = Cast<AVillainCharacter>(OtherActor))
 	{
-		PickupWidget->SetVisibility(true);
-		//VillainCharacter->SetOverlappingWeapon(this);
+		VillainCharacter->SetOverlappingWeapon(this);
 	}	
 }
 
@@ -65,8 +64,7 @@ void AWeapon::OnSphereEndOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 {
 	if (AVillainCharacter* VillainCharacter = Cast<AVillainCharacter>(OtherActor))
 	{
-		PickupWidget->SetVisibility(false);
-		//VillainCharacter->SetOverlappingWeapon(this);
+		VillainCharacter->SetOverlappingWeapon(nullptr);
 	}	
 }
 
@@ -75,5 +73,13 @@ void AWeapon::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void AWeapon::ShowPickupWidget(bool bShowWidget)
+{
+	if (PickupWidget)
+	{
+		PickupWidget->SetVisibility(bShowWidget);
+	}
 }
 

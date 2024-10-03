@@ -4,11 +4,12 @@
 #include "Character/VillainCharacter.h"
 
 #include "AbilitySystemComponent.h"
-#include "EditorDirectories.h"
+#include "Weapon/Weapon.h"
 #include "AbilitySystem/VillainAbilitySystemComponent.h"
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Net/UnrealNetwork.h"
 #include "Player/VillainPlayerState.h"
 
 AVillainCharacter::AVillainCharacter()
@@ -50,6 +51,12 @@ void AVillainCharacter::OnRep_PlayerState()
 	InitAbilityActorInfo();
 }
 
+void AVillainCharacter::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+	DOREPLIFETIME_CONDITION(AVillainCharacter, OverlappingWeapon, COND_OwnerOnly); // Condition that only the Owner of the pawn, will get this replicated to them
+}
+
 int32 AVillainCharacter::GetPlayerLevel_Implementation()
 {
 	const AVillainPlayerState* VillainPlayerState = GetPlayerState<AVillainPlayerState>();
@@ -67,4 +74,29 @@ void AVillainCharacter::InitAbilityActorInfo()
 	AttributeSet = VillainPlayerState->GetAttributeSet();
 	
 	InitializeDefaultAttributes();
+}
+
+void AVillainCharacter::SetOverlappingWeapon(AWeapon* NewWeapon)
+{
+	if (OverlappingWeapon)
+	{
+		OverlappingWeapon->ShowPickupWidget(false);
+	}
+	OverlappingWeapon = NewWeapon;
+	if (IsLocallyControlled() && OverlappingWeapon)
+	{
+		OverlappingWeapon->ShowPickupWidget(true);
+	}
+}
+
+void AVillainCharacter::OnRep_OverlappingWeapon(AWeapon* LastWeapon) // LastWeapon is the last value of Overlapping weapon before replication
+{
+	if (OverlappingWeapon)
+	{
+		OverlappingWeapon->ShowPickupWidget(true);
+	}
+	if (LastWeapon)
+	{
+		LastWeapon->ShowPickupWidget(false);
+	}
 }

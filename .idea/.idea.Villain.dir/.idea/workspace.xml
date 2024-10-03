@@ -9,11 +9,10 @@
   <component name="ChangeListManager">
     <list default="true" id="64539828-f90b-421b-b98a-b9d4e3b60545" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Villain.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Villain.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Weapon/BP_WeaponBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Weapon/BP_WeaponBase.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Maps/TestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/TestMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Villain/Private/Character/VillainCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/Character/VillainCharacter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Villain/Private/Weapon/Weapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/Weapon/Weapon.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/Character/VillainCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/Character/VillainCharacter.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Villain/Public/Weapon/Weapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/Weapon/Weapon.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Villain.Build.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Villain.Build.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,7 +158,8 @@
       <workItem from="1727801411372" duration="7491000" />
       <workItem from="1727818845967" duration="737000" />
       <workItem from="1727819859304" duration="4499000" />
-      <workItem from="1727909729775" duration="5605000" />
+      <workItem from="1727909729775" duration="5990000" />
+      <workItem from="1727968568860" duration="1770000" />
     </task>
     <servers />
   </component>
