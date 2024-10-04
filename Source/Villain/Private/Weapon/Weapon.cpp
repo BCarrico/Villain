@@ -114,17 +114,18 @@ void AWeapon::OnEquipped()
 	WeaponMesh->SetSimulatePhysics(false);
 	WeaponMesh->SetEnableGravity(false);
 	WeaponMesh->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
-
+	AVillainCharacter* OwningCharacter = Cast<AVillainCharacter>(GetOwner());
+	if (OwningCharacter)
+	{
+		OwningCharacter->SetEquippedWeapon(this);
+	}
 	if(HasAuthority())
 	{
-		if (AVillainCharacter* OwningCharacter = Cast<AVillainCharacter>(GetOwner()))
+		if (UAbilitySystemComponent* AbilitySystemComponent = OwningCharacter->GetAbilitySystemComponent())
 		{
-			if (UAbilitySystemComponent* AbilitySystemComponent = OwningCharacter->GetAbilitySystemComponent())
-			{
-				FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(EquipTagClass, 1);
-				AbilitySystemComponent->GiveAbility(AbilitySpec);
-				AbilitySystemComponent->TryActivateAbility(AbilitySpec.Handle);
-			}
+			FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(EquipTagClass, 1);
+			AbilitySystemComponent->GiveAbility(AbilitySpec);
+			AbilitySystemComponent->TryActivateAbility(AbilitySpec.Handle);
 		}
 	}
 	

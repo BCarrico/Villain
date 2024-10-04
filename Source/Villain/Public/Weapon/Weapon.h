@@ -32,6 +32,9 @@ public:
 	virtual void Tick(float DeltaTime) override;
 	void ShowPickupWidget(bool bShowWidget);
 	void SetWeaponState(EWeaponState State);
+	FORCEINLINE FGameplayTag GetWeaponTag() const {return WeaponTag;}
+	
+	
 protected:
 
 	virtual void BeginPlay() override;
@@ -42,6 +45,9 @@ protected:
 	virtual void OnWeaponStateSet();
 	virtual void OnEquipped();
 	virtual void OnDropped();
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Abilities")
+	FGameplayTag WeaponTag;
 private:
 	
 	UPROPERTY(VisibleAnywhere, Category="Weapon Properties")
@@ -56,9 +62,6 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	EWeaponState WeaponState;
 	
-	UPROPERTY(EditDefaultsOnly, Category="Abilities")
-	FGameplayTag WeaponTag;
-
 	UPROPERTY(EditDefaultsOnly, Category="Abilities")
 	TSubclassOf<UGameplayAbility> EquipTagClass;
 

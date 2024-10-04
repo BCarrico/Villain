@@ -23,6 +23,8 @@ public:
 	virtual void OnRep_PlayerState() override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual void PostInitializeComponents() override;
+	FORCEINLINE void SetEquippedWeapon(AWeapon* WeaponToEquip) {EquippedWeapon = WeaponToEquip;}
+	FORCEINLINE AWeapon* GetEquippedWeapon() const {return EquippedWeapon;}
 	FORCEINLINE UCombatComponent* GetCombatComponent() const {return Combat;};
 	void SetOverlappingWeapon(AWeapon* Weapon);
 	UFUNCTION(Server, Reliable)
@@ -35,6 +37,9 @@ protected:
 	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	UCombatComponent* Combat;
+
+	UPROPERTY(BlueprintReadOnly)
+	AWeapon* EquippedWeapon;
 private:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UCameraComponent> FollowCamera;
@@ -49,4 +54,5 @@ private:
 	
 	UFUNCTION()
 	void OnRep_OverlappingWeapon(AWeapon* LastWeapon);
+
 };
