@@ -22,4 +22,7 @@ void FVillainGameplayTags::InitializeNativeGameplayTags()
 
 	// Combat Sockets
 	GameplayTags.CombatSocket_Weapon = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("CombatSocket.Weapon"), FString("Weapon"));
+
+	// Weapon Tags
+	GameplayTags.EquippedWeapon_Test = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("EquippedWeapon.Test"), FString("Test Weapon Tag"));
 }

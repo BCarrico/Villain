@@ -3,6 +3,8 @@
 
 #include "Weapon/Weapon.h"
 
+#include "AbilitySystemComponent.h"
+#include "GameplayAbilitySpec.h"
 #include "Character/VillainCharacter.h"
 #include "Components/SphereComponent.h"
 #include "Components/WidgetComponent.h"
@@ -113,6 +115,20 @@ void AWeapon::OnEquipped()
 	WeaponMesh->SetEnableGravity(false);
 	WeaponMesh->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
 
+	if(HasAuthority())
+	{
+		if (AVillainCharacter* OwningCharacter = Cast<AVillainCharacter>(GetOwner()))
+		{
+			if (UAbilitySystemComponent* AbilitySystemComponent = OwningCharacter->GetAbilitySystemComponent())
+			{
+				FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(EquipTagClass, 1);
+				AbilitySystemComponent->GiveAbility(AbilitySpec);
+				AbilitySystemComponent->TryActivateAbility(AbilitySpec.Handle);
+			}
+		}
+	}
+	
+	
 	/*
 	 *TODO: Lag Compensation
 	BlasterOwnerCharacter = BlasterOwnerCharacter == nullptr ? Cast<ABlasterCharacter>(GetOwner()) : BlasterOwnerCharacter;

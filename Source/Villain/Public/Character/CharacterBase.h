@@ -29,13 +29,16 @@ public:
 	/* Ability System */
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	UAttributeSet* GetAttributeSet() const {return AttributeSet;}
-
+	FORCEINLINE TArray<TSubclassOf<UGameplayAbility>> GetStartupAbilities(){return StartupAbilities;}
 	// Combat Interface
 	virtual FVector GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag) override;
 	virtual TArray<FTaggedMontage> GetAttackMontages_Implementation() override;
 	
 	UPROPERTY(EditAnywhere, Category="Combat")
 	TArray<FTaggedMontage> AttackMontages;
+
+	UPROPERTY(EditAnywhere, Category="Abilities")
+	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
 protected:
 	virtual void BeginPlay() override;
 	virtual void InitAbilityActorInfo();
@@ -58,8 +61,7 @@ protected:
 
 	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const;
 	virtual void InitializeDefaultAttributes() const;
+	
 private:	
 
-	UPROPERTY(EditAnywhere, Category="Abilities")
-	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
 };

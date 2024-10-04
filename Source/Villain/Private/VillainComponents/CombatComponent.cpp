@@ -21,6 +21,7 @@ void UCombatComponent::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& Out
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 	DOREPLIFETIME(UCombatComponent, EquippedWeapon);
+	DOREPLIFETIME(UCombatComponent, CombatState);
 }
 
 void UCombatComponent::BeginPlay()
@@ -57,9 +58,9 @@ void UCombatComponent::EquipPrimaryWeapon(AWeapon* WeaponToEquip)
 	if (WeaponToEquip == nullptr) return;
 	//DropEquippedWeapon();
 	EquippedWeapon = WeaponToEquip;
+	EquippedWeapon->SetOwner(Character);
 	EquippedWeapon->SetWeaponState(EWeaponState::EWS_Equipped);
 	AttachActorToRightHand(EquippedWeapon);
-	EquippedWeapon->SetOwner(Character);
 	//EquippedWeapon->SetHUDAmmo();
 	//UpdateCarriedAmmo();
 	//PlayEquipWeaponSound(WeaponToEquip);

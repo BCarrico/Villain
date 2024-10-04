@@ -30,6 +30,9 @@ public:
 
  // Combat Socket Tags
  FGameplayTag CombatSocket_Weapon;
+
+ // Weapon Tags
+ FGameplayTag EquippedWeapon_Test;
 protected:
 private:
  static FVillainGameplayTags GameplayTags;

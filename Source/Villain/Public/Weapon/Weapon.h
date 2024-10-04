@@ -3,10 +3,12 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "GameplayTagContainer.h"
 #include "GameFramework/Actor.h"
 #include "Weapon.generated.h"
 
 
+class UGameplayAbility;
 
 UENUM(BlueprintType)
 enum class EWeaponState : uint8
@@ -54,6 +56,10 @@ private:
 	UPROPERTY(VisibleAnywhere)
 	EWeaponState WeaponState;
 	
+	UPROPERTY(EditDefaultsOnly, Category="Abilities")
+	FGameplayTag WeaponTag;
 
+	UPROPERTY(EditDefaultsOnly, Category="Abilities")
+	TSubclassOf<UGameplayAbility> EquipTagClass;
 
 };
