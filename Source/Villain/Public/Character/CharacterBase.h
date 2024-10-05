@@ -39,9 +39,12 @@ public:
 
 	UPROPERTY(EditAnywhere, Category="Abilities")
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
+
+	
 protected:
 	virtual void BeginPlay() override;
 	virtual void InitAbilityActorInfo();
+	
 	void AddCharacterAbilities();
 	
 	UPROPERTY()

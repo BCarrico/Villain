@@ -57,7 +57,7 @@ void ACharacterBase::AddCharacterAbilities()
 {
 	UVillainAbilitySystemComponent* VillainASC = CastChecked<UVillainAbilitySystemComponent>(AbilitySystemComponent);
 	if (!HasAuthority()) return;
-
+	
 	VillainASC -> AddCharacterAbilities(StartupAbilities);
 }
 

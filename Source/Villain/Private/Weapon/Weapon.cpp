@@ -6,8 +6,10 @@
 #include "AbilitySystemComponent.h"
 #include "GameplayAbilitySpec.h"
 #include "Character/VillainCharacter.h"
+#include "AbilitySystem/VillainAbilitySystemComponent.h"
 #include "Components/SphereComponent.h"
 #include "Components/WidgetComponent.h"
+
 
 
 AWeapon::AWeapon()
@@ -126,6 +128,8 @@ void AWeapon::OnEquipped()
 			FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(EquipTagClass, 1);
 			AbilitySystemComponent->GiveAbility(AbilitySpec);
 			AbilitySystemComponent->TryActivateAbility(AbilitySpec.Handle);
+
+			AddCharacterAbilities(AbilitySystemComponent);
 		}
 	}
 	
@@ -170,4 +174,12 @@ void AWeapon::OnDropped()
 		}
 	}
 	*/
+}
+
+void AWeapon::AddCharacterAbilities(UAbilitySystemComponent* AbilitySystemComponent)
+{
+		if (!HasAuthority()) return;
+		UVillainAbilitySystemComponent* VillainASC = CastChecked<UVillainAbilitySystemComponent>(AbilitySystemComponent);
+		VillainASC -> AddCharacterAbilities(WeaponAbilities);
+	
 }

@@ -10,9 +10,9 @@ void UVillainAbilitySystemComponent::AbilityActorInfoSet()
 	OnGameplayEffectAppliedDelegateToSelf.AddUObject(this, &UVillainAbilitySystemComponent::ClientEffectApplied);
 }
 
-void UVillainAbilitySystemComponent::AddCharacterAbilities(const TArray<TSubclassOf<UGameplayAbility>>& StartupAbilities)
+void UVillainAbilitySystemComponent::AddCharacterAbilities(const TArray<TSubclassOf<UGameplayAbility>>& AbilitiesToAdd)
 {
-	for (const TSubclassOf<UGameplayAbility> AbilityClass : StartupAbilities)
+	for (const TSubclassOf<UGameplayAbility> AbilityClass : AbilitiesToAdd)
 	{
 		FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(AbilityClass, 1);
 		if (const UVillainGameplayAbilityBase* VillainAbility = Cast<UVillainGameplayAbilityBase>(AbilitySpec.Ability))

@@ -8,6 +8,7 @@
 #include "Weapon.generated.h"
 
 
+class UAbilitySystemComponent;
 class UGameplayAbility;
 
 UENUM(BlueprintType)
@@ -45,6 +46,7 @@ protected:
 	virtual void OnWeaponStateSet();
 	virtual void OnEquipped();
 	virtual void OnDropped();
+	virtual void AddCharacterAbilities(UAbilitySystemComponent* AbilitySystemComponent);
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Abilities")
 	FGameplayTag WeaponTag;
@@ -65,4 +67,6 @@ private:
 	UPROPERTY(EditDefaultsOnly, Category="Abilities")
 	TSubclassOf<UGameplayAbility> EquipTagClass;
 
+	UPROPERTY(EditAnywhere, Category="Abilities")
+	TArray<TSubclassOf<UGameplayAbility>> WeaponAbilities;
 };

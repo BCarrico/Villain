@@ -16,7 +16,7 @@ class VILLAIN_API UVillainAbilitySystemComponent : public UAbilitySystemComponen
 	GENERATED_BODY()
 public:
 	void AbilityActorInfoSet();
-	void AddCharacterAbilities(const TArray<TSubclassOf<UGameplayAbility>>& StartupAbilities);
+	void AddCharacterAbilities(const TArray<TSubclassOf<UGameplayAbility>>& AbilitiesToAdd);
 	void AbilityInputTagPressed(const FGameplayTag& InputTag);
 	void AbilityInputTagHeld(const FGameplayTag& InputTag);
 	void AbilityInputTagReleased(const FGameplayTag& InputTag);
