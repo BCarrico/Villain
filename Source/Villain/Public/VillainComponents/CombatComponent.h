@@ -25,7 +25,7 @@ public:
 
 	void EquipWeapon(AWeapon* WeaponToEquip);
 	void EquipPrimaryWeapon(AWeapon* WeaponToEquip);
-	
+	void SetAiming(bool bIsAiming);
 	UPROPERTY(ReplicatedUsing=OnRep_CombatState)
 	ECombatState CombatState = ECombatState::ECS_Unoccupied;
 protected:
@@ -35,6 +35,9 @@ protected:
 	void AttachActorToRightHand(AActor* ActorToAttach);
 	UFUNCTION()
 	void OnRep_EquippedWeapon();
+
+	UFUNCTION(Server, Reliable)
+	void ServerSetAiming(bool bIsAiming);
 private:
 	UPROPERTY()
 	AVillainCharacter* Character;
@@ -47,6 +50,15 @@ private:
 
 	UFUNCTION()
 	void OnRep_CombatState();
+
+	UPROPERTY(ReplicatedUsing = OnRep_Aiming)
+	bool bAiming = false;
+
+	bool bAimButtonPressed = false;
+	
+	UFUNCTION()
+	void OnRep_Aiming();
+	
 
 	
 

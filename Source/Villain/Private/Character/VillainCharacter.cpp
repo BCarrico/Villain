@@ -16,7 +16,7 @@
 AVillainCharacter::AVillainCharacter()
 {
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>("CameraBoom");
-	CameraBoom->SetupAttachment(GetRootComponent());
+	CameraBoom->SetupAttachment(GetMesh());
 	CameraBoom->TargetArmLength = 320.f;
 	CameraBoom->bUsePawnControlRotation = true;
 
@@ -87,6 +87,12 @@ void AVillainCharacter::InitAbilityActorInfo()
 	InitializeDefaultAttributes();
 }
 
+bool AVillainCharacter::IsWeaponEquipped()
+{
+	return EquippedWeapon == nullptr ? false : true;
+}
+
+
 void AVillainCharacter::SetOverlappingWeapon(AWeapon* NewWeapon)
 {
 	if (OverlappingWeapon)
@@ -126,3 +132,9 @@ void AVillainCharacter::OnRep_OverlappingWeapon(AWeapon* LastWeapon) // LastWeap
 		LastWeapon->ShowPickupWidget(false);
 	}
 }
+
+bool AVillainCharacter::IsAiming()
+{
+	return (Combat && Combat->bAiming);
+}
+

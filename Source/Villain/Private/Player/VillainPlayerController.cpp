@@ -46,7 +46,7 @@ void AVillainPlayerController::SetupInputComponent()
 	UVillainInputComponent* VillainInputComponent = CastChecked<UVillainInputComponent>(InputComponent);
 	
 	VillainInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AVillainPlayerController::Move);
-	VillainInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AVillainPlayerController::Aim);
+	VillainInputComponent->BindAction(AimAction, ETriggerEvent::Triggered, this, &AVillainPlayerController::Aim);
 	VillainInputComponent->BindAction(CrouchAction, ETriggerEvent::Started, this, &AVillainPlayerController::CrouchButtonPressed); // Also set as triggered in IA_Crouch due to stuttering in game. Fixed it
 	VillainInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AVillainPlayerController::Look);
 	VillainInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &AVillainPlayerController::JumpButtonPressed);
@@ -128,7 +128,7 @@ void AVillainPlayerController::Aim(const FInputActionValue& InputActionValue)
 			//if (VillainCharacter->bDisableGameplay) return;
 			if (UCombatComponent* CombatComponent = VillainCharacter->GetCombatComponent())
 			{
-				//CombatComponent->SetAiming(IsAiming);
+				CombatComponent->SetAiming(IsAiming);
 			}
 		}
 	}

@@ -26,6 +26,8 @@ public:
 	FORCEINLINE void SetEquippedWeapon(AWeapon* WeaponToEquip) {EquippedWeapon = WeaponToEquip;}
 	FORCEINLINE AWeapon* GetEquippedWeapon() const {return EquippedWeapon;}
 	FORCEINLINE UCombatComponent* GetCombatComponent() const {return Combat;};
+	bool IsWeaponEquipped();
+	bool IsAiming();
 	void SetOverlappingWeapon(AWeapon* Weapon);
 	UFUNCTION(Server, Reliable)
 	void ServerEquipButtonPressed();
@@ -54,5 +56,7 @@ private:
 	
 	UFUNCTION()
 	void OnRep_OverlappingWeapon(AWeapon* LastWeapon);
+
+	
 
 };

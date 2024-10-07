@@ -48,6 +48,9 @@ private:
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<UInputAction> EquipAction;
 	
+	UPROPERTY(EditAnywhere, Category="Input")
+	TObjectPtr<UInputAction> AimAction;
+
 	UPROPERTY()
 	TObjectPtr<UVillainAbilitySystemComponent> VillainAbilitySystemComponent;
 	

@@ -31,10 +31,10 @@ void UVillainAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 
 	bIsInAir = VillainCharacter->GetCharacterMovement()->IsFalling();
 	bIsAccelerating = VillainCharacter->GetCharacterMovement()->GetCurrentAcceleration().Size() > 0 ? true : false;
-	//bWeaponEquipped = VillainCharacter->IsWeaponEquipped();
+	bWeaponEquipped = VillainCharacter->IsWeaponEquipped();
 	EquippedWeapon = VillainCharacter->GetEquippedWeapon();
 	bIsCrouched = VillainCharacter->bIsCrouched;
-	//bAiming = VillainCharacter->IsAiming();
+	bAiming = VillainCharacter->IsAiming();
 	//TurningInPlace = VillainCharacter->GetTurningInPlace();
 	//bRotateRootBone = VillainCharacter->ShouldRotateRootBone();
 	//bEliminated = VillainCharacter->IsEliminated();
