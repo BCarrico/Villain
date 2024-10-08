@@ -56,6 +56,12 @@ private:
 
 	bool bAimButtonPressed = false;
 	
+	UPROPERTY(EditAnywhere)
+	float BaseWalkSpeed = 600.f;
+	
+	UPROPERTY(EditAnywhere)
+	float AimWalkSpeed = 450.f;
+	
 	UFUNCTION()
 	void OnRep_Aiming();
 	

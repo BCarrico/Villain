@@ -84,11 +84,11 @@ void UCombatComponent::SetAiming(bool bIsAiming)
 {
 	if (Character == nullptr || EquippedWeapon == nullptr) bAiming = bIsAiming;
 	ServerSetAiming(bIsAiming);
-	/*if (Character)
+	if (Character)
 	{
 		Character->GetCharacterMovement()->MaxWalkSpeed = bIsAiming ? AimWalkSpeed : BaseWalkSpeed;
 	}
-	if (Character->IsLocallyControlled() && EquippedWeapon->GetWeaponType() == EWeaponType::EWT_SniperRifle)
+	/*if (Character->IsLocallyControlled() && EquippedWeapon->GetWeaponType() == EWeaponType::EWT_SniperRifle)
 	{
 		Character->ShowSniperScopeWidget(bIsAiming);
 	}*/
@@ -99,10 +99,10 @@ void UCombatComponent::SetAiming(bool bIsAiming)
 void UCombatComponent::ServerSetAiming_Implementation(bool bIsAiming)
 {
 	bAiming = bIsAiming;
-	/*if (Character)
+	if (Character)
 	{
 		Character->GetCharacterMovement()->MaxWalkSpeed = bIsAiming ? AimWalkSpeed : BaseWalkSpeed;
-	}*/
+	}
 }
 
 void UCombatComponent::OnRep_CombatState()

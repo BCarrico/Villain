@@ -34,6 +34,7 @@ public:
 	void ShowPickupWidget(bool bShowWidget);
 	void SetWeaponState(EWeaponState State);
 	FORCEINLINE FGameplayTag GetWeaponTag() const {return WeaponTag;}
+	FORCEINLINE USkeletalMeshComponent* GetWeaponMesh() const {return WeaponMesh;}
 	
 	
 protected:

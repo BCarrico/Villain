@@ -5,6 +5,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Character/VillainCharacter.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "Weapon/Weapon.h"
 #include "VillainTypes/CombatState.h"
 
 void UVillainAnimInstance::NativeInitializeAnimation()
@@ -38,19 +39,20 @@ void UVillainAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	//TurningInPlace = VillainCharacter->GetTurningInPlace();
 	//bRotateRootBone = VillainCharacter->ShouldRotateRootBone();
 	//bEliminated = VillainCharacter->IsEliminated();
+	
 	// Offset Yaw for Strafing
 	FRotator AimRotation = VillainCharacter->GetBaseAimRotation();
 	FRotator MovementRotation = UKismetMathLibrary::MakeRotFromX(VillainCharacter->GetVelocity());
 	FRotator DeltaRot = UKismetMathLibrary::NormalizedDeltaRotator(MovementRotation, AimRotation);
-	//DeltaRotation = FMath::RInterpTo(DeltaRotation, DeltaRot, DeltaSeconds, 6.f);
-	//YawOffset = DeltaRotation.Yaw;
+	DeltaRotation = FMath::RInterpTo(DeltaRotation, DeltaRot, DeltaSeconds, 6.f);
+	YawOffset = DeltaRotation.Yaw;
 	
-	//CharacterRotationLastFrame = CharacterRotation;
-	//CharacterRotation = VillainCharacter->GetActorRotation();
-	//const FRotator Delta = UKismetMathLibrary::NormalizedDeltaRotator(CharacterRotation, CharacterRotationLastFrame);
-	//const float Target = Delta.Yaw / DeltaSeconds;
-	//const float Interp = FMath::FInterpTo(Lean, Target, DeltaSeconds, 6.f);
-	//Lean = FMath::Clamp(Interp, -90.f, 90.f);
+	CharacterRotationLastFrame = CharacterRotation;
+	CharacterRotation = VillainCharacter->GetActorRotation();
+	const FRotator Delta = UKismetMathLibrary::NormalizedDeltaRotator(CharacterRotation, CharacterRotationLastFrame);
+	const float Target = Delta.Yaw / DeltaSeconds;
+	const float Interp = FMath::FInterpTo(Lean, Target, DeltaSeconds, 6.f);
+	Lean = FMath::Clamp(Interp, -90.f, 90.f);
 
 	//AO_Yaw = VillainCharacter->GetAO_Yaw();
 	//AO_Pitch = VillainCharacter->GetAO_Pitch();
@@ -63,16 +65,16 @@ void UVillainAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 		VillainCharacter->GetMesh()->TransformToBoneSpace(FName("hand_r"), LeftHandTransform.GetLocation(), FRotator::ZeroRotator, OutPosition, OutRotation);
 		LeftHandTransform.SetLocation(OutPosition);
 		LeftHandTransform.SetRotation(FQuat(OutRotation));
-
-		if (VillainCharacter->IsLocallyControlled())
-		{
-			bLocallyControlled = true;
-			FTransform RightHandTransform = VillainCharacter->GetMesh()->GetSocketTransform(FName("Hand_R"), RTS_World);
-			FRotator LookAtRotation = UKismetMathLibrary::FindLookAtRotation(RightHandTransform.GetLocation(), RightHandTransform.GetLocation() + (RightHandTransform.GetLocation() - BlasterCharacter->GetHitTarget()));
-			RightHandRotation = FMath::RInterpTo(RightHandRotation, LookAtRotation, DeltaSeconds, 30.f);
-		}
+*/
+	/*if (VillainCharacter->IsLocallyControlled())
+	{
+		bLocallyControlled = true;
+		FTransform RightHandTransform = VillainCharacter->GetMesh()->GetSocketTransform(FName("Hand_R"), RTS_World);
+		FRotator LookAtRotation = UKismetMathLibrary::FindLookAtRotation(RightHandTransform.GetLocation(), RightHandTransform.GetLocation() + (RightHandTransform.GetLocation() - VillainCharacter->GetHitTarget()));
+		RightHandRotation = FMath::RInterpTo(RightHandRotation, LookAtRotation, DeltaSeconds, 30.f);
 	}
-
+}*/
+	/*
 	bUseFABRIK = VillainCharacter->GetCombatState() == ECombatState::ECS_Unoccupied;
 	if (VillainCharacter->IsLocallyControlled() && VillainCharacter->GetCombatState() != ECombatState::ECS_ThrowingGrenade && VillainCharacter->GetCombatState() != ECombatState::ECS_SwappingWeapons  && BlasterCharacter->bFinishedSwapping)
 	{
@@ -80,5 +82,6 @@ void UVillainAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	}
 	bUseAimOffsets = VillainCharacter->GetCombatState() == ECombatState::ECS_Unoccupied && !VillainCharacter->GetDisableGameplay();
 	bTransformRightHand = VillainCharacter->GetCombatState() == ECombatState::ECS_Unoccupied && !VillainCharacter->GetDisableGameplay();
-	*/
+		*/
+
 }
