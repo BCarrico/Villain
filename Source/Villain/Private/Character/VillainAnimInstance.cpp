@@ -36,7 +36,7 @@ void UVillainAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	EquippedWeapon = VillainCharacter->GetEquippedWeapon();
 	bIsCrouched = VillainCharacter->bIsCrouched;
 	bAiming = VillainCharacter->IsAiming();
-	//TurningInPlace = VillainCharacter->GetTurningInPlace();
+	TurningInPlace = VillainCharacter->GetTurningInPlace();
 	//bRotateRootBone = VillainCharacter->ShouldRotateRootBone();
 	//bEliminated = VillainCharacter->IsEliminated();
 	
@@ -54,10 +54,10 @@ void UVillainAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	const float Interp = FMath::FInterpTo(Lean, Target, DeltaSeconds, 6.f);
 	Lean = FMath::Clamp(Interp, -90.f, 90.f);
 
-	//AO_Yaw = VillainCharacter->GetAO_Yaw();
-	//AO_Pitch = VillainCharacter->GetAO_Pitch();
+	AO_Yaw = VillainCharacter->GetAO_Yaw();
+	AO_Pitch = VillainCharacter->GetAO_Pitch();
 
-	/*if (bWeaponEquipped && EquippedWeapon && EquippedWeapon->GetWeaponMesh() && VillainCharacter->GetMesh())
+	if (bWeaponEquipped && EquippedWeapon && EquippedWeapon->GetWeaponMesh() && VillainCharacter->GetMesh())
 	{
 		LeftHandTransform = EquippedWeapon->GetWeaponMesh()->GetSocketTransform(FName("LeftHandSocket"), RTS_World);
 		FVector OutPosition;
@@ -65,23 +65,25 @@ void UVillainAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 		VillainCharacter->GetMesh()->TransformToBoneSpace(FName("hand_r"), LeftHandTransform.GetLocation(), FRotator::ZeroRotator, OutPosition, OutRotation);
 		LeftHandTransform.SetLocation(OutPosition);
 		LeftHandTransform.SetRotation(FQuat(OutRotation));
-*/
-	/*if (VillainCharacter->IsLocallyControlled())
-	{
-		bLocallyControlled = true;
-		FTransform RightHandTransform = VillainCharacter->GetMesh()->GetSocketTransform(FName("Hand_R"), RTS_World);
-		FRotator LookAtRotation = UKismetMathLibrary::FindLookAtRotation(RightHandTransform.GetLocation(), RightHandTransform.GetLocation() + (RightHandTransform.GetLocation() - VillainCharacter->GetHitTarget()));
-		RightHandRotation = FMath::RInterpTo(RightHandRotation, LookAtRotation, DeltaSeconds, 30.f);
+
+		/*if (VillainCharacter->IsLocallyControlled())
+		{
+			bLocallyControlled = true;
+			const FTransform RightHandTransform = VillainCharacter->GetMesh()->GetSocketTransform(FName("Hand_R"), RTS_World);
+			const FRotator LookAtRotation = UKismetMathLibrary::FindLookAtRotation(RightHandTransform.GetLocation(), RightHandTransform.GetLocation() + (RightHandTransform.GetLocation() - VillainCharacter->GetHitTarget()));
+			RightHandRotation = FMath::RInterpTo(RightHandRotation, LookAtRotation, DeltaSeconds, 30.f);
+		}*/
 	}
-}*/
-	/*
+
+	
 	bUseFABRIK = VillainCharacter->GetCombatState() == ECombatState::ECS_Unoccupied;
-	if (VillainCharacter->IsLocallyControlled() && VillainCharacter->GetCombatState() != ECombatState::ECS_ThrowingGrenade && VillainCharacter->GetCombatState() != ECombatState::ECS_SwappingWeapons  && BlasterCharacter->bFinishedSwapping)
+	/*if (VillainCharacter->IsLocallyControlled() && VillainCharacter->GetCombatState() != ECombatState::ECS_ThrowingGrenade && VillainCharacter->GetCombatState() != ECombatState::ECS_SwappingWeapons  && VillainCharacter->bFinishedSwapping)
 	{
 		bUseFABRIK = !VillainCharacter->IsLocallyReloading();
-	}
-	bUseAimOffsets = VillainCharacter->GetCombatState() == ECombatState::ECS_Unoccupied && !VillainCharacter->GetDisableGameplay();
-	bTransformRightHand = VillainCharacter->GetCombatState() == ECombatState::ECS_Unoccupied && !VillainCharacter->GetDisableGameplay();
-		*/
+	}*/
+	
+	//bUseAimOffsets = VillainCharacter->GetCombatState() == ECombatState::ECS_Unoccupied && !VillainCharacter->GetDisableGameplay();
+	//bTransformRightHand = VillainCharacter->GetCombatState() == ECombatState::ECS_Unoccupied && !VillainCharacter->GetDisableGameplay();
+	
 
 }

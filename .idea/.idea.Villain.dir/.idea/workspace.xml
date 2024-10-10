@@ -9,13 +9,13 @@
   <component name="ChangeListManager">
     <list default="true" id="64539828-f90b-421b-b98a-b9d4e3b60545" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Villain.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Villain.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Animations/Aim_Space_Hip.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Animations/Aim_Space_Hip.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Blueprints/Character/Animation/ABP_VillainAnim.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Character/Animation/ABP_VillainAnim.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Character/BP_VillainCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Character/BP_VillainCharacter.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Villain/Private/Character/VillainAnimInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/Character/VillainAnimInstance.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Villain/Private/Character/VillainCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/Character/VillainCharacter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Villain/Private/VillainComponents/CombatComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/VillainComponents/CombatComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Villain/Private/Weapon/Weapon.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/Weapon/Weapon.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Villain/Public/Character/VillainAnimInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/Character/VillainAnimInstance.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/VillainComponents/CombatComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/VillainComponents/CombatComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/Character/VillainCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/Character/VillainCharacter.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Villain/Public/Weapon/Weapon.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/Weapon/Weapon.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,6 +27,10 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
@@ -180,7 +184,8 @@
       <workItem from="1728144868946" duration="5450000" />
       <workItem from="1728172850238" duration="856000" />
       <workItem from="1728335646389" duration="7477000" />
-      <workItem from="1728402018628" duration="4095000" />
+      <workItem from="1728402018628" duration="4712000" />
+      <workItem from="1728506404019" duration="8192000" />
     </task>
     <servers />
   </component>

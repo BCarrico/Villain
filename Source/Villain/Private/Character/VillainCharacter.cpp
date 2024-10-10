@@ -9,6 +9,7 @@
 #include "Camera/CameraComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Kismet/KismetMathLibrary.h"
 #include "Net/UnrealNetwork.h"
 #include "Player/VillainPlayerState.h"
 #include "VillainComponents/CombatComponent.h"
@@ -34,6 +35,12 @@ AVillainCharacter::AVillainCharacter()
 
 	NetUpdateFrequency = 66.f;  // COMMON values for fast-paced games
 	MinNetUpdateFrequency = 33.f;
+}
+
+void AVillainCharacter::Tick(float DeltaSeconds)
+{
+	Super::Tick(DeltaSeconds);
+	AimOffset(DeltaSeconds);
 }
 
 void AVillainCharacter::PossessedBy(AController* NewController)
@@ -75,6 +82,79 @@ int32 AVillainCharacter::GetPlayerLevel_Implementation()
 	return VillainPlayerState->GetPlayerLevel();
 }
 
+void AVillainCharacter::CalculateAO_Pitch()
+{
+	AO_Pitch = GetBaseAimRotation().Pitch;
+	if (AO_Pitch > 90.f && !IsLocallyControlled())
+	{
+		// Map pitch from [270, 360] to [-90, 0]
+		const FVector2D InRange(270.f, 360.f);
+		const FVector2D OutRange(-90.f, 0.f);
+		AO_Pitch = FMath::GetMappedRangeValueClamped(InRange, OutRange, AO_Pitch);
+	}
+}
+
+float AVillainCharacter::CalculateSpeed() 
+{
+	FVector Velocity = GetVelocity();
+	Velocity.Z = 0.f;
+	return Velocity.Size();
+}
+
+void AVillainCharacter::AimOffset(float DeltaTime)
+{
+	if (Combat && Combat->EquippedWeapon == nullptr) return;
+
+	const float Speed = CalculateSpeed();
+	const bool bIsInAir = GetCharacterMovement()->IsFalling();
+	
+	if (Speed == 0.f && !bIsInAir) // Standing still and not jumping
+	{
+		bRotateRootBone = true;
+		const FRotator CurrentAimRotation = FRotator(0.f, GetBaseAimRotation().Yaw, 0.f);
+		const FRotator DeltaAimRotation = UKismetMathLibrary::NormalizedDeltaRotator(CurrentAimRotation, StartingAimRotation);
+		AO_Yaw = DeltaAimRotation.Yaw;
+		if (TurningInPlace == ETurningInPlace::ETIP_NotTurning)
+		{
+			InterpAO_Yaw = AO_Yaw;
+		}
+		bUseControllerRotationYaw = true;
+		TurnInPlace(DeltaTime);
+	}
+	if (Speed > 0.f || bIsInAir) // Running or jumping
+	{
+		bRotateRootBone = false;
+		StartingAimRotation = FRotator(0.f, GetBaseAimRotation().Yaw, 0.f);
+		AO_Yaw = 0.f;
+		bUseControllerRotationYaw = true;
+		TurningInPlace = ETurningInPlace::ETIP_NotTurning;
+	}
+
+	CalculateAO_Pitch();
+}
+
+void AVillainCharacter::TurnInPlace(float DeltaTime)
+{
+	if (AO_Yaw > 90.f)
+	{
+		TurningInPlace = ETurningInPlace::ETIP_Right;
+	}
+	else if (AO_Yaw < -90.f)
+	{
+		TurningInPlace = ETurningInPlace::ETIP_Left;
+	}
+	if (TurningInPlace != ETurningInPlace::ETIP_NotTurning)
+	{
+		InterpAO_Yaw = FMath::FInterpTo(InterpAO_Yaw, 0.f, DeltaTime, 4.f);
+		AO_Yaw = InterpAO_Yaw;
+		if (FMath::Abs(AO_Yaw) < 15.f)
+		{
+			TurningInPlace = ETurningInPlace::ETIP_NotTurning;
+			StartingAimRotation = FRotator(0.f, GetBaseAimRotation().Yaw, 0.f);
+		}
+	}
+}
+
 void AVillainCharacter::InitAbilityActorInfo()
 {
 	AVillainPlayerState* VillainPlayerState = GetPlayerState<AVillainPlayerState>();
@@ -87,9 +167,15 @@ void AVillainCharacter::InitAbilityActorInfo()
 	InitializeDefaultAttributes();
 }
 
+ECombatState AVillainCharacter::GetCombatState() const
+{
+	if (Combat == nullptr) return ECombatState::ECS_MAX;
+	return Combat->CombatState;
+}
+
 bool AVillainCharacter::IsWeaponEquipped()
 {
-	return EquippedWeapon == nullptr ? false : true;
+	return (Combat && Combat->EquippedWeapon);
 }
 
 

@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Character/CharacterBase.h"
+#include "VillainTypes/CombatState.h"
+#include "VillainTypes/TurningInPlace.h"
 #include "VillainCharacter.generated.h"
 
 class UCombatComponent;
@@ -19,13 +21,18 @@ class VILLAIN_API AVillainCharacter : public ACharacterBase
 	GENERATED_BODY()
 public:
 	AVillainCharacter();
+	virtual void Tick(float DeltaSeconds) override;
 	virtual void PossessedBy(AController* NewController) override;
 	virtual void OnRep_PlayerState() override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual void PostInitializeComponents() override;
 	FORCEINLINE void SetEquippedWeapon(AWeapon* WeaponToEquip) {EquippedWeapon = WeaponToEquip;}
 	FORCEINLINE AWeapon* GetEquippedWeapon() const {return EquippedWeapon;}
-	FORCEINLINE UCombatComponent* GetCombatComponent() const {return Combat;};
+	FORCEINLINE UCombatComponent* GetCombatComponent() const {return Combat;}
+	FORCEINLINE float GetAO_Yaw() const { return AO_Yaw;}
+	FORCEINLINE float GetAO_Pitch() const { return AO_Pitch;}
+	FORCEINLINE ETurningInPlace GetTurningInPlace() const { return TurningInPlace;}
+	ECombatState GetCombatState() const;
 	bool IsWeaponEquipped();
 	bool IsAiming();
 	void SetOverlappingWeapon(AWeapon* Weapon);
@@ -42,6 +49,12 @@ protected:
 
 	UPROPERTY(BlueprintReadOnly)
 	AWeapon* EquippedWeapon;
+	
+	void CalculateAO_Pitch();
+	float CalculateSpeed();
+	void AimOffset(float DeltaTime);
+	void TurnInPlace(float DeltaTime);
+	
 private:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UCameraComponent> FollowCamera;
@@ -51,6 +64,18 @@ private:
 
 	UPROPERTY(ReplicatedUsing = OnRep_OverlappingWeapon) // Creates a replicated variable, calls OnRep_OverlappingWeapon when changed.
 	AWeapon* OverlappingWeapon;
+	
+	TEnumAsByte<ETurningInPlace> TurningInPlace = ETurningInPlace::ETIP_NotTurning;
+	float AO_Yaw;
+	float InterpAO_Yaw;
+	float AO_Pitch;
+	FRotator StartingAimRotation;
+	bool bRotateRootBone;
+	float TurnThreshold = 0.5f;
+	FRotator ProxyRotationLastFrame;
+	FRotator ProxyRotation;
+	float ProxyYaw;
+	float TimeSinceLastMovementReplication;
 	
 	virtual void InitAbilityActorInfo() override;
 	

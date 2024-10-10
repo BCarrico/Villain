@@ -35,7 +35,7 @@ public:
 	void SetWeaponState(EWeaponState State);
 	FORCEINLINE FGameplayTag GetWeaponTag() const {return WeaponTag;}
 	FORCEINLINE USkeletalMeshComponent* GetWeaponMesh() const {return WeaponMesh;}
-	
+	virtual void AddCharacterAbilities();
 	
 protected:
 
@@ -47,7 +47,7 @@ protected:
 	virtual void OnWeaponStateSet();
 	virtual void OnEquipped();
 	virtual void OnDropped();
-	virtual void AddCharacterAbilities(UAbilitySystemComponent* AbilitySystemComponent);
+
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Abilities")
 	FGameplayTag WeaponTag;

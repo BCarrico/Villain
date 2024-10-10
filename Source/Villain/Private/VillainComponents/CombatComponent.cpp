@@ -59,9 +59,11 @@ void UCombatComponent::EquipPrimaryWeapon(AWeapon* WeaponToEquip)
 	if (WeaponToEquip == nullptr) return;
 	//DropEquippedWeapon();
 	EquippedWeapon = WeaponToEquip;
-	EquippedWeapon->SetOwner(Character);
 	EquippedWeapon->SetWeaponState(EWeaponState::EWS_Equipped);
+	EquippedWeapon->SetOwner(Character);
 	AttachActorToRightHand(EquippedWeapon);
+	EquippedWeapon->AddCharacterAbilities();
+	
 	//EquippedWeapon->SetHUDAmmo();
 	//UpdateCarriedAmmo();
 	//PlayEquipWeaponSound(WeaponToEquip);

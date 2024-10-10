@@ -116,12 +116,12 @@ void AWeapon::OnEquipped()
 	WeaponMesh->SetSimulatePhysics(false);
 	WeaponMesh->SetEnableGravity(false);
 	WeaponMesh->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
-	AVillainCharacter* OwningCharacter = Cast<AVillainCharacter>(GetOwner());
+	/*AVillainCharacter* OwningCharacter = Cast<AVillainCharacter>(GetOwner());
 	if (OwningCharacter)
 	{
 		OwningCharacter->SetEquippedWeapon(this);
-	}
-	if(HasAuthority())
+	}*/
+	/*if(HasAuthority())
 	{
 		if (UAbilitySystemComponent* AbilitySystemComponent = OwningCharacter->GetAbilitySystemComponent())
 		{
@@ -131,7 +131,7 @@ void AWeapon::OnEquipped()
 
 			AddCharacterAbilities(AbilitySystemComponent);
 		}
-	}
+	}*/
 	
 	
 	/*
@@ -176,10 +176,20 @@ void AWeapon::OnDropped()
 	*/
 }
 
-void AWeapon::AddCharacterAbilities(UAbilitySystemComponent* AbilitySystemComponent)
+void AWeapon::AddCharacterAbilities()
 {
-		if (!HasAuthority()) return;
-		UVillainAbilitySystemComponent* VillainASC = CastChecked<UVillainAbilitySystemComponent>(AbilitySystemComponent);
-		VillainASC -> AddCharacterAbilities(WeaponAbilities);
-	
+	if (!HasAuthority()) return;
+	AVillainCharacter* OwningCharacter = Cast<AVillainCharacter>(GetOwner());
+	if (OwningCharacter)
+	{
+		if (UAbilitySystemComponent* AbilitySystemComponent = OwningCharacter->GetAbilitySystemComponent())
+		{
+			FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(EquipTagClass, 1);
+			AbilitySystemComponent->GiveAbility(AbilitySpec);
+			AbilitySystemComponent->TryActivateAbility(AbilitySpec.Handle);
+		
+			UVillainAbilitySystemComponent* VillainASC = CastChecked<UVillainAbilitySystemComponent>(AbilitySystemComponent);
+			VillainASC -> AddCharacterAbilities(WeaponAbilities);
+		}
+	}
 }
