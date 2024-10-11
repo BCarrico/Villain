@@ -75,6 +75,24 @@ void AVillainCharacter::PostInitializeComponents()
 	}
 }
 
+void AVillainCharacter::Jump()
+{
+	Super::Jump();
+	if (bIsCrouched)
+	{
+		UnCrouch();
+	}
+	else
+	{
+		Super::Jump();
+	}
+}
+
+AWeapon* AVillainCharacter::GetEquippedWeapon() const
+{
+	return Combat->EquippedWeapon;
+}
+
 int32 AVillainCharacter::GetPlayerLevel_Implementation()
 {
 	const AVillainPlayerState* VillainPlayerState = GetPlayerState<AVillainPlayerState>();

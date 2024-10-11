@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
+#include "HUD/VillainHUD.h"
 #include "VillainTypes/CombatState.h"
 #include "CombatComponent.generated.h"
 
@@ -11,6 +12,7 @@
 class AWeapon;
 class AVillainPlayerController;
 class AVillainCharacter;
+class AVillainHUD;
 enum class ECombatState : uint8;
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
@@ -22,7 +24,7 @@ public:
 
 	UCombatComponent();
 	friend class AVillainCharacter;
-
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	void EquipWeapon(AWeapon* WeaponToEquip);
 	void EquipPrimaryWeapon(AWeapon* WeaponToEquip);
 	void SetAiming(bool bIsAiming);
@@ -33,23 +35,34 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	void AttachActorToRightHand(AActor* ActorToAttach);
+	
 	UFUNCTION()
 	void OnRep_EquippedWeapon();
 
 	UFUNCTION(Server, Reliable)
 	void ServerSetAiming(bool bIsAiming);
+
+	void TraceUnderCrosshairs(FHitResult& TraceHitResult);
+	void SetHUDCrosshairs(float DeltaTime);
 private:
 	UPROPERTY()
 	AVillainCharacter* Character;
 	
 	UPROPERTY()
 	AVillainPlayerController* Controller;
+	
+	UPROPERTY()
+	AVillainHUD* HUD;
 
 	UPROPERTY(ReplicatedUsing = OnRep_EquippedWeapon)
 	AWeapon* EquippedWeapon;
-
-	UFUNCTION()
-	void OnRep_CombatState();
+	// HUD and Crosshairs
+	
+	float CrosshairVelocityFactor;
+	float CrosshairInAirFactor;
+	float CrosshairAimFactor;
+	float CrosshairShootingFactor;
+	FHUDPackage HUDPackage;
 
 	UPROPERTY(ReplicatedUsing = OnRep_Aiming)
 	bool bAiming = false;
@@ -65,7 +78,8 @@ private:
 	UFUNCTION()
 	void OnRep_Aiming();
 	
-
+	UFUNCTION()
+	void OnRep_CombatState();
 	
 
 		

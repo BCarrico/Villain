@@ -26,8 +26,9 @@ public:
 	virtual void OnRep_PlayerState() override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual void PostInitializeComponents() override;
+	virtual void Jump() override;
 	FORCEINLINE void SetEquippedWeapon(AWeapon* WeaponToEquip) {EquippedWeapon = WeaponToEquip;}
-	FORCEINLINE AWeapon* GetEquippedWeapon() const {return EquippedWeapon;}
+	AWeapon* GetEquippedWeapon() const;
 	FORCEINLINE UCombatComponent* GetCombatComponent() const {return Combat;}
 	FORCEINLINE float GetAO_Yaw() const { return AO_Yaw;}
 	FORCEINLINE float GetAO_Pitch() const { return AO_Pitch;}
