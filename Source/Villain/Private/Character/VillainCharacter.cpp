@@ -40,7 +40,7 @@ AVillainCharacter::AVillainCharacter()
 void AVillainCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
-	AimOffset(DeltaSeconds);
+	RotateInPlace(DeltaSeconds);
 }
 
 void AVillainCharacter::PossessedBy(AController* NewController)
@@ -88,6 +88,13 @@ void AVillainCharacter::Jump()
 	}
 }
 
+void AVillainCharacter::OnRep_ReplicatedMovement()
+{
+	Super::OnRep_ReplicatedMovement();
+	SimProxiesTurn();
+	TimeSinceLastMovementReplication = 0.f;
+}
+
 AWeapon* AVillainCharacter::GetEquippedWeapon() const
 {
 	return Combat->EquippedWeapon;
@@ -98,6 +105,12 @@ int32 AVillainCharacter::GetPlayerLevel_Implementation()
 	const AVillainPlayerState* VillainPlayerState = GetPlayerState<AVillainPlayerState>();
 	check(VillainPlayerState);
 	return VillainPlayerState->GetPlayerLevel();
+}
+
+FVector AVillainCharacter::GetHitTarget() const
+{
+	if (Combat == nullptr) return FVector();
+	return Combat->HitTarget;
 }
 
 void AVillainCharacter::CalculateAO_Pitch()
@@ -173,6 +186,41 @@ void AVillainCharacter::TurnInPlace(float DeltaTime)
 	}
 }
 
+void AVillainCharacter::SimProxiesTurn()
+{
+	if (Combat == nullptr || Combat->EquippedWeapon == nullptr) return;
+	bRotateRootBone = false;
+	
+	float Speed = CalculateSpeed();
+	if (Speed > 0.f)
+	{
+		TurningInPlace = ETIP_NotTurning;
+		return;
+	}
+
+	ProxyRotationLastFrame = ProxyRotation;
+	ProxyRotation = GetActorRotation();
+	ProxyYaw = UKismetMathLibrary::NormalizedDeltaRotator(ProxyRotation, ProxyRotationLastFrame).Yaw;
+	
+	if (FMath::Abs(ProxyYaw) > TurnThreshold)
+	{
+		if (ProxyYaw > TurnThreshold)
+		{
+			TurningInPlace = ETurningInPlace::ETIP_Right;
+		}
+		else if (ProxyYaw < TurnThreshold)
+		{
+			TurningInPlace = ETurningInPlace::ETIP_Left;
+		}
+		else
+		{
+			TurningInPlace = ETIP_NotTurning;
+		}
+		return;
+	}
+	TurningInPlace = ETIP_NotTurning;
+}
+
 void AVillainCharacter::InitAbilityActorInfo()
 {
 	AVillainPlayerState* VillainPlayerState = GetPlayerState<AVillainPlayerState>();
@@ -234,6 +282,34 @@ void AVillainCharacter::OnRep_OverlappingWeapon(AWeapon* LastWeapon) // LastWeap
 	if (LastWeapon)
 	{
 		LastWeapon->ShowPickupWidget(false);
+	}
+}
+
+void AVillainCharacter::RotateInPlace(float DeltaTime)
+{
+	if (Combat && Combat->EquippedWeapon)
+	{
+		bUseControllerRotationYaw = true;
+		GetCharacterMovement()->bOrientRotationToMovement = false;
+	}
+	/*if (bDisableGameplay)
+	{
+		bUseControllerRotationYaw = false;
+		TurningInPlace = ETurningInPlace::ETIP_NotTurning;
+		return;
+	}*/
+	if (GetLocalRole() > ROLE_SimulatedProxy && IsLocallyControlled())
+	{
+		AimOffset(DeltaTime);
+	}
+	else
+	{
+		TimeSinceLastMovementReplication += DeltaTime;
+		if (TimeSinceLastMovementReplication > 0.25f)
+		{
+			OnRep_ReplicatedMovement();
+		}
+		CalculateAO_Pitch();
 	}
 }
 

@@ -13,6 +13,7 @@ void AVillainHUD::DrawHUD()
 		GEngine->GameViewport->GetViewportSize(ViewportSize);
 		const FVector2d ViewportCenter(ViewportSize.X / 2.f, ViewportSize.Y / 2.f);
 		float SpreadScaled = CrosshairSpreadMax * HUDPackage.CrosshairSpread;
+		HUDPackage.CrosshairsColor = FLinearColor::White;
 		if (HUDPackage.CrosshairsCenter)
 		{
 			FVector2d Spread(0.f, 0.f);

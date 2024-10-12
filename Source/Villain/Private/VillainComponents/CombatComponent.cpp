@@ -5,6 +5,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Character/VillainCharacter.h"
 #include "Engine/SkeletalMeshSocket.h"
+#include "Kismet/GameplayStatics.h"
 #include "Net/UnrealNetwork.h"
 #include "Player/VillainPlayerController.h"
 #include "VillainTypes/CombatState.h"
@@ -25,7 +26,7 @@ void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	{
 		FHitResult HitResult;
 		TraceUnderCrosshairs(HitResult);
-		//HitTarget = HitResult.ImpactPoint;
+		HitTarget = HitResult.ImpactPoint;
 		SetHUDCrosshairs(DeltaTime);
 		//InterpFOV(DeltaTime);
 	}
@@ -98,7 +99,39 @@ void UCombatComponent::OnRep_EquippedWeapon()
 
 void UCombatComponent::TraceUnderCrosshairs(FHitResult& TraceHitResult)
 {
-	
+	// Trace from center of screen outwards
+	FVector2d ViewportSize;
+	if (GEngine && GEngine->GameViewport)
+	{
+		GEngine->GameViewport->GetViewportSize(ViewportSize);
+	}
+	FVector2d CrosshairLocation(ViewportSize.X / 2.f, ViewportSize.Y / 2); // Crosshair is center of viewport
+	FVector CrosshairWorldPosition;
+	FVector CrosshairWorldDirection;
+	bool bScreenToWorld = UGameplayStatics::DeprojectScreenToWorld(UGameplayStatics::GetPlayerController(this, 0), CrosshairLocation, CrosshairWorldPosition, CrosshairWorldDirection);
+	if (bScreenToWorld)
+	{
+		FVector Start = CrosshairWorldPosition;
+		if (Character)
+		{
+			float DistanceToCharacter = (Character->GetActorLocation() - Start).Size();
+			Start += CrosshairWorldDirection * (DistanceToCharacter + 100.f);
+		}
+		FVector End = Start + CrosshairWorldDirection * 80000 /* TRACE_LENGTH see Blaster Weapon Types */;
+		GetWorld()->LineTraceSingleByChannel(
+			TraceHitResult,
+			Start,
+			End,
+			ECC_Visibility
+			);
+	}
+	/*if (TraceHitResult.GetActor() && TraceHitResult.GetActor()->Implements<UInteractWithCrosshairsInterface>())
+	{
+		HUDPackage.CrosshairsColor = FLinearColor::Red;
+	} else
+	{
+		HUDPackage.CrosshairsColor = FLinearColor::White;
+	}*/
 }
 
 void UCombatComponent::SetHUDCrosshairs(float DeltaTime)

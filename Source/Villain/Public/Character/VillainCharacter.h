@@ -27,6 +27,7 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual void PostInitializeComponents() override;
 	virtual void Jump() override;
+	virtual void OnRep_ReplicatedMovement() override;
 	FORCEINLINE void SetEquippedWeapon(AWeapon* WeaponToEquip) {EquippedWeapon = WeaponToEquip;}
 	AWeapon* GetEquippedWeapon() const;
 	FORCEINLINE UCombatComponent* GetCombatComponent() const {return Combat;}
@@ -41,6 +42,7 @@ public:
 	void ServerEquipButtonPressed();
 	/* Combat Interface */
 	virtual int32 GetPlayerLevel_Implementation() override;
+	FVector GetHitTarget() const;
 protected:
 
 	// Villain Components
@@ -55,7 +57,7 @@ protected:
 	float CalculateSpeed();
 	void AimOffset(float DeltaTime);
 	void TurnInPlace(float DeltaTime);
-	
+	void SimProxiesTurn();
 private:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UCameraComponent> FollowCamera;
@@ -83,6 +85,6 @@ private:
 	UFUNCTION()
 	void OnRep_OverlappingWeapon(AWeapon* LastWeapon);
 
-	
+	void RotateInPlace(float DeltaTime);
 
 };

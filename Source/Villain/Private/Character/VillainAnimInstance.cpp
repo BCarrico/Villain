@@ -66,13 +66,13 @@ void UVillainAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 		LeftHandTransform.SetLocation(OutPosition);
 		LeftHandTransform.SetRotation(FQuat(OutRotation));
 
-		/*if (VillainCharacter->IsLocallyControlled())
+		if (VillainCharacter->IsLocallyControlled())
 		{
 			bLocallyControlled = true;
-			const FTransform RightHandTransform = VillainCharacter->GetMesh()->GetSocketTransform(FName("Hand_R"), RTS_World);
+			const FTransform RightHandTransform = VillainCharacter->GetMesh()->GetSocketTransform(FName("hand_r"), RTS_World);
 			const FRotator LookAtRotation = UKismetMathLibrary::FindLookAtRotation(RightHandTransform.GetLocation(), RightHandTransform.GetLocation() + (RightHandTransform.GetLocation() - VillainCharacter->GetHitTarget()));
 			RightHandRotation = FMath::RInterpTo(RightHandRotation, LookAtRotation, DeltaSeconds, 30.f);
-		}*/
+		}
 	}
 
 	

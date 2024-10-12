@@ -63,7 +63,9 @@ private:
 	float CrosshairAimFactor;
 	float CrosshairShootingFactor;
 	FHUDPackage HUDPackage;
-
+	
+	FVector HitTarget;
+	
 	UPROPERTY(ReplicatedUsing = OnRep_Aiming)
 	bool bAiming = false;
 
