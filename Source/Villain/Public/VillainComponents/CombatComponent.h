@@ -30,6 +30,9 @@ public:
 	void SetAiming(bool bIsAiming);
 	UPROPERTY(ReplicatedUsing=OnRep_CombatState)
 	ECombatState CombatState = ECombatState::ECS_Unoccupied;
+
+	UPROPERTY(BlueprintReadOnly)
+	FHitResult HitResult;
 protected:
 
 	virtual void BeginPlay() override;

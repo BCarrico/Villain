@@ -3,6 +3,8 @@
 
 #include "AbilitySystem/AbilityTasks/TargetDataUnderMouse.h"
 #include "AbilitySystemComponent.h"
+#include "Character/VillainCharacter.h"
+#include "VillainComponents/CombatComponent.h"
 
 
 UTargetDataUnderMouse* UTargetDataUnderMouse::CreateTargetDataUnderMouse(UGameplayAbility* OwningAbility)
@@ -34,22 +36,30 @@ void UTargetDataUnderMouse::Activate()
 
 void UTargetDataUnderMouse::SendMouseCursorData()
 {
-	FScopedPredictionWindow ScopedPrediction(AbilitySystemComponent.Get());
+	//FScopedPredictionWindow ScopedPrediction(AbilitySystemComponent.Get());
 	
-	APlayerController* PC = Ability->GetCurrentActorInfo()->PlayerController.Get();
-	FHitResult CursorHit;
-	PC->GetHitResultUnderCursor(ECC_Visibility /*TODO: Custom Channel like Aura???*/, false, CursorHit);
+	//APlayerController* PC = Ability->GetCurrentActorInfo()->PlayerController.Get();
+	//FHitResult CursorHit;
+	//PC->GetHitResultUnderCursor(ECC_Visibility /*TODO: Custom Channel like Aura???*/, false, CursorHit);
 
-	FGameplayAbilityTargetDataHandle DataHandle;
-	FGameplayAbilityTargetData_SingleTargetHit* Data = new FGameplayAbilityTargetData_SingleTargetHit;
-	Data->HitResult = CursorHit;
-	DataHandle.Add(Data);
-	
-	AbilitySystemComponent->ServerSetReplicatedTargetData(GetAbilitySpecHandle(), GetActivationPredictionKey(), DataHandle, FGameplayTag(), AbilitySystemComponent->ScopedPredictionKey);
-
-	if (ShouldBroadcastAbilityTaskDelegates())
+	if (const AVillainCharacter* VillainCharacter = Cast<AVillainCharacter>(Ability->GetCurrentActorInfo()->AvatarActor.Get()))
 	{
-		ValidData.Broadcast(DataHandle);
+		if (const UCombatComponent* CombatComponent = VillainCharacter->GetCombatComponent())
+		{
+			const FHitResult CrosshairHit = CombatComponent->HitResult;
+
+			FGameplayAbilityTargetDataHandle DataHandle;
+			FGameplayAbilityTargetData_SingleTargetHit* Data = new FGameplayAbilityTargetData_SingleTargetHit;
+			Data->HitResult = CrosshairHit;
+			DataHandle.Add(Data);
+
+			AbilitySystemComponent->ServerSetReplicatedTargetData(GetAbilitySpecHandle(), GetActivationPredictionKey(), DataHandle, FGameplayTag(), AbilitySystemComponent->ScopedPredictionKey);
+
+			if (ShouldBroadcastAbilityTaskDelegates())
+			{
+				ValidData.Broadcast(DataHandle);
+			}
+		}
 	}
 }
 
