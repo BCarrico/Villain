@@ -30,9 +30,9 @@ ACharacterBase::ACharacterBase()
 FVector ACharacterBase::GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag)
 {
 	const FVillainGameplayTags& GameplayTags = FVillainGameplayTags::Get();
-	if (MontageTag.MatchesTagExact(GameplayTags.CombatSocket_Weapon) && IsValid(WeaponDepreciated))
+	if (MontageTag.MatchesTagExact(GameplayTags.CombatSocket_Weapon) && IsValid(Weapon))
 	{
-		return WeaponDepreciated->GetSocketLocation(WeaponTipSocketName);
+		return Weapon->GetSocketLocation(WeaponTipSocketName);
 	}
 	return FVector();
 }

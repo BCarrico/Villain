@@ -7,6 +7,7 @@
 #include "VillainTypes/TurningInPlace.h"
 #include "VillainAnimInstance.generated.h"
 
+class UVillainAimAbility;
 class AWeapon;
 class AVillainCharacter;
 /**

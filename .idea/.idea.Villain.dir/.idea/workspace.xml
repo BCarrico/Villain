@@ -9,23 +9,31 @@
   <component name="ChangeListManager">
     <list default="true" id="64539828-f90b-421b-b98a-b9d4e3b60545" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Villain.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Villain.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Villain/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Villain/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/Animations/AM_TestShootAnimation.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Animations/AM_TestShootAnimation.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Assets/MilitaryWeapSilver/Weapons/Assault_Rifle_A.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/MilitaryWeapSilver/Weapons/Assault_Rifle_A.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Assets/MilitaryWeapSilver/Weapons/Assault_Rifle_A_Skeleton.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/MilitaryWeapSilver/Weapons/Assault_Rifle_A_Skeleton.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/StarterContent/Characters/Mannequins/Meshes/SKM_Manny.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/StarterContent/Characters/Mannequins/Meshes/SKM_Manny.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Textures/Crosshairs/Primary/Crosshair_Bottom.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Textures/Crosshairs/Primary/Crosshair_Bottom.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Textures/Crosshairs/Primary/Crosshair_Center.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Textures/Crosshairs/Primary/Crosshair_Center.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Textures/Crosshairs/Primary/Crosshair_Left.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Textures/Crosshairs/Primary/Crosshair_Left.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Textures/Crosshairs/Primary/Crosshair_Right.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Textures/Crosshairs/Primary/Crosshair_Right.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Textures/Crosshairs/Primary/Crosshair_Top.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Textures/Crosshairs/Primary/Crosshair_Top.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Textures/Crosshairs/Primary/DefaultCrosshair.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Textures/Crosshairs/Primary/DefaultCrosshair.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Character/Animation/ABP_VillainAnim.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Character/Animation/ABP_VillainAnim.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Assets/StarterContent/Characters/Mannequins/Animations/ABP_Manny.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/StarterContent/Characters/Mannequins/Animations/ABP_Manny.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/AbilitySystem/GameplayAbilities/GA_TestProjectileAbility.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/AbilitySystem/GameplayAbilities/GA_TestProjectileAbility.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Character/BP_VillainCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Character/BP_VillainCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Input/IMC_VillainContext.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Input/IMC_VillainContext.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Input/InputActions/IA_Crouch.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Input/InputActions/IA_Crouch.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Input/InputActions/IA_Jump.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Input/InputActions/IA_Jump.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Input/VillainInputConfig.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Input/VillainInputConfig.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Player/BP_VillainPlayerController.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Player/BP_VillainPlayerController.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Weapon/BP_WeaponBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Weapon/BP_WeaponBase.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/TestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/TestMap.umap" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Villain/Private/Character/CharacterBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/Character/CharacterBase.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Villain/Private/Character/VillainAnimInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/Character/VillainAnimInstance.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Villain/Private/Character/VillainCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/Character/VillainCharacter.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Private/HUD/VillainHUD.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/HUD/VillainHUD.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Villain/Private/Player/VillainPlayerController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/Player/VillainPlayerController.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Villain/Private/VillainComponents/CombatComponent.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/VillainComponents/CombatComponent.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Villain/Private/VillainGameplayTags.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/VillainGameplayTags.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/Character/CharacterBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/Character/CharacterBase.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/Character/VillainAnimInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/Character/VillainAnimInstance.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Villain/Public/Character/VillainCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/Character/VillainCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/VillainComponents/CombatComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/VillainComponents/CombatComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/Player/VillainPlayerController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/Player/VillainPlayerController.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/VillainGameplayTags.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/VillainGameplayTags.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,55 +70,6 @@
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
-    <setting file="mock:///dummy.cpp" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Villain/Private/AbilitySystem/Abilities/VillainGameplayAbilityBase.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Villain/Private/Actor/VillainProjectile.cpp" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Villain/Private/Player/VillainPlayerController.cpp" root0="FORCE_HIGHLIGHTING" />
@@ -118,6 +77,7 @@
     <setting file="file://$PROJECT_DIR$/Source/Villain/Public/Character/VillainCharacter.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Villain/Public/Player/VillainPlayerController.h" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Source/Villain/Villain.Build.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/../../UE_5.4/Engine/Plugins/Runtime/GameplayAbilities/Source/GameplayAbilities/Private/Abilities/Tasks/AbilityTask.cpp" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
@@ -254,7 +214,11 @@
       <workItem from="1728506404019" duration="8235000" />
       <workItem from="1728666466353" duration="4761000" />
       <workItem from="1728673489531" duration="504000" />
-      <workItem from="1728755905425" duration="6075000" />
+      <workItem from="1728755905425" duration="6497000" />
+      <workItem from="1728833901910" duration="5279000" />
+      <workItem from="1728920474649" duration="8920000" />
+      <workItem from="1728953738584" duration="2763000" />
+      <workItem from="1729013398199" duration="5879000" />
     </task>
     <servers />
   </component>

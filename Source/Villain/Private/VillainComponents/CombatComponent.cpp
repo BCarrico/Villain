@@ -24,8 +24,9 @@ void UCombatComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActo
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 	if (Character && Character->IsLocallyControlled())
 	{
+	
 		FHitResult HitResult;
-		TraceUnderCrosshairs(HitResult);
+		TraceUnderCrosshairs(HitResult); 
 		HitTarget = HitResult.ImpactPoint;
 		SetHUDCrosshairs(DeltaTime);
 		//InterpFOV(DeltaTime);
@@ -64,8 +65,8 @@ void UCombatComponent::EquipWeapon(AWeapon* WeaponToEquip)
 	
 	EquipPrimaryWeapon(WeaponToEquip);
 	
-	Character->GetCharacterMovement()->bOrientRotationToMovement = false;
-	Character->bUseControllerRotationYaw = true;
+	Character->GetCharacterMovement()->bOrientRotationToMovement = false; 
+	Character->bUseControllerRotationYaw = true; 
 
 }
 
@@ -199,6 +200,7 @@ void UCombatComponent::SetAiming(bool bIsAiming)
 	if (Character)
 	{
 		Character->GetCharacterMovement()->MaxWalkSpeed = bIsAiming ? AimWalkSpeed : BaseWalkSpeed;
+		
 	}
 	/*if (Character->IsLocallyControlled() && EquippedWeapon->GetWeaponType() == EWeaponType::EWT_SniperRifle)
 	{

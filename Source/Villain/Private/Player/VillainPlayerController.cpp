@@ -28,15 +28,6 @@ void AVillainPlayerController::BeginPlay()
 	{
 		Subsystem->AddMappingContext(VillainInputContext, 0);
 	};
-
-	// Show mouse cursor, and use default arrow-shaped cursor
-	//bShowMouseCursor = true;
-	//DefaultMouseCursor = EMouseCursor::Default;
-	
-	//FInputModeGameAndUI InputModeData;
-	//InputModeData.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
-	//InputModeData.SetHideCursorDuringCapture(false);
-	//SetInputMode(InputModeData);
 }
 
 void AVillainPlayerController::SetupInputComponent()
@@ -47,8 +38,8 @@ void AVillainPlayerController::SetupInputComponent()
 	
 	VillainInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AVillainPlayerController::Move);
 	VillainInputComponent->BindAction(AimAction, ETriggerEvent::Triggered, this, &AVillainPlayerController::Aim);
-	VillainInputComponent->BindAction(CrouchAction, ETriggerEvent::Started, this, &AVillainPlayerController::CrouchButtonPressed); // Also set as triggered in IA_Crouch due to stuttering in game. Fixed it
 	VillainInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AVillainPlayerController::Look);
+	VillainInputComponent->BindAction(CrouchAction, ETriggerEvent::Started, this, &AVillainPlayerController::CrouchButtonPressed); // Also set as triggered in IA_Crouch due to stuttering in game. Fixed it
 	VillainInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &AVillainPlayerController::JumpButtonPressed);
 	VillainInputComponent->BindAction(EquipAction, ETriggerEvent::Triggered, this, &AVillainPlayerController::EquipButtonPressed);
 	VillainInputComponent->BindAbilityActions(InputConfig, this, &ThisClass::AbilityInputTagPressed, &ThisClass::AbilityInputTagReleased, &ThisClass::AbilityInputTagHeld);
@@ -57,7 +48,8 @@ void AVillainPlayerController::SetupInputComponent()
 void AVillainPlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
-	
+	//CursorTrace();
+
 }
 
 void AVillainPlayerController::OnPossess(APawn* InPawn)
@@ -120,10 +112,11 @@ void AVillainPlayerController::Move(const FInputActionValue& InputActionValue)
 
 void AVillainPlayerController::Aim(const FInputActionValue& InputActionValue)
 {
-	bool IsAiming = InputActionValue.Get<bool>();
+	const bool IsAiming = InputActionValue.Get<bool>();
 	if (APawn* ControlledPawn = GetPawn<APawn>())
 	{
-		if (AVillainCharacter* VillainCharacter = Cast<AVillainCharacter>(ControlledPawn))
+		VillainCharacter == nullptr ? VillainCharacter = Cast<AVillainCharacter>(ControlledPawn) : VillainCharacter;
+		if (VillainCharacter && VillainCharacter->IsWeaponEquipped())
 		{
 			//if (VillainCharacter->bDisableGameplay) return;
 			if (UCombatComponent* CombatComponent = VillainCharacter->GetCombatComponent())
@@ -145,13 +138,23 @@ void AVillainPlayerController::Look(const FInputActionValue& InputActionValue)
 	}
 }
 
-void AVillainPlayerController::JumpButtonPressed()
+
+void AVillainPlayerController::EquipButtonPressed()
 {
 	if (APawn* ControlledPawn = GetPawn<APawn>())
 	{
-		if (ACharacter* ControlledCharacter = Cast<ACharacter>(ControlledPawn))
+		VillainCharacter == nullptr ? VillainCharacter = Cast<AVillainCharacter>(ControlledPawn) : VillainCharacter;
+		if (VillainCharacter)
 		{
-			ControlledCharacter->Jump();
+			//if (VillainCharacter->bDisableGameplay) return;
+			if (VillainCharacter->GetCombatComponent()->CombatState == ECombatState::ECS_Unoccupied) VillainCharacter->ServerEquipButtonPressed();
+			/*if (VillainCharacter->GetCombatComponent()->ShouldSwapWeapons() && !HasAuthority() && BlasterCharacter->GetCombatComponent()->CombatState == ECombatState::ECS_Unoccupied && BlasterCharacter->OverlappingWeapon == nullptr)
+			{
+				VillainCharacter->PlaySwapMontage();
+				VillainCharacter->GetCombatComponent()->CombatState = ECombatState::ECS_SwappingWeapons;
+				VillainCharacter->bFinishedSwapping = false;
+			}
+			*/
 		}
 	}
 }
@@ -160,6 +163,11 @@ void AVillainPlayerController::CrouchButtonPressed()
 {
 	if (APawn* ControlledPawn = GetPawn<APawn>())
 	{
+		VillainCharacter == nullptr ? VillainCharacter = Cast<AVillainCharacter>(ControlledPawn) : VillainCharacter;
+		if (VillainCharacter)
+		{
+			//if (VillainCharacter->bDisableGameplay) return;
+		}
 		if (ACharacter* ControlledCharacter = Cast<ACharacter>(ControlledPawn))
 		{
 			if (ControlledCharacter->bIsCrouched)
@@ -174,21 +182,21 @@ void AVillainPlayerController::CrouchButtonPressed()
 	}
 }
 
-void AVillainPlayerController::EquipButtonPressed()
+void AVillainPlayerController::JumpButtonPressed()
 {
 	if (APawn* ControlledPawn = GetPawn<APawn>())
 	{
-		if (AVillainCharacter* VillainCharacter = Cast<AVillainCharacter>(ControlledPawn))
+		VillainCharacter == nullptr ? VillainCharacter = Cast<AVillainCharacter>(ControlledPawn) : VillainCharacter;
+		//if (VillainCharacter && VillainCharacter->bDisableGameplay) return;
+		if (ACharacter* ControlledCharacter = Cast<ACharacter>(ControlledPawn))
 		{
-			//if (VillainCharacter->bDisableGameplay) return;
-			if (VillainCharacter->GetCombatComponent()->CombatState == ECombatState::ECS_Unoccupied) VillainCharacter->ServerEquipButtonPressed();
-			/*if (VillainCharacter->GetCombatComponent()->ShouldSwapWeapons() && !HasAuthority() && BlasterCharacter->GetCombatComponent()->CombatState == ECombatState::ECS_Unoccupied && BlasterCharacter->OverlappingWeapon == nullptr)
-			{
-				VillainCharacter->PlaySwapMontage();
-				VillainCharacter->GetCombatComponent()->CombatState = ECombatState::ECS_SwappingWeapons;
-				VillainCharacter->bFinishedSwapping = false;
-			}
-			*/
+			ControlledCharacter->Jump();
 		}
 	}
+}
+
+void AVillainPlayerController::CursorTrace()
+{
+	const ECollisionChannel TraceChannel = ECC_Visibility;
+	GetHitResultUnderCursor(TraceChannel, false, CursorHit);
 }

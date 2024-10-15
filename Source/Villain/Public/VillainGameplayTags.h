@@ -27,12 +27,16 @@ public:
 
  // Input Tags
  FGameplayTag InputTag_LMB;
+ FGameplayTag InputTag_RMB;
 
  // Combat Socket Tags
  FGameplayTag CombatSocket_Weapon;
 
  // Weapon Tags
  FGameplayTag EquippedWeapon_Test;
+
+ // Event Tags
+ FGameplayTag Event_Montage_Test;
 protected:
 private:
  static FVillainGameplayTags GameplayTags;

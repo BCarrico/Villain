@@ -4,6 +4,7 @@
 #include "Character/VillainCharacter.h"
 
 #include "AbilitySystemComponent.h"
+#include "VillainGameplayTags.h"
 #include "Weapon/Weapon.h"
 #include "AbilitySystem/VillainAbilitySystemComponent.h"
 #include "Camera/CameraComponent.h"
@@ -26,6 +27,7 @@ AVillainCharacter::AVillainCharacter()
 	FollowCamera->bUsePawnControlRotation = false;
 	
 	bUseControllerRotationYaw = true;
+	
 	GetCharacterMovement()->bOrientRotationToMovement = false;
 	GetCharacterMovement()->RotationRate = FRotator(0.f, 0.f, 850.f);
 	GetCharacterMovement()->NavAgentProps.bCanCrouch = true;
@@ -105,6 +107,16 @@ int32 AVillainCharacter::GetPlayerLevel_Implementation()
 	const AVillainPlayerState* VillainPlayerState = GetPlayerState<AVillainPlayerState>();
 	check(VillainPlayerState);
 	return VillainPlayerState->GetPlayerLevel();
+}
+
+FVector AVillainCharacter::GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag)
+{
+	const FVillainGameplayTags& GameplayTags = FVillainGameplayTags::Get();
+	if (MontageTag.MatchesTagExact(GameplayTags.CombatSocket_Weapon) && IsValid(Combat->EquippedWeapon))
+	{
+		return Combat->EquippedWeapon->GetWeaponMesh()->GetSocketLocation(WeaponTipSocketName);
+	}
+	return FVector();
 }
 
 FVector AVillainCharacter::GetHitTarget() const

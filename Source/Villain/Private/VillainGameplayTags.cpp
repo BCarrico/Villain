@@ -19,10 +19,14 @@ void FVillainGameplayTags::InitializeNativeGameplayTags()
 
 	// Input Tags
 	GameplayTags.InputTag_LMB = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("InputTag.LMB"), FString("InputTag for LMB"));
+	GameplayTags.InputTag_RMB = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("InputTag.RMB"), FString("InputTag for RMB"));
 
 	// Combat Sockets
 	GameplayTags.CombatSocket_Weapon = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("CombatSocket.Weapon"), FString("Weapon"));
 
 	// Weapon Tags
 	GameplayTags.EquippedWeapon_Test = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("EquippedWeapon.Test"), FString("Test Weapon Tag"));
+
+	// Event Tags
+	GameplayTags.Event_Montage_Test = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Test"), FString("Test Event Montage Tag"));
 }

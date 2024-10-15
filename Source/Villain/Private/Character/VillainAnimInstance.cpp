@@ -23,7 +23,6 @@ void UVillainAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	{
 		VillainCharacter = Cast<AVillainCharacter>(TryGetPawnOwner());
 	}
-
 	if (VillainCharacter == nullptr) return; // If unable to initialize, return.
 
 	FVector Velocity = VillainCharacter->GetVelocity();

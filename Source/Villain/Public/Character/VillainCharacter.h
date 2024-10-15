@@ -42,6 +42,7 @@ public:
 	void ServerEquipButtonPressed();
 	/* Combat Interface */
 	virtual int32 GetPlayerLevel_Implementation() override;
+	virtual FVector GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag) override;
 	FVector GetHitTarget() const;
 protected:
 
