@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
+#include "WeaponType.h"
 #include "GameFramework/Actor.h"
 #include "Weapon.generated.h"
 
@@ -35,6 +36,7 @@ public:
 	void SetWeaponState(EWeaponState State);
 	FORCEINLINE FGameplayTag GetWeaponTag() const {return WeaponTag;}
 	FORCEINLINE USkeletalMeshComponent* GetWeaponMesh() const {return WeaponMesh;}
+	FORCEINLINE EWeaponType GetWeaponType() const {return WeaponType;}
 	virtual void AddCharacterAbilities();
 	
 	// Textures for the weapon crosshairs
@@ -85,4 +87,7 @@ private:
 
 	UPROPERTY(EditAnywhere, Category="Abilities")
 	TArray<TSubclassOf<UGameplayAbility>> WeaponAbilities;
+
+	UPROPERTY(EditAnywhere)
+	EWeaponType WeaponType;
 };

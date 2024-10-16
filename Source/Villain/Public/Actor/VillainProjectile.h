@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "VillainAbilityTypes.h"
 #include "GameFramework/Actor.h"
 #include "VillainProjectile.generated.h"
 
@@ -21,6 +22,9 @@ public:
 	
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UProjectileMovementComponent> ProjectileMovement;
+	
+	UPROPERTY(BlueprintReadWrite, meta = (ExposeOnSpawn = true))
+	FDamageEffectParams DamageEffectParams;
 protected:
 	
 	virtual void BeginPlay() override;

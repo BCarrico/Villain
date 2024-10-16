@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Animation/AnimInstance.h"
 #include "VillainTypes/TurningInPlace.h"
+#include "Weapon/WeaponType.h"
 #include "VillainAnimInstance.generated.h"
 
 class UVillainAimAbility;
@@ -91,4 +92,7 @@ private:
 
 	UPROPERTY(BlueprintReadOnly, Category="Movement", meta = (AllowPrivateAccess="true"))
 	TEnumAsByte<ETurningInPlace> TurningInPlace;
+
+	UPROPERTY(BlueprintReadOnly, Category="Movement", meta = (AllowPrivateAccess="true"))
+	EWeaponType WeaponType;
 };

@@ -38,7 +38,7 @@ protected:
 	virtual void BeginPlay() override;
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	void AttachActorToRightHand(AActor* ActorToAttach);
-	
+	void AttachActorToLeftHand(AActor* ActorToAttach);
 	UFUNCTION()
 	void OnRep_EquippedWeapon();
 

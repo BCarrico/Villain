@@ -116,24 +116,7 @@ void AWeapon::OnEquipped()
 	WeaponMesh->SetSimulatePhysics(false);
 	WeaponMesh->SetEnableGravity(false);
 	WeaponMesh->SetCollisionEnabled(ECollisionEnabled::Type::NoCollision);
-	/*AVillainCharacter* OwningCharacter = Cast<AVillainCharacter>(GetOwner());
-	if (OwningCharacter)
-	{
-		OwningCharacter->SetEquippedWeapon(this);
-	}*/
-	/*if(HasAuthority())
-	{
-		if (UAbilitySystemComponent* AbilitySystemComponent = OwningCharacter->GetAbilitySystemComponent())
-		{
-			FGameplayAbilitySpec AbilitySpec = FGameplayAbilitySpec(EquipTagClass, 1);
-			AbilitySystemComponent->GiveAbility(AbilitySpec);
-			AbilitySystemComponent->TryActivateAbility(AbilitySpec.Handle);
 
-			AddCharacterAbilities(AbilitySystemComponent);
-		}
-	}*/
-	
-	
 	/*
 	 *TODO: Lag Compensation
 	BlasterOwnerCharacter = BlasterOwnerCharacter == nullptr ? Cast<ABlasterCharacter>(GetOwner()) : BlasterOwnerCharacter;

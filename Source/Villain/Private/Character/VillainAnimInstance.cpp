@@ -36,6 +36,10 @@ void UVillainAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	bIsCrouched = VillainCharacter->bIsCrouched;
 	bAiming = VillainCharacter->IsAiming();
 	TurningInPlace = VillainCharacter->GetTurningInPlace();
+	if (EquippedWeapon)
+	{
+		WeaponType = EquippedWeapon->GetWeaponType();
+	}
 	//bRotateRootBone = VillainCharacter->ShouldRotateRootBone();
 	//bEliminated = VillainCharacter->IsEliminated();
 	

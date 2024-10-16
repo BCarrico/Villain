@@ -77,7 +77,14 @@ void UCombatComponent::EquipPrimaryWeapon(AWeapon* WeaponToEquip)
 	EquippedWeapon = WeaponToEquip;
 	EquippedWeapon->SetWeaponState(EWeaponState::EWS_Equipped);
 	EquippedWeapon->SetOwner(Character);
-	AttachActorToRightHand(EquippedWeapon);
+	if (EquippedWeapon->GetWeaponType() == EWeaponType::EWT_OneHand_Left)
+	{
+		AttachActorToLeftHand(EquippedWeapon);
+	}
+	else
+	{
+		AttachActorToRightHand(EquippedWeapon);
+	}
 	EquippedWeapon->AddCharacterAbilities();
 	
 	//EquippedWeapon->SetHUDAmmo();
@@ -91,7 +98,14 @@ void UCombatComponent::OnRep_EquippedWeapon()
 	if (EquippedWeapon && Character)
 	{
 		EquippedWeapon->SetWeaponState(EWeaponState::EWS_Equipped);
-		AttachActorToRightHand(EquippedWeapon);
+		if (EquippedWeapon->GetWeaponType() == EWeaponType::EWT_OneHand_Left)
+		{
+			AttachActorToLeftHand(EquippedWeapon);
+		}
+		else
+		{
+			AttachActorToRightHand(EquippedWeapon);
+		}
 		//PlayEquipWeaponSound(EquippedWeapon);
 		Character->GetCharacterMovement()->bOrientRotationToMovement = false;
 		Character->bUseControllerRotationYaw = true;
@@ -263,6 +277,17 @@ void UCombatComponent::AttachActorToRightHand(AActor* ActorToAttach)
 {
 	if (Character == nullptr || ActorToAttach == nullptr) return;
 	const USkeletalMeshSocket* HandSocket = Character->GetMesh()->GetSocketByName(FName("RightHandSocket"));
+	// Check boolean for if EquippedWeapon->GetWeaponType() == xxx, to see if a different socket needs to be used for animation purposes.
+	if (HandSocket)
+	{
+		HandSocket->AttachActor(ActorToAttach, Character->GetMesh());
+	}
+}
+
+void UCombatComponent::AttachActorToLeftHand(AActor* ActorToAttach)
+{
+	if (Character == nullptr || ActorToAttach == nullptr) return;
+	const USkeletalMeshSocket* HandSocket = Character->GetMesh()->GetSocketByName(FName("LeftHandSocket"));
 	// Check boolean for if EquippedWeapon->GetWeaponType() == xxx, to see if a different socket needs to be used for animation purposes.
 	if (HandSocket)
 	{
