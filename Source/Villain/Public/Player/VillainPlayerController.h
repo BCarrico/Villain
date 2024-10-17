@@ -31,6 +31,8 @@ protected:
 	virtual void PlayerTick(float DeltaTime) override;
 	virtual void OnPossess(APawn* InPawn) override;
 private:
+	bool bIsAiming;
+	
 	UPROPERTY()
 	AVillainCharacter* VillainCharacter;
 	
@@ -76,5 +78,5 @@ private:
 	void EquipButtonPressed();
 	void CrouchButtonPressed();
 	void JumpButtonPressed();
-	void CursorTrace();
+	void LookAtMouseWhileAiming();
 };

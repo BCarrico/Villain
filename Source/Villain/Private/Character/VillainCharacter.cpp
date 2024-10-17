@@ -17,19 +17,37 @@
 
 AVillainCharacter::AVillainCharacter()
 {
-	CameraBoom = CreateDefaultSubobject<USpringArmComponent>("CameraBoom");
+	// For 3rd Person
+	/*CameraBoom = CreateDefaultSubobject<USpringArmComponent>("CameraBoom");
 	CameraBoom->SetupAttachment(GetMesh());
 	CameraBoom->TargetArmLength = 320.f;
 	CameraBoom->bUsePawnControlRotation = true;
-
+	*/
+	
+	//bUseControllerRotationYaw = true;
+	
+	/*GetCharacterMovement()->bOrientRotationToMovement = false;
+	GetCharacterMovement()->RotationRate = FRotator(0.f, 0.f, 850.f);
+	GetCharacterMovement()->NavAgentProps.bCanCrouch = true;
+	*/
+	
+	CameraBoom = CreateDefaultSubobject<USpringArmComponent>("CameraBoom");
+	CameraBoom->SetupAttachment(GetMesh());
+	CameraBoom->SetUsingAbsoluteRotation(true);
+	CameraBoom->bDoCollisionTest = false;
+	
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>("FollowCamera");
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	FollowCamera->bUsePawnControlRotation = false;
 	
-	bUseControllerRotationYaw = true;
-	
-	GetCharacterMovement()->bOrientRotationToMovement = false;
-	GetCharacterMovement()->RotationRate = FRotator(0.f, 0.f, 850.f);
+	bUseControllerRotationPitch = false;
+	bUseControllerRotationRoll = false;
+	bUseControllerRotationYaw = false;
+
+	GetCharacterMovement()->bOrientRotationToMovement = true;
+	GetCharacterMovement()->RotationRate = FRotator(0.f, 400.f, 0.f);
+	GetCharacterMovement()->bConstrainToPlane = true;
+	GetCharacterMovement()->bSnapToPlaneAtStart = true;
 	GetCharacterMovement()->NavAgentProps.bCanCrouch = true;
 	
 	Combat = CreateDefaultSubobject<UCombatComponent>("CombatComponent");
@@ -42,7 +60,7 @@ AVillainCharacter::AVillainCharacter()
 void AVillainCharacter::Tick(float DeltaSeconds)
 {
 	Super::Tick(DeltaSeconds);
-	RotateInPlace(DeltaSeconds);
+	//RotateInPlace(DeltaSeconds);
 }
 
 void AVillainCharacter::PossessedBy(AController* NewController)

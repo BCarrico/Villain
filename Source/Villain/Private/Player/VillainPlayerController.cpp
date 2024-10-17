@@ -20,7 +20,17 @@ void AVillainPlayerController::BeginPlay()
 	Super::BeginPlay();
 	check(VillainInputContext);
 	
-	FInputModeGameOnly InputModeData;
+	//3rd Person Only
+	/*FInputModeGameOnly InputModeData;
+	SetInputMode(InputModeData);
+	*/
+	
+	bShowMouseCursor = true;
+	DefaultMouseCursor = EMouseCursor::Default;
+
+	FInputModeGameAndUI InputModeData;
+	InputModeData.SetLockMouseToViewportBehavior(EMouseLockMode::DoNotLock);
+	InputModeData.SetHideCursorDuringCapture(false);
 	SetInputMode(InputModeData);
 	
 	UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(GetLocalPlayer());
@@ -48,7 +58,7 @@ void AVillainPlayerController::SetupInputComponent()
 void AVillainPlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
-	//CursorTrace();
+	if (bIsAiming) LookAtMouseWhileAiming();
 
 }
 
@@ -96,7 +106,8 @@ void AVillainPlayerController::Move(const FInputActionValue& InputActionValue)
 {
 	//TODO: If unable to move due to certain GameplayTag, return early
 	
-	const FVector2d InputAxisVector = InputActionValue.Get<FVector2d>();
+	//FOR 3rd Person
+	/*const FVector2d InputAxisVector = InputActionValue.Get<FVector2d>();
 	const FRotator Rotation = GetControlRotation();
 	const FRotator YawRotation(0.f, Rotation.Yaw, 0.f);
 
@@ -107,12 +118,25 @@ void AVillainPlayerController::Move(const FInputActionValue& InputActionValue)
 	{
 		ControlledPawn->AddMovementInput(ForwardDirection, InputAxisVector.Y);
 		ControlledPawn->AddMovementInput(RightDirection, InputAxisVector.X);
-	}
+	}*/
+
+	// Retrieve the movement input value
+	FVector2D MoveInput = InputActionValue.Get<FVector2D>();
+
+	// Set a fixed movement direction
+	FVector FixedDirection = FVector::ForwardVector * MoveInput.Y + FVector::RightVector * MoveInput.X;
+
+	// Normalize the vector to ensure consistent movement speed
+	FixedDirection.Normalize();
+
+	// Move in the fixed world direction
+	if (APawn* ControlledPawn = GetPawn<APawn>())
+	ControlledPawn->AddMovementInput(FixedDirection, 1.0f);
 }
 
 void AVillainPlayerController::Aim(const FInputActionValue& InputActionValue)
 {
-	const bool IsAiming = InputActionValue.Get<bool>();
+	bIsAiming = InputActionValue.Get<bool>();
 	if (APawn* ControlledPawn = GetPawn<APawn>())
 	{
 		VillainCharacter == nullptr ? VillainCharacter = Cast<AVillainCharacter>(ControlledPawn) : VillainCharacter;
@@ -121,7 +145,7 @@ void AVillainPlayerController::Aim(const FInputActionValue& InputActionValue)
 			//if (VillainCharacter->bDisableGameplay) return;
 			if (UCombatComponent* CombatComponent = VillainCharacter->GetCombatComponent())
 			{
-				CombatComponent->SetAiming(IsAiming);
+				CombatComponent->SetAiming(bIsAiming);
 			}
 		}
 	}
@@ -129,13 +153,15 @@ void AVillainPlayerController::Aim(const FInputActionValue& InputActionValue)
 
 void AVillainPlayerController::Look(const FInputActionValue& InputActionValue)
 {
+	// For 3rd Person
+	/*
 	FVector2D LookAxisVector = InputActionValue.Get<FVector2D>();
 	if (APawn* ControlledPawn = GetPawn<APawn>())
 	{
 		// add yaw and pitch input to controller
 		ControlledPawn->AddControllerYawInput(LookAxisVector.X);
 		ControlledPawn->AddControllerPitchInput(LookAxisVector.Y);
-	}
+	}*/
 }
 
 
@@ -195,8 +221,23 @@ void AVillainPlayerController::JumpButtonPressed()
 	}
 }
 
-void AVillainPlayerController::CursorTrace()
+void AVillainPlayerController::LookAtMouseWhileAiming()
 {
 	const ECollisionChannel TraceChannel = ECC_Visibility;
 	GetHitResultUnderCursor(TraceChannel, false, CursorHit);
+
+	// Get the controlled character and ensure it's valid
+	if (APawn* ControlledPawn = GetPawn())
+	{
+		// Determine where to look at based on the trace result
+		const FVector LookAtLocation = CursorHit.Location;
+		const FVector DirectionToLook = (LookAtLocation - ControlledPawn->GetActorLocation()).GetSafeNormal();
+		const FRotator LookRotation = FRotationMatrix::MakeFromX(DirectionToLook).Rotator();
+
+		// Update only the Yaw to make the character face horizontally
+		const FRotator NewRotation = FRotator(0.0f, LookRotation.Yaw, 0.0f);
+
+		// Smooth rotation for a natural look
+		ControlledPawn->Controller->SetControlRotation(FMath::RInterpTo(ControlledPawn->Controller->GetControlRotation(), NewRotation, GetWorld()->GetDeltaSeconds(), 960));
+	}
 }

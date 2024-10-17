@@ -64,10 +64,6 @@ void UCombatComponent::EquipWeapon(AWeapon* WeaponToEquip)
 	}*/
 	
 	EquipPrimaryWeapon(WeaponToEquip);
-	
-	Character->GetCharacterMovement()->bOrientRotationToMovement = false; 
-	Character->bUseControllerRotationYaw = true; 
-
 }
 
 void UCombatComponent::EquipPrimaryWeapon(AWeapon* WeaponToEquip)
@@ -107,8 +103,8 @@ void UCombatComponent::OnRep_EquippedWeapon()
 			AttachActorToRightHand(EquippedWeapon);
 		}
 		//PlayEquipWeaponSound(EquippedWeapon);
-		Character->GetCharacterMovement()->bOrientRotationToMovement = false;
-		Character->bUseControllerRotationYaw = true;
+		Character->GetCharacterMovement()->bOrientRotationToMovement = true;
+		//Character->bUseControllerRotationYaw = true;
 	}
 }
 
@@ -214,7 +210,7 @@ void UCombatComponent::SetAiming(bool bIsAiming)
 	if (Character)
 	{
 		Character->GetCharacterMovement()->MaxWalkSpeed = bIsAiming ? AimWalkSpeed : BaseWalkSpeed;
-		
+		Character->bUseControllerRotationYaw = bIsAiming ? true : false;
 	}
 	/*if (Character->IsLocallyControlled() && EquippedWeapon->GetWeaponType() == EWeaponType::EWT_SniperRifle)
 	{
@@ -230,6 +226,7 @@ void UCombatComponent::ServerSetAiming_Implementation(bool bIsAiming)
 	if (Character)
 	{
 		Character->GetCharacterMovement()->MaxWalkSpeed = bIsAiming ? AimWalkSpeed : BaseWalkSpeed;
+		Character->bUseControllerRotationYaw = bIsAiming ? true : false;
 	}
 }
 
