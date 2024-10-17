@@ -36,13 +36,25 @@ void UTargetDataUnderMouse::Activate()
 
 void UTargetDataUnderMouse::SendMouseCursorData()
 {
-	//FScopedPredictionWindow ScopedPrediction(AbilitySystemComponent.Get());
+	FScopedPredictionWindow ScopedPrediction(AbilitySystemComponent.Get());
 	
-	//APlayerController* PC = Ability->GetCurrentActorInfo()->PlayerController.Get();
-	//FHitResult CursorHit;
-	//PC->GetHitResultUnderCursor(ECC_Visibility /*TODO: Custom Channel like Aura???*/, false, CursorHit);
+	APlayerController* PC = Ability->GetCurrentActorInfo()->PlayerController.Get();
+	FHitResult CursorHit;
+	PC->GetHitResultUnderCursor(ECC_Visibility /*TODO: Custom Channel like Aura???*/, false, CursorHit);
 
-	if (const AVillainCharacter* VillainCharacter = Cast<AVillainCharacter>(Ability->GetCurrentActorInfo()->AvatarActor.Get()))
+	FGameplayAbilityTargetDataHandle DataHandle;
+	FGameplayAbilityTargetData_SingleTargetHit* Data = new FGameplayAbilityTargetData_SingleTargetHit;
+	Data->HitResult = CursorHit;
+	DataHandle.Add(Data);
+	
+	AbilitySystemComponent->ServerSetReplicatedTargetData(GetAbilitySpecHandle(), GetActivationPredictionKey(), DataHandle, FGameplayTag(), AbilitySystemComponent->ScopedPredictionKey);
+
+	if (ShouldBroadcastAbilityTaskDelegates())
+	{
+		ValidData.Broadcast(DataHandle);
+	}
+	
+	/*if (const AVillainCharacter* VillainCharacter = Cast<AVillainCharacter>(Ability->GetCurrentActorInfo()->AvatarActor.Get()))
 	{
 		if (const UCombatComponent* CombatComponent = VillainCharacter->GetCombatComponent())
 		{
@@ -60,7 +72,7 @@ void UTargetDataUnderMouse::SendMouseCursorData()
 				ValidData.Broadcast(DataHandle);
 			}
 		}
-	}
+	} REMOVE? Using Crosshair Location*/
 }
 
 void UTargetDataUnderMouse::OnTargetDataReplicatedCallback(const FGameplayAbilityTargetDataHandle& DataHandle, FGameplayTag ActivationTag)
