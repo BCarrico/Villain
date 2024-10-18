@@ -24,12 +24,13 @@ class VILLAIN_API AVillainPlayerController : public APlayerController
 	GENERATED_BODY()
 public:
 	AVillainPlayerController();
-
+	FORCEINLINE FHitResult GetCursorHitResult(){return CursorHit;}
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
 	virtual void PlayerTick(float DeltaTime) override;
 	virtual void OnPossess(APawn* InPawn) override;
+
 private:
 	bool bIsAiming;
 	

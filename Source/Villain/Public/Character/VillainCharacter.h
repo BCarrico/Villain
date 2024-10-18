@@ -8,6 +8,7 @@
 #include "VillainTypes/TurningInPlace.h"
 #include "VillainCharacter.generated.h"
 
+class AVillainPlayerController;
 class UCombatComponent;
 class AWeapon;
 class UCameraComponent;
@@ -36,6 +37,7 @@ public:
 	FORCEINLINE ETurningInPlace GetTurningInPlace() const { return TurningInPlace;}
 	ECombatState GetCombatState() const;
 	bool IsWeaponEquipped();
+	UFUNCTION(BlueprintCallable)
 	bool IsAiming();
 	void SetOverlappingWeapon(AWeapon* Weapon);
 	UFUNCTION(Server, Reliable)

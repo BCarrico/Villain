@@ -6,6 +6,8 @@
 #include "GameFramework/HUD.h"
 #include "VillainHUD.generated.h"
 
+class AVillainPlayerController;
+
 USTRUCT(BlueprintType)
 struct FHUDPackage
 {
@@ -42,7 +44,7 @@ private:
 	FHUDPackage HUDPackage;
 	
 	UPROPERTY()
-	APlayerController* OwningPlayer;
+	AVillainPlayerController* PlayerController;
 	
 	void DrawCrosshair(UTexture2D* Texture, FVector2d ViewportCenter, FVector2d Spread, FLinearColor CrosshairColor);
 	UPROPERTY(EditAnywhere)

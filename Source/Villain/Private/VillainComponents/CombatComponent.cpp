@@ -53,7 +53,6 @@ void UCombatComponent::EquipWeapon(AWeapon* WeaponToEquip)
 	if (Character == nullptr || WeaponToEquip == nullptr) return;
 	if (CombatState != ECombatState::ECS_Unoccupied) return;
 
-
 	/*if (EquippedWeapon != nullptr && SecondaryWeapon == nullptr)
 	{
 		EquipSecondaryWeapon(WeaponToEquip);
@@ -73,6 +72,7 @@ void UCombatComponent::EquipPrimaryWeapon(AWeapon* WeaponToEquip)
 	EquippedWeapon = WeaponToEquip;
 	EquippedWeapon->SetWeaponState(EWeaponState::EWS_Equipped);
 	EquippedWeapon->SetOwner(Character);
+	
 	if (EquippedWeapon->GetWeaponType() == EWeaponType::EWT_OneHand_Left)
 	{
 		AttachActorToLeftHand(EquippedWeapon);
@@ -211,6 +211,7 @@ void UCombatComponent::SetAiming(bool bIsAiming)
 	{
 		Character->GetCharacterMovement()->MaxWalkSpeed = bIsAiming ? AimWalkSpeed : BaseWalkSpeed;
 		Character->bUseControllerRotationYaw = bIsAiming ? true : false;
+		Character->GetCharacterMovement()->bOrientRotationToMovement = !bIsAiming ? true : false;
 	}
 	/*if (Character->IsLocallyControlled() && EquippedWeapon->GetWeaponType() == EWeaponType::EWT_SniperRifle)
 	{
@@ -227,6 +228,7 @@ void UCombatComponent::ServerSetAiming_Implementation(bool bIsAiming)
 	{
 		Character->GetCharacterMovement()->MaxWalkSpeed = bIsAiming ? AimWalkSpeed : BaseWalkSpeed;
 		Character->bUseControllerRotationYaw = bIsAiming ? true : false;
+		Character->GetCharacterMovement()->bOrientRotationToMovement = !bIsAiming ? true : false;
 	}
 }
 

@@ -3,41 +3,82 @@
 
 #include "HUD/VillainHUD.h"
 
+#include "AssetTypeCategories.h"
+#include "Player/VillainPlayerController.h"
+
 void AVillainHUD::DrawHUD()
 {
 	Super::DrawHUD();
 	
-	FVector2d ViewportSize;
+	//FVector2d ViewportSize;
 	if (GEngine)
 	{
-		GEngine->GameViewport->GetViewportSize(ViewportSize);
-		const FVector2d ViewportCenter(ViewportSize.X / 2.f, ViewportSize.Y / 2.f);
-		float SpreadScaled = CrosshairSpreadMax * HUDPackage.CrosshairSpread;
-		HUDPackage.CrosshairsColor = FLinearColor::White;
-		if (HUDPackage.CrosshairsCenter)
+		//GEngine->GameViewport->GetViewportSize(ViewportSize);
+		//const FVector2d ViewportCenter(ViewportSize.X / 2.f, ViewportSize.Y / 2.f);
+		if (PlayerController == nullptr ? PlayerController = Cast<AVillainPlayerController>(GetOwningPlayerController()) : PlayerController)
 		{
-			FVector2d Spread(0.f, 0.f);
-			DrawCrosshair(HUDPackage.CrosshairsCenter, ViewportCenter, Spread, HUDPackage.CrosshairsColor);	
-		}
-		if (HUDPackage.CrosshairsLeft)
-		{
-			FVector2d Spread(-SpreadScaled, 0.f);
-			DrawCrosshair(HUDPackage.CrosshairsLeft, ViewportCenter, Spread, HUDPackage.CrosshairsColor);	
-		}
-		if (HUDPackage.CrosshairsRight)
-		{
-			FVector2d Spread(SpreadScaled, 0.f);
-			DrawCrosshair(HUDPackage.CrosshairsRight, ViewportCenter, Spread, HUDPackage.CrosshairsColor);	
-		}
-		if (HUDPackage.CrosshairsBottom)
-		{
-			FVector2d Spread(0.f, SpreadScaled);
-			DrawCrosshair(HUDPackage.CrosshairsBottom, ViewportCenter, Spread, HUDPackage.CrosshairsColor);	
-		}
-		if (HUDPackage.CrosshairsTop)
-		{
-			FVector2d Spread(0.f, -SpreadScaled);
-			DrawCrosshair(HUDPackage.CrosshairsTop, ViewportCenter, Spread, HUDPackage.CrosshairsColor);	
+			FHitResult CursorHit = PlayerController->GetCursorHitResult();
+			if (CursorHit.bBlockingHit)
+			{
+				FVector2d ScreenPosition;
+				if (PlayerController->ProjectWorldLocationToScreen(CursorHit.Location, ScreenPosition))
+				{
+					float SpreadScaled = CrosshairSpreadMax * HUDPackage.CrosshairSpread;
+					HUDPackage.CrosshairsColor = FLinearColor::White;
+					if (HUDPackage.CrosshairsCenter)
+					{
+						FVector2d Spread(0.f, 0.f);
+						DrawCrosshair(HUDPackage.CrosshairsCenter, ScreenPosition, Spread, HUDPackage.CrosshairsColor);	
+					}
+					if (HUDPackage.CrosshairsLeft)
+					{
+						FVector2d Spread(-SpreadScaled, 0.f);
+						DrawCrosshair(HUDPackage.CrosshairsLeft, ScreenPosition, Spread, HUDPackage.CrosshairsColor);	
+					}
+					if (HUDPackage.CrosshairsRight)
+					{
+						FVector2d Spread(SpreadScaled, 0.f);
+						DrawCrosshair(HUDPackage.CrosshairsRight, ScreenPosition, Spread, HUDPackage.CrosshairsColor);	
+					}
+					if (HUDPackage.CrosshairsBottom)
+					{
+						FVector2d Spread(0.f, SpreadScaled);
+						DrawCrosshair(HUDPackage.CrosshairsBottom, ScreenPosition, Spread, HUDPackage.CrosshairsColor);	
+					}
+					if (HUDPackage.CrosshairsTop)
+					{
+						FVector2d Spread(0.f, -SpreadScaled);
+						DrawCrosshair(HUDPackage.CrosshairsTop, ScreenPosition, Spread, HUDPackage.CrosshairsColor);	
+					}
+				}
+			}
+			/*float SpreadScaled = CrosshairSpreadMax * HUDPackage.CrosshairSpread;
+			HUDPackage.CrosshairsColor = FLinearColor::White;
+			if (HUDPackage.CrosshairsCenter)
+			{
+				FVector2d Spread(0.f, 0.f);
+				DrawCrosshair(HUDPackage.CrosshairsCenter, ViewportCenter, Spread, HUDPackage.CrosshairsColor);	
+			}
+			if (HUDPackage.CrosshairsLeft)
+			{
+				FVector2d Spread(-SpreadScaled, 0.f);
+				DrawCrosshair(HUDPackage.CrosshairsLeft, ViewportCenter, Spread, HUDPackage.CrosshairsColor);	
+			}
+			if (HUDPackage.CrosshairsRight)
+			{
+				FVector2d Spread(SpreadScaled, 0.f);
+				DrawCrosshair(HUDPackage.CrosshairsRight, ViewportCenter, Spread, HUDPackage.CrosshairsColor);	
+			}
+			if (HUDPackage.CrosshairsBottom)
+			{
+				FVector2d Spread(0.f, SpreadScaled);
+				DrawCrosshair(HUDPackage.CrosshairsBottom, ViewportCenter, Spread, HUDPackage.CrosshairsColor);	
+			}
+			if (HUDPackage.CrosshairsTop)
+			{
+				FVector2d Spread(0.f, -SpreadScaled);
+				DrawCrosshair(HUDPackage.CrosshairsTop, ViewportCenter, Spread, HUDPackage.CrosshairsColor);	
+			}*/
 		}
 	}
 }

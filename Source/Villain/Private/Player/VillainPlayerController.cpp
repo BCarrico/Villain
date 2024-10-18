@@ -58,7 +58,7 @@ void AVillainPlayerController::SetupInputComponent()
 void AVillainPlayerController::PlayerTick(float DeltaTime)
 {
 	Super::PlayerTick(DeltaTime);
-	if (bIsAiming) LookAtMouseWhileAiming();
+	LookAtMouseWhileAiming();
 
 }
 
@@ -173,7 +173,11 @@ void AVillainPlayerController::EquipButtonPressed()
 		if (VillainCharacter)
 		{
 			//if (VillainCharacter->bDisableGameplay) return;
-			if (VillainCharacter->GetCombatComponent()->CombatState == ECombatState::ECS_Unoccupied) VillainCharacter->ServerEquipButtonPressed();
+			if (VillainCharacter->GetCombatComponent()->CombatState == ECombatState::ECS_Unoccupied)
+			{
+				VillainCharacter->ServerEquipButtonPressed();
+				bShowMouseCursor = false;
+			}
 			/*if (VillainCharacter->GetCombatComponent()->ShouldSwapWeapons() && !HasAuthority() && BlasterCharacter->GetCombatComponent()->CombatState == ECombatState::ECS_Unoccupied && BlasterCharacter->OverlappingWeapon == nullptr)
 			{
 				VillainCharacter->PlaySwapMontage();
@@ -226,6 +230,7 @@ void AVillainPlayerController::LookAtMouseWhileAiming()
 	const ECollisionChannel TraceChannel = ECC_Visibility;
 	GetHitResultUnderCursor(TraceChannel, false, CursorHit);
 
+	if (!bIsAiming) return;
 	// Get the controlled character and ensure it's valid
 	if (APawn* ControlledPawn = GetPawn())
 	{
