@@ -143,6 +143,17 @@ FVector AVillainCharacter::GetHitTarget() const
 	return Combat->HitTarget;
 }
 
+void AVillainCharacter::BeginWellFedMutation(FVector WellFedMeshSize)
+{
+	MulticastHandleWellFedMutation(WellFedMeshSize);
+}
+
+void AVillainCharacter::MulticastHandleWellFedMutation_Implementation(FVector WellFedMeshSize)
+{
+	
+	GetMesh()->SetWorldScale3D(WellFedMeshSize);
+}
+
 void AVillainCharacter::CalculateAO_Pitch()
 {
 	AO_Pitch = GetBaseAimRotation().Pitch;

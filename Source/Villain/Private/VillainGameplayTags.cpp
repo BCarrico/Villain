@@ -29,4 +29,7 @@ void FVillainGameplayTags::InitializeNativeGameplayTags()
 
 	// Event Tags
 	GameplayTags.Event_Montage_Test = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Test"), FString("Test Event Montage Tag"));
+
+	// Mutation Tags
+	GameplayTags.Mutation_WellFed = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Mutation.WellFed"), FString("Increase character size scale"));
 }

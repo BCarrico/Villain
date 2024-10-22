@@ -37,6 +37,9 @@ public:
 
  // Event Tags
  FGameplayTag Event_Montage_Test;
+
+ // Mutation Tags
+ FGameplayTag Mutation_WellFed;
 protected:
 private:
  static FVillainGameplayTags GameplayTags;

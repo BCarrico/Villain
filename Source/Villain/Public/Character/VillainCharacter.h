@@ -46,6 +46,13 @@ public:
 	virtual int32 GetPlayerLevel_Implementation() override;
 	virtual FVector GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag) override;
 	FVector GetHitTarget() const;
+
+	UFUNCTION(NetMulticast, Reliable)
+	virtual void MulticastHandleWellFedMutation(FVector WellFedMeshSize);
+
+	UFUNCTION(BlueprintCallable)
+	void BeginWellFedMutation(FVector WellFedMeshSize);
+	
 protected:
 
 	// Villain Components
@@ -61,6 +68,7 @@ protected:
 	void AimOffset(float DeltaTime);
 	void TurnInPlace(float DeltaTime);
 	void SimProxiesTurn();
+
 private:
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UCameraComponent> FollowCamera;
@@ -90,4 +98,5 @@ private:
 
 	void RotateInPlace(float DeltaTime);
 
+	
 };
