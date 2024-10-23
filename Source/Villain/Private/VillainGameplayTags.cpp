@@ -11,8 +11,8 @@ void FVillainGameplayTags::InitializeNativeGameplayTags()
 	// TEST Tags
 	GameplayTags.Test_TestTag = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Test.TestTag"), FString("Tag used for testing"));
 	
-	// Vital Attributes
-	GameplayTags.Attributes_Vital_MaxHealth = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Vital.MaxHealth"), FString("Maximum amount of Health obtainable"));
+	// Secondary Attributes
+	GameplayTags.Attributes_Secondary_MaxHealth = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Vital.MaxHealth"), FString("Maximum amount of Health obtainable"));
 	
 	// Player Tags
 	GameplayTags.Player_Block_CursorTrace = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Player.Block.CursorTrace"), FString("Block tracing under cursor"));
@@ -32,4 +32,9 @@ void FVillainGameplayTags::InitializeNativeGameplayTags()
 
 	// Mutation Tags
 	GameplayTags.Mutation_WellFed = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Mutation.WellFed"), FString("Increase character size scale"));
+
+	// Damage Types
+	GameplayTags.Damage = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage"), FString("Damage"));
+	GameplayTags.Damage_TestDamageType = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage.TestDamageType"), FString("Test Damage Type"));
+
 }

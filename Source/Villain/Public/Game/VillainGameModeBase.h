@@ -6,6 +6,7 @@
 #include "GameFramework/GameModeBase.h"
 #include "VillainGameModeBase.generated.h"
 
+class UCharacterClassInfo;
 /**
  * 
  */
@@ -14,4 +15,10 @@ class VILLAIN_API AVillainGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
 	
+public: 
+	UPROPERTY(EditDefaultsOnly, Category= "Character Class Defaults")
+	TObjectPtr<UCharacterClassInfo> CharacterClassInfo;
+
+	//UPROPERTY(EditDefaultsOnly, Category= "Ability Info")
+	//TObjectPtr<UAbilityInfo> AbilityInfo;
 };

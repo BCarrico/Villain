@@ -6,12 +6,19 @@
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystemComponent.h"
 #include "GameplayEffectExtension.h"
+#include "VillainGameplayTags.h"
+#include "AbilitySystem/VillainAbilitySystemLibrary.h"
 #include "GameFramework/Character.h"
+#include "Interaction/CombatInterface.h"
 #include "Net/UnrealNetwork.h"
+
+class ICombatInterface;
 
 UVillainAttributeSet::UVillainAttributeSet()
 {
-
+	const FVillainGameplayTags& GameplayTags = FVillainGameplayTags::Get();
+	// Secondary Attributes
+	TagsToAttributes.Add(GameplayTags.Attributes_Secondary_MaxHealth, GetMaxHealthAttribute);
 }
 
 void UVillainAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -48,7 +55,57 @@ void UVillainAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCal
 	{
 		SetHealth(FMath::Clamp(GetHealth(), 0.f, GetMaxHealth()));
 	}
+	if (Data.EvaluatedData.Attribute == GetIncomingDamageAttribute())
+	{
+		HandleIncomingDamage(Props);
+	}
+}
 
+void UVillainAttributeSet::HandleIncomingDamage(const FEffectProperties& Props)
+{
+	const float LocalIncomingDamage = GetIncomingDamage();
+	SetIncomingDamage(0.f);
+	if (LocalIncomingDamage > 0.f)
+	{
+		const float NewHealth = GetHealth() - LocalIncomingDamage;
+		SetHealth(FMath::Clamp(NewHealth, 0.f, GetMaxHealth()));
+
+		const bool bFatal = NewHealth <= 0.f;
+		if (bFatal)
+		{
+			/*ICombatInterface* CombatInterface = Cast<ICombatInterface>(Props.TargetAvatarActor);
+			if (CombatInterface)
+			{
+				CombatInterface->Die(UAuraAbilitySystemLibrary::GetDeathImpulse(Props.EffectContextHandle));
+			}
+			SendXPEvent(Props);
+			*/
+		}
+		else
+		{
+			/*if (Props.TargetCharacter->Implements<UCombatInterface>() && !ICombatInterface::Execute_IsBeingShocked(Props.TargetCharacter))
+			{
+				FGameplayTagContainer TagContainer;
+				TagContainer.AddTag(FAuraGameplayTags::Get().Effects_HitReact);
+				Props.TargetASC->TryActivateAbilitiesByTag(TagContainer);
+			}
+			
+			const FVector& KnockbackForce = UAuraAbilitySystemLibrary::GetKnockbackForce(Props.EffectContextHandle);
+			if (!KnockbackForce.IsNearlyZero(1.f))
+			{
+				Props.TargetCharacter->LaunchCharacter(KnockbackForce, true, true);
+			}*/
+		}
+			
+		//const bool bBlock = UVillainAbilitySystemLibrary::IsBlockedHit(Props.EffectContextHandle);
+		//const bool bCriticalHit = UVillainAbilitySystemLibrary::IsCriticalHit(Props.EffectContextHandle);
+		//ShowFloatingText(Props, LocalIncomingDamage, bBlock, bCriticalHit);
+		/*if (UVillainAbilitySystemLibrary::IsSuccessfulDebuff(Props.EffectContextHandle))
+		{
+			UE_LOG(LogTemp, Warning, TEXT("Debuff Applying"))
+			Debuff(Props);
+		}*/
+	}
 }
 
 void UVillainAttributeSet::OnRep_Health(const FGameplayAttributeData& OldHealth) const

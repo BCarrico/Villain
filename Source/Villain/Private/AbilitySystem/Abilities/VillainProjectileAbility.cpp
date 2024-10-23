@@ -34,8 +34,7 @@ void UVillainProjectileAbility::SpawnProjectile(const FVector& ProjectileTargetL
 	Cast<APawn>(GetOwningActorFromActorInfo()),
 		ESpawnActorCollisionHandlingMethod::AlwaysSpawn);
 	
-	//TODO Add DamageEffectParams
-	//Projectile->DamageEffectParams = MakeDamageEffectParamsFromClassDefaults();
+	Projectile->DamageEffectParams = MakeDamageEffectParamsFromClassDefaults();
 	
 	Projectile->FinishSpawning(SpawnTransform);
 }

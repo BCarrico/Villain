@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "AbilitySystem/Abilities/VillainGameplayAbilityBase.h"
+#include "VillainDamageGameplayAbility.h"
 #include "VillainProjectileAbility.generated.h"
 
 class AVillainProjectile;
@@ -11,7 +11,7 @@ class AVillainProjectile;
  * 
  */
 UCLASS()
-class VILLAIN_API UVillainProjectileAbility : public UVillainGameplayAbilityBase
+class VILLAIN_API UVillainProjectileAbility : public UVillainDamageGameplayAbility
 {
 	GENERATED_BODY()
 	
@@ -23,4 +23,6 @@ protected:
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TSubclassOf<AVillainProjectile> ProjectileClass;
+
+
 };

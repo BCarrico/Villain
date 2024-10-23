@@ -19,8 +19,8 @@ public:
  // TEST Tags
  FGameplayTag Test_TestTag;
  
- // Vital Attributes
- FGameplayTag Attributes_Vital_MaxHealth;
+ // Secondary Attributes
+ FGameplayTag Attributes_Secondary_MaxHealth;
  
  // Player Tags
  FGameplayTag Player_Block_CursorTrace;
@@ -40,6 +40,10 @@ public:
 
  // Mutation Tags
  FGameplayTag Mutation_WellFed;
+
+ // Damage Type Tags
+ FGameplayTag Damage;
+ FGameplayTag Damage_TestDamageType;
 protected:
 private:
  static FVillainGameplayTags GameplayTags;
