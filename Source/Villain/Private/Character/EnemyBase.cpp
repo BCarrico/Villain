@@ -5,6 +5,7 @@
 
 #include "AbilitySystemComponent.h"
 #include "AbilitySystem/VillainAbilitySystemComponent.h"
+#include "AbilitySystem/VillainAbilitySystemLibrary.h"
 #include "AbilitySystem/VillainAttributeSet.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Villain/Villain.h"
@@ -24,6 +25,8 @@ AEnemyBase::AEnemyBase()
 	GetCharacterMovement()->bUseControllerDesiredRotation = true;
 
 	AttributeSet = CreateDefaultSubobject<UVillainAttributeSet>("AttributeSet");
+
+	CharacterClass = ECharacterClass::EnemyClass;
 }
 
 void AEnemyBase::HighlightActor()
@@ -54,10 +57,22 @@ void AEnemyBase::BeginPlay()
 	Super::BeginPlay();
 	
 	InitAbilityActorInfo();
+	
 }
 
 void AEnemyBase::InitAbilityActorInfo()
 {
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
 	Cast<UVillainAbilitySystemComponent>(GetAbilitySystemComponent())->AbilityActorInfoSet();
+	if (HasAuthority())
+	{
+		InitializeDefaultAttributes();
+	}
+	OnAscRegistered.Broadcast(AbilitySystemComponent);
+}
+
+void AEnemyBase::InitializeDefaultAttributes() const
+{
+	UVillainAbilitySystemLibrary::InitializeDefaultAttributes(CharacterClass, Level, this, AbilitySystemComponent);
+	
 }
