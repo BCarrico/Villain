@@ -118,6 +118,11 @@ void UVillainAttributeSet::OnRep_MaxHealth(const FGameplayAttributeData& OldMaxH
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UVillainAttributeSet, MaxHealth, OldMaxHealth);
 }
 
+void UVillainAttributeSet::OnRep_TestResistance(const FGameplayAttributeData& OldTestResistance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UVillainAttributeSet, TestResistance, OldTestResistance);
+}
+
 void UVillainAttributeSet::SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props)
 {
 	// Source = causer of the effect, Target = target of the effect (owner of this AS)

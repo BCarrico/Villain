@@ -44,6 +44,10 @@ public:
  // Damage Type Tags
  FGameplayTag Damage;
  FGameplayTag Damage_TestDamageType;
+
+ // Resistance Type Tags
+ FGameplayTag Attributes_Resistance_Test;
+ TMap<FGameplayTag, FGameplayTag> DamageTypesToResistances;
 protected:
 private:
  static FVillainGameplayTags GameplayTags;

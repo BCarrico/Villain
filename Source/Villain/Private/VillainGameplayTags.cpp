@@ -37,4 +37,10 @@ void FVillainGameplayTags::InitializeNativeGameplayTags()
 	GameplayTags.Damage = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage"), FString("Damage"));
 	GameplayTags.Damage_TestDamageType = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage.TestDamageType"), FString("Test Damage Type"));
 
+	// Resistance Types
+	GameplayTags.Attributes_Resistance_Test = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Resistance.Test")), FString("Test Resistance Type");
+	// Map of Damage Types to Resistances
+	GameplayTags.DamageTypesToResistances.Add(GameplayTags.Damage_TestDamageType, GameplayTags.Attributes_Resistance_Test);
+
+
 }

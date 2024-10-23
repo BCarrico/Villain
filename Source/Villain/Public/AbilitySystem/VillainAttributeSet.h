@@ -81,6 +81,12 @@ public:
 	UPROPERTY(BlueprintReadOnly, Category="Meta Attributes")
 	FGameplayAttributeData IncomingDamage;
 	ATTRIBUTE_ACCESSORS(UVillainAttributeSet, IncomingDamage);
+
+	// Resistance Attributes
+	
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing= OnRep_TestResistance, Category= "Resistance Attributes")
+	FGameplayAttributeData TestResistance;
+	ATTRIBUTE_ACCESSORS(UVillainAttributeSet, TestResistance);
 	
 	UFUNCTION()
 	void OnRep_Health(const FGameplayAttributeData& OldHealth) const;
@@ -88,6 +94,8 @@ public:
 	UFUNCTION()
 	void OnRep_MaxHealth(const FGameplayAttributeData& OldMaxHealth) const;
 
+	UFUNCTION()
+	void OnRep_TestResistance(const FGameplayAttributeData& OldTestResistance) const;
 private:
 	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props);
 	void HandleIncomingDamage(const FEffectProperties& Props);

@@ -25,6 +25,8 @@ struct VillainDamageStatics
 	//DECLARE_ATTRIBUTE_CAPTUREDEF(ArcaneResistance);
 	//DECLARE_ATTRIBUTE_CAPTUREDEF(PhysicalResistance);
 	
+	DECLARE_ATTRIBUTE_CAPTUREDEF(TestResistance);
+	
 	VillainDamageStatics()
 	{
 		//TODO:
@@ -39,7 +41,7 @@ struct VillainDamageStatics
 		//DEFINE_ATTRIBUTE_CAPTUREDEF(UVillainAttributeSet, LightningResistance, Target, false);
 		//DEFINE_ATTRIBUTE_CAPTUREDEF(UVillainAttributeSet, ArcaneResistance, Target, false);
 		//DEFINE_ATTRIBUTE_CAPTUREDEF(UVillainAttributeSet, PhysicalResistance, Target, false);
-		
+		DEFINE_ATTRIBUTE_CAPTUREDEF(UVillainAttributeSet, TestResistance, Target, false);
 	}
 };
 
@@ -123,6 +125,8 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	//TagsToCaptureDefs.Add(Tags.Attributes_Resistance_Arcane, DamageStatics().ArcaneResistanceDef);
 	//TagsToCaptureDefs.Add(Tags.Attributes_Resistance_Physical, DamageStatics().PhysicalResistanceDef);
 	
+	TagsToCaptureDefs.Add(Tags.Attributes_Resistance_Test, DamageStatics().TestResistanceDef);
+	
 	const UAbilitySystemComponent* SourceASC = ExecutionParams.GetSourceAbilitySystemComponent();
 	const UAbilitySystemComponent* TargetASC = ExecutionParams.GetTargetAbilitySystemComponent();
 
@@ -154,7 +158,7 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 	
 	// Get Damage Set by Caller Magnitude
 	float Damage = 0.f;
-	/*for (auto& Pair : FVillainGameplayTags::Get().DamageTypesToResistances)
+	for (auto& Pair : FVillainGameplayTags::Get().DamageTypesToResistances)
 	{
 		const FGameplayTag DamageTypeTag = Pair.Key;
 		const FGameplayTag ResistanceTag = Pair.Value;
@@ -174,7 +178,7 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 
 		DamageTypeValue *= (100.f - Resistance ) / 100.f;
 
-		if (UVillainAbilitySystemLibrary::IsRadialDamage(EffectContextHandle))
+		/*if (UVillainAbilitySystemLibrary::IsRadialDamage(EffectContextHandle))
 		{
 			// 1. Override TakeDamage in AuraCharacterBase *
 			// 2. Create delegate OnDamageDelegate, broadcast damage received in TakeDamage * (Check combat interface && AuraCharacterBase)
@@ -203,10 +207,10 @@ void UExecCalc_Damage::Execute_Implementation(const FGameplayEffectCustomExecuti
 				SourceAvatar,
 				nullptr
 				);
-		}
+		}*/
 		
 		Damage += DamageTypeValue;
-	}*/
+	}
 	
 	//TODO: Capture BlockChance on Target, and determine if there was a successful Block
 	
