@@ -8,11 +8,24 @@
 #include "AbilitySystem/VillainAbilitySystemComponent.h"
 #include "Character/VillainCharacter.h"
 #include "Input/VillainInputComponent.h"
+#include "UI/Widget/DamageTextComponent.h"
 #include "VillainComponents/CombatComponent.h"
 
 AVillainPlayerController::AVillainPlayerController()
 {
 	bReplicates = true;
+}
+
+void AVillainPlayerController::ShowDamageNumber_Implementation(float DamageAmount, ACharacter* TargetCharacter,bool bBlockedHit, bool bCriticalHit)
+{
+	if (IsValid(TargetCharacter) && DamageTextComponentClass && IsLocalController())
+	{
+		UDamageTextComponent* DamageText = NewObject<UDamageTextComponent>(TargetCharacter, DamageTextComponentClass);
+		DamageText->RegisterComponent();
+		DamageText->AttachToComponent(TargetCharacter->GetRootComponent(), FAttachmentTransformRules::KeepRelativeTransform);
+		DamageText->DetachFromComponent(FDetachmentTransformRules::KeepWorldTransform);
+		DamageText->SetDamageText(DamageAmount, bBlockedHit, bCriticalHit);
+	}
 }
 
 void AVillainPlayerController::BeginPlay()

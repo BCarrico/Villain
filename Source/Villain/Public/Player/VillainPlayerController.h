@@ -7,6 +7,7 @@
 #include "GameFramework/PlayerController.h"
 #include "VillainPlayerController.generated.h"
 
+class UDamageTextComponent;
 class AVillainCharacter;
 class UVillainInputConfig;
 class UVillainAbilitySystemComponent;
@@ -25,6 +26,9 @@ class VILLAIN_API AVillainPlayerController : public APlayerController
 public:
 	AVillainPlayerController();
 	FORCEINLINE FHitResult GetCursorHitResult(){return CursorHit;}
+	
+	UFUNCTION(Client, Reliable)
+	void ShowDamageNumber(float DamageAmount, ACharacter* TargetCharacter, bool bBlockedHit, bool bCriticalHit);
 protected:
 	virtual void BeginPlay() override;
 	virtual void SetupInputComponent() override;
@@ -36,6 +40,9 @@ private:
 	
 	UPROPERTY()
 	AVillainCharacter* VillainCharacter;
+	
+	UPROPERTY(EditDefaultsOnly)
+	TSubclassOf<UDamageTextComponent> DamageTextComponentClass;
 	
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<UInputMappingContext> VillainInputContext;

@@ -98,5 +98,7 @@ public:
 	void OnRep_TestResistance(const FGameplayAttributeData& OldTestResistance) const;
 private:
 	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props);
+	// TODO: Keep blocked and critical hits?
+	void ShowFloatingText(const FEffectProperties& Props, float Damage, bool bBlockedHit, bool bCriticalHit) const;
 	void HandleIncomingDamage(const FEffectProperties& Props);
 };

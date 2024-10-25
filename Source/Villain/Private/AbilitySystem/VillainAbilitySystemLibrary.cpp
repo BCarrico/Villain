@@ -46,6 +46,24 @@ UCharacterClassInfo* UVillainAbilitySystemLibrary::GetCharacterClassInfo(const U
 	return VillainGameMode->CharacterClassInfo;
 }
 
+bool UVillainAbilitySystemLibrary::IsBlockedHit(const FGameplayEffectContextHandle& EffectContextHandle)
+{
+	if (const FVillainGameplayEffectContext* VillainEffectContext = static_cast<const FVillainGameplayEffectContext*>(EffectContextHandle.Get()))
+	{
+		return VillainEffectContext->IsBlockedHit();
+	};
+	return false;
+}
+
+bool UVillainAbilitySystemLibrary::IsCriticalHit(const FGameplayEffectContextHandle& EffectContextHandle)
+{
+	if (const FVillainGameplayEffectContext* VillainEffectContext = static_cast<const FVillainGameplayEffectContext*>(EffectContextHandle.Get()))
+	{
+		return VillainEffectContext->IsCriticalHit();
+	};
+	return false;
+}
+
 FGameplayEffectContextHandle UVillainAbilitySystemLibrary::ApplyDamageEffect(const FDamageEffectParams& DamageEffectParams)
 {
 	const FVillainGameplayTags& GameplayTags = FVillainGameplayTags::Get();

@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Components/ActorComponent.h"
-#include "HUD/VillainHUD.h"
+#include "UI/HUD/VillainHUD.h"
 #include "VillainTypes/CombatState.h"
 #include "CombatComponent.generated.h"
 

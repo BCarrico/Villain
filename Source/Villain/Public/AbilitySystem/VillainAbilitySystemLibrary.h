@@ -6,6 +6,7 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "VillainAbilitySystemLibrary.generated.h"
 
+struct FGameplayEffectContextHandle;
 class UCharacterClassInfo;
 enum class ECharacterClass : uint8;
 class UAbilitySystemComponent;
@@ -49,8 +50,8 @@ class VILLAIN_API UVillainAbilitySystemLibrary : public UBlueprintFunctionLibrar
 
 	// Effect Context Getters
 	
-	//UFUNCTION(BlueprintPure, Category="VillainAbilitySystemLibray|GameplayEffects")
-	//static bool IsBlockedHit(const FGameplayEffectContextHandle& EffectContextHandle);
+	UFUNCTION(BlueprintPure, Category="VillainAbilitySystemLibray|GameplayEffects")
+	static bool IsBlockedHit(const FGameplayEffectContextHandle& EffectContextHandle);
 
 	//UFUNCTION(BlueprintPure, Category="AuraAbilitySystemLibrary|GameplayEffects")
 	//static bool IsSuccessfulDebuff (const FGameplayEffectContextHandle& EffectContextHandle);
@@ -73,8 +74,8 @@ class VILLAIN_API UVillainAbilitySystemLibrary : public UBlueprintFunctionLibrar
 	//UFUNCTION(BlueprintPure, Category="VillainAbilitySystemLibray|GameplayEffects")
 	//static FVector GetKnockbackForce (const FGameplayEffectContextHandle& EffectContextHandle);
 
-	//UFUNCTION(BlueprintPure, Category="VillainAbilitySystemLibray|GameplayEffects")
-	//static bool IsCriticalHit (const FGameplayEffectContextHandle& EffectContextHandle);
+	UFUNCTION(BlueprintPure, Category="VillainAbilitySystemLibray|GameplayEffects")
+	static bool IsCriticalHit (const FGameplayEffectContextHandle& EffectContextHandle);
 
 	//UFUNCTION(BlueprintPure, Category="VillainAbilitySystemLibray|GameplayEffects")
 	//static bool IsRadialDamage(const FGameplayEffectContextHandle& EffectContextHandle);

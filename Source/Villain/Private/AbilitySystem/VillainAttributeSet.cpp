@@ -11,6 +11,7 @@
 #include "GameFramework/Character.h"
 #include "Interaction/CombatInterface.h"
 #include "Net/UnrealNetwork.h"
+#include "Player/VillainPlayerController.h"
 
 class ICombatInterface;
 
@@ -97,9 +98,9 @@ void UVillainAttributeSet::HandleIncomingDamage(const FEffectProperties& Props)
 			}*/
 		}
 			
-		//const bool bBlock = UVillainAbilitySystemLibrary::IsBlockedHit(Props.EffectContextHandle);
-		//const bool bCriticalHit = UVillainAbilitySystemLibrary::IsCriticalHit(Props.EffectContextHandle);
-		//ShowFloatingText(Props, LocalIncomingDamage, bBlock, bCriticalHit);
+		const bool bBlock = UVillainAbilitySystemLibrary::IsBlockedHit(Props.EffectContextHandle);
+		const bool bCriticalHit = UVillainAbilitySystemLibrary::IsCriticalHit(Props.EffectContextHandle);
+		ShowFloatingText(Props, LocalIncomingDamage, bBlock, bCriticalHit);
 		/*if (UVillainAbilitySystemLibrary::IsSuccessfulDebuff(Props.EffectContextHandle))
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Debuff Applying"))
@@ -151,5 +152,21 @@ void UVillainAttributeSet::SetEffectProperties(const FGameplayEffectModCallbackD
 		Props.TargetController = Data.Target.AbilityActorInfo->PlayerController.Get();
 		Props.TargetCharacter = Cast<ACharacter>(Props.TargetAvatarActor);
 		Props.TargetASC = UAbilitySystemBlueprintLibrary::GetAbilitySystemComponent(Props.TargetAvatarActor);
+	}
+}
+
+void UVillainAttributeSet::ShowFloatingText(const FEffectProperties& Props, float Damage, bool bBlockedHit, bool bCriticalHit) const
+{
+	if (Props.SourceCharacter != Props.TargetCharacter)
+	{
+		if (AVillainPlayerController* PC = Cast<AVillainPlayerController>(Props.SourceCharacter->Controller))
+		{
+			PC->ShowDamageNumber(Damage, Props.TargetCharacter, bBlockedHit, bCriticalHit);
+			return;
+		}
+		if (AVillainPlayerController* PC = Cast<AVillainPlayerController>(Props.TargetCharacter->Controller))
+		{
+			PC->ShowDamageNumber(Damage, Props.TargetCharacter, bBlockedHit, bCriticalHit);
+		}
 	}
 }
