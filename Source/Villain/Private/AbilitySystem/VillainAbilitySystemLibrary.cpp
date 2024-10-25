@@ -64,6 +64,14 @@ bool UVillainAbilitySystemLibrary::IsCriticalHit(const FGameplayEffectContextHan
 	return false;
 }
 
+void UVillainAbilitySystemLibrary::SetIsCriticalHit(FGameplayEffectContextHandle& EffectContextHandle, bool bInIsCriticalHit)
+{
+	if (FVillainGameplayEffectContext* AuraEffectContext = static_cast<FVillainGameplayEffectContext*>(EffectContextHandle.Get()))
+	{
+		AuraEffectContext->SetIsCriticalHit(bInIsCriticalHit);
+	};
+}
+
 FGameplayEffectContextHandle UVillainAbilitySystemLibrary::ApplyDamageEffect(const FDamageEffectParams& DamageEffectParams)
 {
 	const FVillainGameplayTags& GameplayTags = FVillainGameplayTags::Get();

@@ -27,7 +27,10 @@ void UVillainAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>&
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 
 	DOREPLIFETIME_CONDITION_NOTIFY(UVillainAttributeSet, Health, COND_None, REPNOTIFY_Always);
+
 	DOREPLIFETIME_CONDITION_NOTIFY(UVillainAttributeSet, MaxHealth, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UVillainAttributeSet, CriticalHitChance, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UVillainAttributeSet, CriticalHitDamage, COND_None, REPNOTIFY_Always);
 }
 
 void UVillainAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
@@ -122,6 +125,21 @@ void UVillainAttributeSet::OnRep_MaxHealth(const FGameplayAttributeData& OldMaxH
 void UVillainAttributeSet::OnRep_TestResistance(const FGameplayAttributeData& OldTestResistance) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UVillainAttributeSet, TestResistance, OldTestResistance);
+}
+
+void UVillainAttributeSet::OnRep_CriticalHitChance(const FGameplayAttributeData& OldCriticalHitChance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UVillainAttributeSet, CriticalHitChance, OldCriticalHitChance)
+}
+
+void UVillainAttributeSet::OnRep_CriticalHitDamage(const FGameplayAttributeData& OldCriticalHitDamage) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UVillainAttributeSet, CriticalHitDamage, OldCriticalHitDamage)
+}
+
+void UVillainAttributeSet::OnRep_CriticalHitResistance(const FGameplayAttributeData& OldCriticalHitResistance) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UVillainAttributeSet, CriticalHitResistance, OldCriticalHitResistance)
 }
 
 void UVillainAttributeSet::SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props)

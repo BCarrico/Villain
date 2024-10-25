@@ -21,7 +21,9 @@ public:
  
  // Secondary Attributes
  FGameplayTag Attributes_Secondary_MaxHealth;
- 
+ FGameplayTag Attributes_Secondary_CriticalHitChance;
+ FGameplayTag Attributes_Secondary_CriticalHitDamage;
+ FGameplayTag Attributes_Secondary_CriticalHitResistance;
  // Player Tags
  FGameplayTag Player_Block_CursorTrace;
 

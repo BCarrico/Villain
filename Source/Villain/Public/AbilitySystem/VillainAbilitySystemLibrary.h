@@ -94,8 +94,8 @@ class VILLAIN_API UVillainAbilitySystemLibrary : public UBlueprintFunctionLibrar
 	//UFUNCTION(BlueprintCallable, Category="VillainAbilitySystemLibray|GameplayEffects")
 	//static void SetIsBlockedHit(UPARAM(ref) FGameplayEffectContextHandle& EffectContextHandle, bool bInIsBlockedHit);
 
-	//UFUNCTION(BlueprintCallable, Category="VillainAbilitySystemLibray|GameplayEffects")
-	//static void SetIsCriticalHit(UPARAM(ref) FGameplayEffectContextHandle& EffectContextHandle, bool bInIsCriticalHit);
+	UFUNCTION(BlueprintCallable, Category="VillainAbilitySystemLibray|GameplayEffects")
+	static void SetIsCriticalHit(UPARAM(ref) FGameplayEffectContextHandle& EffectContextHandle, bool bInIsCriticalHit);
 
 	//UFUNCTION(BlueprintCallable, Category="VillainAbilitySystemLibray|GameplayEffects")
 	//static void SetIsSuccessfulDebuff(UPARAM(ref) FGameplayEffectContextHandle& EffectContextHandle, bool bInSuccessfulDebuff);
