@@ -64,7 +64,6 @@ protected:
 	virtual void OnWeaponStateSet();
 	virtual void OnEquipped();
 	virtual void OnDropped();
-
 	
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Abilities")
 	FGameplayTag WeaponTag;

@@ -158,6 +158,7 @@ void AWeapon::OnDropped()
 	*/
 }
 
+
 void AWeapon::AddCharacterAbilities()
 {
 	if (!HasAuthority()) return;
