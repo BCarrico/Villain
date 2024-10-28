@@ -19,11 +19,15 @@ void FVillainGameplayTags::InitializeNativeGameplayTags()
 	
 	// Player Tags
 	GameplayTags.Player_Block_CursorTrace = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Player.Block.CursorTrace"), FString("Block tracing under cursor"));
-
+	GameplayTags.Player_Block_InputHeld = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Player.Block.InputHeld"), FString("Block Input Held callback for input"));
+	GameplayTags.Player_Block_InputPressed = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Player.Block.InputPressed"), FString("Block Input Pressed callback for input"));
+	GameplayTags.Player_Block_InputReleased = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Player.Block.InputReleased"), FString("Block Input Released callback for input"));
+	
 	// Input Tags
 	GameplayTags.InputTag_LMB = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("InputTag.LMB"), FString("InputTag for LMB"));
 	GameplayTags.InputTag_RMB = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("InputTag.RMB"), FString("InputTag for RMB"));
-
+	GameplayTags.InputTag_Shift = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("InputTag.Shift"), FString("InputTag for LMB"));
+	
 	// Combat Sockets
 	GameplayTags.CombatSocket_Weapon = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("CombatSocket.Weapon"), FString("Weapon"));
 
@@ -42,8 +46,10 @@ void FVillainGameplayTags::InitializeNativeGameplayTags()
 
 	// Resistance Types
 	GameplayTags.Attributes_Resistance_Test = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Attributes.Resistance.Test")), FString("Test Resistance Type");
+	
 	// Map of Damage Types to Resistances
 	GameplayTags.DamageTypesToResistances.Add(GameplayTags.Damage_TestDamageType, GameplayTags.Attributes_Resistance_Test);
+	
 
 
 }

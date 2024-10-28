@@ -25,12 +25,16 @@ public:
  FGameplayTag Attributes_Secondary_CriticalHitDamage;
  FGameplayTag Attributes_Secondary_CriticalHitResistance;
  // Player Tags
+ 
  FGameplayTag Player_Block_CursorTrace;
-
+ FGameplayTag Player_Block_InputPressed;
+ FGameplayTag Player_Block_InputHeld;
+ FGameplayTag Player_Block_InputReleased;
+ 
  // Input Tags
  FGameplayTag InputTag_LMB;
  FGameplayTag InputTag_RMB;
-
+ FGameplayTag InputTag_Shift;
  // Combat Socket Tags
  FGameplayTag CombatSocket_Weapon;
 
@@ -50,6 +54,9 @@ public:
  // Resistance Type Tags
  FGameplayTag Attributes_Resistance_Test;
  TMap<FGameplayTag, FGameplayTag> DamageTypesToResistances;
+
+
+
 protected:
 private:
  static FVillainGameplayTags GameplayTags;

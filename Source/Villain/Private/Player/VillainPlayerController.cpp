@@ -5,6 +5,7 @@
 
 #include "AbilitySystemBlueprintLibrary.h"
 #include "EnhancedInputSubsystems.h"
+#include "VillainGameplayTags.h"
 #include "AbilitySystem/VillainAbilitySystemComponent.h"
 #include "Character/VillainCharacter.h"
 #include "Input/VillainInputComponent.h"
@@ -117,7 +118,10 @@ void AVillainPlayerController::AbilityInputTagHeld(FGameplayTag InputTag)
 
 void AVillainPlayerController::Move(const FInputActionValue& InputActionValue)
 {
-	//TODO: If unable to move due to certain GameplayTag, return early
+	if (GetASC() && GetASC()->HasMatchingGameplayTag(FVillainGameplayTags::Get().Player_Block_InputPressed))
+	{
+		return;
+	}
 	
 	//FOR 3rd Person
 	/*const FVector2d InputAxisVector = InputActionValue.Get<FVector2d>();
