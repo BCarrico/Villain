@@ -33,7 +33,12 @@ void FVillainGameplayTags::InitializeNativeGameplayTags()
 
 	// Weapon Tags
 	GameplayTags.EquippedWeapon_Test = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("EquippedWeapon.Test"), FString("Test Weapon Tag"));
-
+	
+	// Cooldowns
+	GameplayTags.Cooldown_Weapon_Rifle = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Cooldown.Weapon.Rifle"), FString("Rifle Cooldown Tag"));
+	GameplayTags.Cooldown_Weapon_Revolver = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Cooldown.Weapon.Revolver"), FString("Revolver Cooldown Tag"));
+	GameplayTags.Cooldown_Movement_Dash = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Cooldown.Movement.Dash"), FString("Dash Cooldown Tag"));
+	
 	// Event Tags
 	GameplayTags.Event_Montage_Test = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Event.Montage.Test"), FString("Test Event Montage Tag"));
 

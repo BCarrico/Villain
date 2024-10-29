@@ -31,6 +31,10 @@ void UVillainAttributeSet::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>&
 	DOREPLIFETIME_CONDITION_NOTIFY(UVillainAttributeSet, MaxHealth, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UVillainAttributeSet, CriticalHitChance, COND_None, REPNOTIFY_Always);
 	DOREPLIFETIME_CONDITION_NOTIFY(UVillainAttributeSet, CriticalHitDamage, COND_None, REPNOTIFY_Always);
+
+	DOREPLIFETIME_CONDITION_NOTIFY(UVillainAttributeSet, DashCooldown, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UVillainAttributeSet, RifleCooldown, COND_None, REPNOTIFY_Always);
+	DOREPLIFETIME_CONDITION_NOTIFY(UVillainAttributeSet, RevolverCooldown, COND_None, REPNOTIFY_Always);
 }
 
 void UVillainAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
@@ -140,6 +144,21 @@ void UVillainAttributeSet::OnRep_CriticalHitDamage(const FGameplayAttributeData&
 void UVillainAttributeSet::OnRep_CriticalHitResistance(const FGameplayAttributeData& OldCriticalHitResistance) const
 {
 	GAMEPLAYATTRIBUTE_REPNOTIFY(UVillainAttributeSet, CriticalHitResistance, OldCriticalHitResistance)
+}
+
+void UVillainAttributeSet::OnRep_DashCooldown(const FGameplayAttributeData& OldDashCooldown) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UVillainAttributeSet, DashCooldown, OldDashCooldown)
+}
+
+void UVillainAttributeSet::OnRep_RifleCooldown(const FGameplayAttributeData& OldRifleCooldown) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UVillainAttributeSet, RifleCooldown, OldRifleCooldown)
+}
+
+void UVillainAttributeSet::OnRep_RevolverCooldown(const FGameplayAttributeData& OldRevolverCooldown) const
+{
+	GAMEPLAYATTRIBUTE_REPNOTIFY(UVillainAttributeSet, RevolverCooldown, OldRevolverCooldown)
 }
 
 void UVillainAttributeSet::SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props)

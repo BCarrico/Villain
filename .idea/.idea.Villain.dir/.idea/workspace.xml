@@ -7,7 +7,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="64539828-f90b-421b-b98a-b9d4e3b60545" name="Changes" comment="" />
+    <list default="true" id="64539828-f90b-421b-b98a-b9d4e3b60545" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Villain.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Villain.dir/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/AbilitySystem/GameplayAbilities/GA_Dash.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/AbilitySystem/GameplayAbilities/GA_RevolverRecoil.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/AbilitySystem/GameplayAbilities/GA_TestProjectileAbility.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Character/BP_VillainCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Character/BP_VillainCharacter.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Weapon/BP_Revolver.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Weapon/BP_Revolver.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Weapon/BP_WeaponBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Weapon/BP_WeaponBase.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Villain/Private/AbilitySystem/VillainAttributeSet.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/AbilitySystem/VillainAttributeSet.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Villain/Private/VillainGameplayTags.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/VillainGameplayTags.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/AbilitySystem/VillainAttributeSet.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/AbilitySystem/VillainAttributeSet.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/VillainGameplayTags.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/VillainGameplayTags.h" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -203,6 +215,7 @@
       <workItem from="1729718056123" duration="2806000" />
       <workItem from="1729871006480" duration="9210000" />
       <workItem from="1730145955782" duration="5156000" />
+      <workItem from="1730210485294" duration="4395000" />
     </task>
     <servers />
   </component>

@@ -99,6 +99,23 @@ public:
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing= OnRep_TestResistance, Category= "Resistance Attributes")
 	FGameplayAttributeData TestResistance;
 	ATTRIBUTE_ACCESSORS(UVillainAttributeSet, TestResistance);
+
+	// Movement Attributes
+	
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing= OnRep_DashCooldown, Category= "Resistance Attributes")
+	FGameplayAttributeData DashCooldown;
+	ATTRIBUTE_ACCESSORS(UVillainAttributeSet, DashCooldown);
+
+	// Weapon Attributes
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing= OnRep_RifleCooldown, Category= "Resistance Attributes")
+	FGameplayAttributeData RifleCooldown;
+	ATTRIBUTE_ACCESSORS(UVillainAttributeSet, RifleCooldown);
+
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing= OnRep_RevolverCooldown, Category= "Resistance Attributes")
+	FGameplayAttributeData RevolverCooldown;
+	ATTRIBUTE_ACCESSORS(UVillainAttributeSet, RevolverCooldown);
+	
 	
 	UFUNCTION()
 	void OnRep_Health(const FGameplayAttributeData& OldHealth) const;
@@ -117,7 +134,15 @@ public:
 
 	UFUNCTION()
 	void OnRep_CriticalHitResistance(const FGameplayAttributeData& OldCriticalHitResistance) const;
+
+	UFUNCTION()
+	void OnRep_DashCooldown(const FGameplayAttributeData& OldDashCooldown) const;
 	
+	UFUNCTION()
+	void OnRep_RifleCooldown(const FGameplayAttributeData& OldRifleCooldown) const;
+	
+	UFUNCTION()
+	void OnRep_RevolverCooldown(const FGameplayAttributeData& OldRevolverCooldown) const;
 private:
 	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props);
 	// TODO: Keep blocked and critical hits?

@@ -35,12 +35,17 @@ public:
  FGameplayTag InputTag_LMB;
  FGameplayTag InputTag_RMB;
  FGameplayTag InputTag_Shift;
+ 
  // Combat Socket Tags
  FGameplayTag CombatSocket_Weapon;
 
  // Weapon Tags
  FGameplayTag EquippedWeapon_Test;
 
+ // Cooldown Tags
+ FGameplayTag Cooldown_Weapon_Rifle;
+ FGameplayTag Cooldown_Weapon_Revolver;
+ FGameplayTag Cooldown_Movement_Dash;
  // Event Tags
  FGameplayTag Event_Montage_Test;
 
