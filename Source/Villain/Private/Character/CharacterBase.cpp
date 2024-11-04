@@ -74,7 +74,9 @@ void ACharacterBase::ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffe
 void ACharacterBase::InitializeDefaultAttributes() const
 {
 	ApplyEffectToSelf(DefaultSecondaryAttributes, 1);
+	ApplyEffectToSelf(DefaultWeaponAttributes, 1);
 	ApplyEffectToSelf(DefaultVitalAttributes, 1);
+
 }
 
 

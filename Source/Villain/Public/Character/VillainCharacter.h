@@ -28,13 +28,15 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	virtual void PostInitializeComponents() override;
 	virtual void Jump() override;
-	virtual void OnRep_ReplicatedMovement() override;
+	//virtual void OnRep_ReplicatedMovement() override;
 	FORCEINLINE void SetEquippedWeapon(AWeapon* WeaponToEquip) {EquippedWeapon = WeaponToEquip;}
 	AWeapon* GetEquippedWeapon() const;
 	FORCEINLINE UCombatComponent* GetCombatComponent() const {return Combat;}
 	FORCEINLINE float GetAO_Yaw() const { return AO_Yaw;}
 	FORCEINLINE float GetAO_Pitch() const { return AO_Pitch;}
 	FORCEINLINE ETurningInPlace GetTurningInPlace() const { return TurningInPlace;}
+	FORCEINLINE bool ShouldRotateRootBone() const {return bRotateRootBone;}
+	
 	ECombatState GetCombatState() const;
 	bool IsWeaponEquipped();
 	UFUNCTION(BlueprintCallable)
@@ -53,6 +55,7 @@ public:
 	UFUNCTION(BlueprintCallable)
 	void BeginWellFedMutation(FVector WellFedMeshSize);
 	
+	void AimOffset(float DeltaTime);
 protected:
 
 	// Villain Components
@@ -63,11 +66,11 @@ protected:
 	UPROPERTY(BlueprintReadOnly)
 	AWeapon* EquippedWeapon;
 	
-	void CalculateAO_Pitch();
+	//void CalculateAO_Pitch();
 	float CalculateSpeed();
-	void AimOffset(float DeltaTime);
-	void TurnInPlace(float DeltaTime);
-	void SimProxiesTurn();
+	
+	//void TurnInPlace(float DeltaTime);
+	//void SimProxiesTurn();
 
 private:
 	UPROPERTY(VisibleAnywhere)
@@ -96,7 +99,7 @@ private:
 	UFUNCTION()
 	void OnRep_OverlappingWeapon(AWeapon* LastWeapon);
 
-	void RotateInPlace(float DeltaTime);
+	//void RotateInPlace(float DeltaTime);
 
-	
+
 };

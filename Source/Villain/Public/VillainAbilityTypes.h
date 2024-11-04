@@ -176,6 +176,7 @@ protected:
 
 	UPROPERTY()
 	FVector RadialDamageOrigin = FVector::ZeroVector;
+	
 };
 
 template<>

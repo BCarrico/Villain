@@ -5,6 +5,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Character/VillainCharacter.h"
 #include "Kismet/KismetMathLibrary.h"
+#include "VillainComponents/CombatComponent.h"
 #include "Weapon/Weapon.h"
 #include "VillainTypes/CombatState.h"
 
@@ -35,12 +36,21 @@ void UVillainAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	EquippedWeapon = VillainCharacter->GetEquippedWeapon();
 	bIsCrouched = VillainCharacter->bIsCrouched;
 	bAiming = VillainCharacter->IsAiming();
+	if (bAiming && VillainCharacter->GetCombatComponent() && VillainCharacter->GetCombatComponent()->EquippedWeapon)
+	{
+		VillainCharacter->bUseControllerRotationYaw = true;
+		VillainCharacter->GetCharacterMovement()->bOrientRotationToMovement = false;
+	} else
+	{
+		VillainCharacter->bUseControllerRotationYaw = false;
+		VillainCharacter->GetCharacterMovement()->bOrientRotationToMovement = true;
+	}
 	TurningInPlace = VillainCharacter->GetTurningInPlace();
 	if (EquippedWeapon)
 	{
 		WeaponType = EquippedWeapon->GetWeaponType();
 	}
-	//bRotateRootBone = VillainCharacter->ShouldRotateRootBone();
+	bRotateRootBone = VillainCharacter->ShouldRotateRootBone();
 	//bEliminated = VillainCharacter->IsEliminated();
 	
 	// Offset Yaw for Strafing
@@ -57,6 +67,7 @@ void UVillainAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 	const float Interp = FMath::FInterpTo(Lean, Target, DeltaSeconds, 6.f);
 	Lean = FMath::Clamp(Interp, -90.f, 90.f);
 
+	VillainCharacter->AimOffset(DeltaSeconds);
 	AO_Yaw = VillainCharacter->GetAO_Yaw();
 	AO_Pitch = VillainCharacter->GetAO_Pitch();
 

@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameplayTagContainer.h"
+#include "InputActionValue.h"
 #include "GameFramework/PlayerController.h"
 #include "VillainPlayerController.generated.h"
 
@@ -65,6 +66,9 @@ private:
 	UPROPERTY(EditAnywhere, Category="Input")
 	TObjectPtr<UInputAction> AimAction;
 
+	UPROPERTY(EditAnywhere, Category="Input")
+	TObjectPtr<UInputAction> LMBAimAction;
+	
 	UPROPERTY()
 	TObjectPtr<UVillainAbilitySystemComponent> VillainAbilitySystemComponent;
 	
@@ -86,5 +90,6 @@ private:
 	void EquipButtonPressed();
 	void CrouchButtonPressed();
 	void JumpButtonPressed();
+	void LMBAimPressed(const FInputActionValue& InputActionValue);
 	void LookAtMouseWhileAiming();
 };

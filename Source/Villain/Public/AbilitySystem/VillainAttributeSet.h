@@ -102,20 +102,19 @@ public:
 
 	// Movement Attributes
 	
-	UPROPERTY(BlueprintReadOnly, ReplicatedUsing= OnRep_DashCooldown, Category= "Resistance Attributes")
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing= OnRep_DashCooldown, Category= "Movement Attributes")
 	FGameplayAttributeData DashCooldown;
 	ATTRIBUTE_ACCESSORS(UVillainAttributeSet, DashCooldown);
 
 	// Weapon Attributes
 
-	UPROPERTY(BlueprintReadOnly, ReplicatedUsing= OnRep_RifleCooldown, Category= "Resistance Attributes")
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing= OnRep_RifleCooldown, Category= "Weapon Attributes")
 	FGameplayAttributeData RifleCooldown;
 	ATTRIBUTE_ACCESSORS(UVillainAttributeSet, RifleCooldown);
 
-	UPROPERTY(BlueprintReadOnly, ReplicatedUsing= OnRep_RevolverCooldown, Category= "Resistance Attributes")
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing= OnRep_RevolverCooldown, Category= "Weapon Attributes")
 	FGameplayAttributeData RevolverCooldown;
 	ATTRIBUTE_ACCESSORS(UVillainAttributeSet, RevolverCooldown);
-	
 	
 	UFUNCTION()
 	void OnRep_Health(const FGameplayAttributeData& OldHealth) const;

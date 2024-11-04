@@ -27,12 +27,17 @@ public:
 	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 	void EquipWeapon(AWeapon* WeaponToEquip);
 	void EquipPrimaryWeapon(AWeapon* WeaponToEquip);
+	UFUNCTION(BlueprintCallable)
 	void SetAiming(bool bIsAiming);
 	UPROPERTY(ReplicatedUsing=OnRep_CombatState)
 	ECombatState CombatState = ECombatState::ECS_Unoccupied;
 
 	UPROPERTY(BlueprintReadOnly)
 	FHitResult HitResult;
+	
+	UPROPERTY(ReplicatedUsing = OnRep_EquippedWeapon)
+	AWeapon* EquippedWeapon;
+
 protected:
 
 	virtual void BeginPlay() override;
@@ -47,6 +52,8 @@ protected:
 
 	void TraceUnderCrosshairs(FHitResult& TraceHitResult);
 	void SetHUDCrosshairs(float DeltaTime);
+
+
 private:
 	UPROPERTY()
 	AVillainCharacter* Character;
@@ -56,9 +63,7 @@ private:
 	
 	UPROPERTY()
 	AVillainHUD* HUD;
-
-	UPROPERTY(ReplicatedUsing = OnRep_EquippedWeapon)
-	AWeapon* EquippedWeapon;
+	
 	// HUD and Crosshairs
 	
 	float CrosshairVelocityFactor;
@@ -86,6 +91,4 @@ private:
 	UFUNCTION()
 	void OnRep_CombatState();
 	
-
-		
 };

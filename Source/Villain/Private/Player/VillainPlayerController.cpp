@@ -66,6 +66,7 @@ void AVillainPlayerController::SetupInputComponent()
 	VillainInputComponent->BindAction(CrouchAction, ETriggerEvent::Started, this, &AVillainPlayerController::CrouchButtonPressed); // Also set as triggered in IA_Crouch due to stuttering in game. Fixed it
 	VillainInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &AVillainPlayerController::JumpButtonPressed);
 	VillainInputComponent->BindAction(EquipAction, ETriggerEvent::Triggered, this, &AVillainPlayerController::EquipButtonPressed);
+	VillainInputComponent->BindAction(LMBAction, ETriggerEvent::Triggered, this, &AVillainPlayerController::LMBAimPressed);
 	VillainInputComponent->BindAbilityActions(InputConfig, this, &ThisClass::AbilityInputTagPressed, &ThisClass::AbilityInputTagReleased, &ThisClass::AbilityInputTagHeld);
 }
 
@@ -238,6 +239,23 @@ void AVillainPlayerController::JumpButtonPressed()
 		if (ACharacter* ControlledCharacter = Cast<ACharacter>(ControlledPawn))
 		{
 			ControlledCharacter->Jump();
+		}
+	}
+}
+
+void AVillainPlayerController::LMBAimPressed(const FInputActionValue& InputActionValue)
+{
+	bIsAiming = InputActionValue.Get<bool>();
+	if (APawn* ControlledPawn = GetPawn<APawn>())
+	{
+		VillainCharacter == nullptr ? VillainCharacter = Cast<AVillainCharacter>(ControlledPawn) : VillainCharacter;
+		if (VillainCharacter && VillainCharacter->IsWeaponEquipped())
+		{
+			//if (VillainCharacter->bDisableGameplay) return;
+			if (UCombatComponent* CombatComponent = VillainCharacter->GetCombatComponent())
+			{
+				CombatComponent->SetAiming(bIsAiming);
+			}
 		}
 	}
 }

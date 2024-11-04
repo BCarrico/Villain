@@ -53,7 +53,7 @@ AVillainCharacter::AVillainCharacter()
 	Combat = CreateDefaultSubobject<UCombatComponent>("CombatComponent");
 	Combat->SetIsReplicated(true);  // Components do not need to be registered in GetLifetimeReplicatedProps
 
-	NetUpdateFrequency = 66.f;  // COMMON values for fast-paced games
+	NetUpdateFrequency = 100.f;  // COMMON values for fast-paced games
 	MinNetUpdateFrequency = 33.f;
 }
 
@@ -108,12 +108,12 @@ void AVillainCharacter::Jump()
 	}
 }
 
-void AVillainCharacter::OnRep_ReplicatedMovement()
+/*void AVillainCharacter::OnRep_ReplicatedMovement()
 {
 	Super::OnRep_ReplicatedMovement();
 	SimProxiesTurn();
 	TimeSinceLastMovementReplication = 0.f;
-}
+}*/
 
 AWeapon* AVillainCharacter::GetEquippedWeapon() const
 {
@@ -154,7 +154,7 @@ void AVillainCharacter::MulticastHandleWellFedMutation_Implementation(FVector We
 	GetMesh()->SetWorldScale3D(WellFedMeshSize);
 }
 
-void AVillainCharacter::CalculateAO_Pitch()
+/*void AVillainCharacter::CalculateAO_Pitch()
 {
 	AO_Pitch = GetBaseAimRotation().Pitch;
 	if (AO_Pitch > 90.f && !IsLocallyControlled())
@@ -164,7 +164,7 @@ void AVillainCharacter::CalculateAO_Pitch()
 		const FVector2D OutRange(-90.f, 0.f);
 		AO_Pitch = FMath::GetMappedRangeValueClamped(InRange, OutRange, AO_Pitch);
 	}
-}
+}*/
 
 float AVillainCharacter::CalculateSpeed() 
 {
@@ -182,7 +182,7 @@ void AVillainCharacter::AimOffset(float DeltaTime)
 	
 	if (Speed == 0.f && !bIsInAir) // Standing still and not jumping
 	{
-		bRotateRootBone = true;
+		//bRotateRootBone = true;
 		const FRotator CurrentAimRotation = FRotator(0.f, GetBaseAimRotation().Yaw, 0.f);
 		const FRotator DeltaAimRotation = UKismetMathLibrary::NormalizedDeltaRotator(CurrentAimRotation, StartingAimRotation);
 		AO_Yaw = DeltaAimRotation.Yaw;
@@ -190,22 +190,22 @@ void AVillainCharacter::AimOffset(float DeltaTime)
 		{
 			InterpAO_Yaw = AO_Yaw;
 		}
-		bUseControllerRotationYaw = true;
-		TurnInPlace(DeltaTime);
+		//bUseControllerRotationYaw = true;
+		//TurnInPlace(DeltaTime);
 	}
 	if (Speed > 0.f || bIsInAir) // Running or jumping
 	{
-		bRotateRootBone = false;
+		//bRotateRootBone = false;
 		StartingAimRotation = FRotator(0.f, GetBaseAimRotation().Yaw, 0.f);
 		AO_Yaw = 0.f;
-		bUseControllerRotationYaw = true;
+		//bUseControllerRotationYaw = true;
 		TurningInPlace = ETurningInPlace::ETIP_NotTurning;
 	}
 
-	CalculateAO_Pitch();
+	//CalculateAO_Pitch();
 }
 
-void AVillainCharacter::TurnInPlace(float DeltaTime)
+/*void AVillainCharacter::TurnInPlace(float DeltaTime)
 {
 	if (AO_Yaw > 90.f)
 	{
@@ -225,9 +225,9 @@ void AVillainCharacter::TurnInPlace(float DeltaTime)
 			StartingAimRotation = FRotator(0.f, GetBaseAimRotation().Yaw, 0.f);
 		}
 	}
-}
+}*/
 
-void AVillainCharacter::SimProxiesTurn()
+/*void AVillainCharacter::SimProxiesTurn()
 {
 	if (Combat == nullptr || Combat->EquippedWeapon == nullptr) return;
 	bRotateRootBone = false;
@@ -260,7 +260,7 @@ void AVillainCharacter::SimProxiesTurn()
 		return;
 	}
 	TurningInPlace = ETIP_NotTurning;
-}
+}*/
 
 void AVillainCharacter::InitAbilityActorInfo()
 {
@@ -326,19 +326,19 @@ void AVillainCharacter::OnRep_OverlappingWeapon(AWeapon* LastWeapon) // LastWeap
 	}
 }
 
-void AVillainCharacter::RotateInPlace(float DeltaTime)
+/*void AVillainCharacter::RotateInPlace(float DeltaTime)
 {
 	if (Combat && Combat->EquippedWeapon)
 	{
 		bUseControllerRotationYaw = true;
 		GetCharacterMovement()->bOrientRotationToMovement = false;
 	}
-	/*if (bDisableGameplay)
+	if (bDisableGameplay)
 	{
 		bUseControllerRotationYaw = false;
 		TurningInPlace = ETurningInPlace::ETIP_NotTurning;
 		return;
-	}*/
+	}
 	if (GetLocalRole() > ROLE_SimulatedProxy && IsLocallyControlled())
 	{
 		AimOffset(DeltaTime);
@@ -352,7 +352,7 @@ void AVillainCharacter::RotateInPlace(float DeltaTime)
 		}
 		CalculateAO_Pitch();
 	}
-}
+}*/
 
 bool AVillainCharacter::IsAiming()
 {

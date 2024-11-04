@@ -66,8 +66,8 @@ private:
 	UPROPERTY(BlueprintReadOnly, Category="Movement", meta = (AllowPrivateAccess="true"))
 	FTransform LeftHandTransform;
 
-	//UPROPERTY(BlueprintReadOnly, Category="Movement", meta = (AllowPrivateAccess="true"))
-	//TEnumAsByte<ETurningInPlace> TurningInPlace;
+	UPROPERTY(BlueprintReadOnly, Category="Movement", meta = (AllowPrivateAccess="true"))
+	TEnumAsByte<ETurningInPlace> TurningInPlace;
 
 	UPROPERTY(BlueprintReadOnly, Category="Movement", meta = (AllowPrivateAccess="true"))
 	FRotator RightHandRotation;
@@ -90,8 +90,8 @@ private:
 	UPROPERTY(BlueprintReadOnly, Category="Movement", meta = (AllowPrivateAccess="true"))
 	bool bTransformRightHand;
 
-	UPROPERTY(BlueprintReadOnly, Category="Movement", meta = (AllowPrivateAccess="true"))
-	TEnumAsByte<ETurningInPlace> TurningInPlace;
+	//UPROPERTY(BlueprintReadOnly, Category="Movement", meta = (AllowPrivateAccess="true"))
+	//TEnumAsByte<ETurningInPlace> TurningInPlace;
 
 	UPROPERTY(BlueprintReadOnly, Category="Movement", meta = (AllowPrivateAccess="true"))
 	EWeaponType WeaponType;
