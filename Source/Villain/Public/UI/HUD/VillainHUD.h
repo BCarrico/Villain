@@ -6,6 +6,11 @@
 #include "GameFramework/HUD.h"
 #include "VillainHUD.generated.h"
 
+struct FWidgetControllerParams;
+class UAbilitySystemComponent;
+class UAttributeSet;
+class UOverlayWidgetController;
+class UVillainUserWidget;
 class AVillainPlayerController;
 
 USTRUCT(BlueprintType)
@@ -39,8 +44,25 @@ class VILLAIN_API AVillainHUD : public AHUD
 public:
 	virtual void DrawHUD() override;
 	FORCEINLINE void SetHUDPackage(const FHUDPackage& Package){HUDPackage = Package;}
+	
 
+	UOverlayWidgetController* GetOverlayWidgetController(const FWidgetControllerParams& WCParams);
+	
+	void InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS);
+	
 private:
+	UPROPERTY()
+	TObjectPtr<UVillainUserWidget> OverlayWidget;
+	
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UVillainUserWidget> OverlayWidgetClass;
+
+	UPROPERTY()
+	TObjectPtr<UOverlayWidgetController> OverlayWidgetController;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UOverlayWidgetController> OverlayWidgetControllerClass;
+	
 	FHUDPackage HUDPackage;
 	
 	UPROPERTY()

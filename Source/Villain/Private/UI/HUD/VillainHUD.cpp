@@ -5,6 +5,8 @@
 
 #include "AssetTypeCategories.h"
 #include "Player/VillainPlayerController.h"
+#include "UI/Widget/VillainUserWidget.h"
+#include "UI/WidgetController/OverlayWidgetController.h"
 
 void AVillainHUD::DrawHUD()
 {
@@ -81,6 +83,33 @@ void AVillainHUD::DrawHUD()
 			}*/
 		}
 	}
+}
+
+UOverlayWidgetController* AVillainHUD::GetOverlayWidgetController(const FWidgetControllerParams& WCParams)
+{
+	if (OverlayWidgetController == nullptr)
+	{
+		OverlayWidgetController = NewObject<UOverlayWidgetController>(this, OverlayWidgetControllerClass);
+		OverlayWidgetController->SetWidgetControllerParams(WCParams);
+		//OverlayWidgetController->BindCallbacksToDependencies();
+	}
+	return OverlayWidgetController;
+}
+
+void AVillainHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS)
+{
+	checkf(OverlayWidgetClass, TEXT("Overlay Widget Class uninitialized, please fill out BP_AuraHUD"))
+	checkf(OverlayWidgetControllerClass, TEXT("Overlay Widget Controller Class unititiailzied, please fill out BP_AuraHUD"))
+	
+UUserWidget* Widget = CreateWidget<UUserWidget>(GetWorld(), OverlayWidgetClass);
+	OverlayWidget = Cast<UVillainUserWidget>(Widget);
+
+	const FWidgetControllerParams WidgetControllerParams(PC, PS, ASC, AS);
+	UOverlayWidgetController* WidgetController = GetOverlayWidgetController(WidgetControllerParams);
+
+	OverlayWidget->SetWidgetController(WidgetController);
+	//WidgetController->BroadcastInitialValues();
+	Widget->AddToViewport();
 }
 
 void AVillainHUD::DrawCrosshair(UTexture2D* Texture, FVector2d ViewportCenter, FVector2d Spread, FLinearColor CrosshairColor)

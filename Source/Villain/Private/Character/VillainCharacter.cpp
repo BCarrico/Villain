@@ -12,6 +12,7 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Net/UnrealNetwork.h"
+#include "Player/VillainPlayerController.h"
 #include "Player/VillainPlayerState.h"
 #include "VillainComponents/CombatComponent.h"
 
@@ -270,7 +271,13 @@ void AVillainCharacter::InitAbilityActorInfo()
 	Cast<UVillainAbilitySystemComponent>(VillainPlayerState->GetAbilitySystemComponent())->AbilityActorInfoSet();
 	AbilitySystemComponent = VillainPlayerState->GetAbilitySystemComponent();
 	AttributeSet = VillainPlayerState->GetAttributeSet();
-	
+	if (AVillainPlayerController* VillainPlayerController = Cast<AVillainPlayerController>(GetController()))
+	{
+		if (AVillainHUD* AuraHUD = Cast<AVillainHUD>(VillainPlayerController->GetHUD()))
+		{
+			AuraHUD->InitOverlay(VillainPlayerController, VillainPlayerState, AbilitySystemComponent, AttributeSet);
+		}
+	}
 	InitializeDefaultAttributes();
 }
 

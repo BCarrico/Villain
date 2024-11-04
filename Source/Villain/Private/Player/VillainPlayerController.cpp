@@ -66,7 +66,7 @@ void AVillainPlayerController::SetupInputComponent()
 	VillainInputComponent->BindAction(CrouchAction, ETriggerEvent::Started, this, &AVillainPlayerController::CrouchButtonPressed); // Also set as triggered in IA_Crouch due to stuttering in game. Fixed it
 	VillainInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &AVillainPlayerController::JumpButtonPressed);
 	VillainInputComponent->BindAction(EquipAction, ETriggerEvent::Triggered, this, &AVillainPlayerController::EquipButtonPressed);
-	VillainInputComponent->BindAction(LMBAction, ETriggerEvent::Triggered, this, &AVillainPlayerController::LMBAimPressed);
+	VillainInputComponent->BindAction(LMBAimAction, ETriggerEvent::Triggered, this, &AVillainPlayerController::LMBAimPressed);
 	VillainInputComponent->BindAbilityActions(InputConfig, this, &ThisClass::AbilityInputTagPressed, &ThisClass::AbilityInputTagReleased, &ThisClass::AbilityInputTagHeld);
 }
 

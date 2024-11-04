@@ -9,37 +9,19 @@
   <component name="ChangeListManager">
     <list default="true" id="64539828-f90b-421b-b98a-b9d4e3b60545" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Villain.dir/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Villain.dir/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Animations/AM_FireWeapon.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Animations/AM_FireWeapon.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Animations/AM_Fire_Rifle_Ironsights.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Animations/AM_Fire_Rifle_Ironsights.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Animations/AM_FlyingDash.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Animations/AM_FlyingDash.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Animations/Aura/AM_Cast_FireBolt.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Animations/Aura/AM_Cast_FireBolt.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/Animations/Fire_Rifle_Ironsights.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/Animations/Fire_Rifle_Ironsights.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Assets/StarterContent/Characters/Mannequins/Meshes/SK_Mannequin.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Assets/StarterContent/Characters/Mannequins/Meshes/SK_Mannequin.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/AbilitySystem/GameplayAbilities/GA_TestProjectileAbility_LeftHanded.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/AbilitySystem/GameplayAbilities/GA_TestProjectileAbility_LeftHanded.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/AbilitySystem/GameplayAbilities/Movement/GA_Dash.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/AbilitySystem/GameplayAbilities/Movement/GA_Dash.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Blueprints/AbilitySystem/GameplayAbilities/Revolver/GA_RevolverRecoil.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/AbilitySystem/GameplayAbilities/Revolver/GA_RevolverRecoil.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Blueprints/AbilitySystem/GameplayAbilities/Rifle/GA_RifleProjectile.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/AbilitySystem/GameplayAbilities/Rifle/GA_RifleProjectile.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/AbilitySystem/GameplayAbilities/Rifle/GE_Cooldown_Rifle.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/AbilitySystem/GameplayAbilities/Rifle/GE_Cooldown_Rifle.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/AbilitySystem/GameplayEffects/Attributes/GE_SecondaryAttributes_TEST.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/AbilitySystem/GameplayEffects/Attributes/GE_SecondaryAttributes_TEST.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/AbilitySystem/GameplayEffects/Attributes/GE_VillainSecondaryAttributes.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/AbilitySystem/GameplayEffects/Attributes/GE_VillainSecondaryAttributes.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/AbilitySystem/GameplayEffects/Attributes/GE_VillainVitalAttributes.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/AbilitySystem/GameplayEffects/Attributes/GE_VillainVitalAttributes.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Character/Animation/ABP_VillainAnim.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Character/Animation/ABP_VillainAnim.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Character/BP_VillainCharacter.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Character/BP_VillainCharacter.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Input/IMC_VillainContext.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Input/IMC_VillainContext.uasset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Input/InputActions/IA_LMB.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Input/InputActions/IA_LMB.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Game/BP_VillainGameModeBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Game/BP_VillainGameModeBase.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/HUD/BP_VillainHUD.uasset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/HUD/WBP_PickupWidget.uasset" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Blueprints/Player/BP_VillainPlayerController.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Player/BP_VillainPlayerController.uasset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Content/Blueprints/Weapon/BP_WeaponBase.uasset" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Blueprints/Weapon/BP_WeaponBase.uasset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Content/Maps/TestMap.umap" beforeDir="false" afterPath="$PROJECT_DIR$/Content/Maps/TestMap.umap" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Private/Character/CharacterBase.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/Character/CharacterBase.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Private/Character/VillainAnimInstance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/Character/VillainAnimInstance.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Villain/Private/Character/VillainCharacter.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/Character/VillainCharacter.cpp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Source/Villain/Private/Player/VillainPlayerController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/Player/VillainPlayerController.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/AbilitySystem/VillainAttributeSet.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/AbilitySystem/VillainAttributeSet.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/Character/CharacterBase.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/Character/CharacterBase.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/Character/VillainAnimInstance.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/Character/VillainAnimInstance.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/Character/VillainCharacter.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/Character/VillainCharacter.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/Player/VillainPlayerController.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/Player/VillainPlayerController.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/VillainAbilityTypes.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/VillainAbilityTypes.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/VillainComponents/CombatComponent.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/VillainComponents/CombatComponent.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Villain/Private/UI/HUD/VillainHUD.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Private/UI/HUD/VillainHUD.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Source/Villain/Public/UI/HUD/VillainHUD.h" beforeDir="false" afterPath="$PROJECT_DIR$/Source/Villain/Public/UI/HUD/VillainHUD.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Villain.uproject" beforeDir="false" afterPath="$PROJECT_DIR$/Villain.uproject" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -224,7 +206,7 @@
       <workItem from="1730335170051" duration="1209000" />
       <workItem from="1730413971962" duration="2569000" />
       <workItem from="1730493322884" duration="5289000" />
-      <workItem from="1730735085594" duration="3917000" />
+      <workItem from="1730735085594" duration="9300000" />
     </task>
     <servers />
   </component>
