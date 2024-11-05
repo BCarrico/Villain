@@ -6,6 +6,7 @@
 #include "GameFramework/HUD.h"
 #include "VillainHUD.generated.h"
 
+class UMutationOverlayWidgetController;
 struct FWidgetControllerParams;
 class UAbilitySystemComponent;
 class UAttributeSet;
@@ -47,6 +48,7 @@ public:
 	
 
 	UOverlayWidgetController* GetOverlayWidgetController(const FWidgetControllerParams& WCParams);
+	UMutationOverlayWidgetController* GetMutationOverlayWidgetController(const FWidgetControllerParams& WCParams);
 	
 	void InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS);
 	
@@ -62,6 +64,12 @@ private:
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<UOverlayWidgetController> OverlayWidgetControllerClass;
+
+	UPROPERTY()
+	TObjectPtr<UMutationOverlayWidgetController> MutationWidgetController;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<UMutationOverlayWidgetController> MutationWidgetControllerClass;
 	
 	FHUDPackage HUDPackage;
 	

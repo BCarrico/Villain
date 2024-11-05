@@ -5,6 +5,7 @@
 
 #include "AbilitySystem/VillainAbilitySystemComponent.h"
 #include "AbilitySystem/VillainAttributeSet.h"
+#include "Character/VillainCharacter.h"
 #include "Player/VillainPlayerController.h"
 #include "Player/VillainPlayerState.h"
 
@@ -14,6 +15,16 @@ void UVillainWidgetController::SetWidgetControllerParams(const FWidgetController
 	PlayerState = WCParams.PlayerState;
 	AbilitySystemComponent = WCParams.AbilitySystemComponent;
 	AttributeSet = WCParams.AttributeSet;
+}
+
+void UVillainWidgetController::BroadcastInitialValues()
+{
+	
+}
+
+void UVillainWidgetController::BindCallbacksToDependencies()
+{
+	
 }
 
 AVillainPlayerController* UVillainWidgetController::GetVillainPC()

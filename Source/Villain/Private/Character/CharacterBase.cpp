@@ -42,6 +42,18 @@ TArray<FTaggedMontage> ACharacterBase::GetAttackMontages_Implementation()
 	return AttackMontages;
 }
 
+void ACharacterBase::ApplyEffectToSelf_Implementation(TSubclassOf<UGameplayEffect> GameplayEffectClass,
+	float Level) const
+{
+	check(IsValid(GetAbilitySystemComponent()));
+	check (GameplayEffectClass);
+	if (!HasAuthority()) return;
+	FGameplayEffectContextHandle ContextHandle = GetAbilitySystemComponent()->MakeEffectContext();
+	ContextHandle.AddSourceObject(this);
+	const FGameplayEffectSpecHandle SpecHandle = GetAbilitySystemComponent()->MakeOutgoingSpec(GameplayEffectClass, 1.f, ContextHandle);
+	GetAbilitySystemComponent()->ApplyGameplayEffectSpecToTarget(*SpecHandle.Data.Get(), GetAbilitySystemComponent());
+}
+
 void ACharacterBase::BeginPlay()
 {
 	Super::BeginPlay();
@@ -61,7 +73,7 @@ void ACharacterBase::AddCharacterAbilities()
 	VillainASC -> AddCharacterAbilities(StartupAbilities);
 }
 
-void ACharacterBase::ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const
+/*void ACharacterBase::ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const
 {
 	check(IsValid(GetAbilitySystemComponent()));
 	check (GameplayEffectClass);
@@ -69,7 +81,7 @@ void ACharacterBase::ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffe
 	ContextHandle.AddSourceObject(this);
 	const FGameplayEffectSpecHandle SpecHandle = GetAbilitySystemComponent()->MakeOutgoingSpec(GameplayEffectClass, 1.f, ContextHandle);
 	GetAbilitySystemComponent()->ApplyGameplayEffectSpecToTarget(*SpecHandle.Data.Get(), GetAbilitySystemComponent());
-}
+}*/
 
 void ACharacterBase::InitializeDefaultAttributes() const
 {

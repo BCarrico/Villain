@@ -6,6 +6,7 @@
 #include "AssetTypeCategories.h"
 #include "Player/VillainPlayerController.h"
 #include "UI/Widget/VillainUserWidget.h"
+#include "UI/WidgetController/MutationOverlayWidgetController.h"
 #include "UI/WidgetController/OverlayWidgetController.h"
 
 void AVillainHUD::DrawHUD()
@@ -94,6 +95,17 @@ UOverlayWidgetController* AVillainHUD::GetOverlayWidgetController(const FWidgetC
 		//OverlayWidgetController->BindCallbacksToDependencies();
 	}
 	return OverlayWidgetController;
+}
+
+UMutationOverlayWidgetController* AVillainHUD::GetMutationOverlayWidgetController(const FWidgetControllerParams& WCParams)
+{
+	if (MutationWidgetController == nullptr)
+	{
+		MutationWidgetController = NewObject<UMutationOverlayWidgetController>(this, MutationWidgetControllerClass);
+		MutationWidgetController->SetWidgetControllerParams(WCParams);
+		//MutationWidgetController->BindCallbacksToDependencies();
+	}
+	return MutationWidgetController;
 }
 
 void AVillainHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilitySystemComponent* ASC, UAttributeSet* AS)

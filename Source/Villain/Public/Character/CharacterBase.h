@@ -43,6 +43,9 @@ public:
 	TArray<TSubclassOf<UGameplayAbility>> StartupAbilities;
 
 	FOnASCRegistered OnAscRegistered;
+
+	UFUNCTION(BlueprintCallable, Server, Reliable)
+	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const;
 protected:
 	virtual void BeginPlay() override;
 	virtual void InitAbilityActorInfo();
@@ -70,7 +73,7 @@ protected:
 	UPROPERTY(BlueprintReadOnly, EditAnywhere, Category="Attributes")
 	TSubclassOf<UGameplayEffect> DefaultWeaponAttributes;
 	
-	void ApplyEffectToSelf(TSubclassOf<UGameplayEffect> GameplayEffectClass, float Level) const;
+
 	virtual void InitializeDefaultAttributes() const;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category="Character Class Defaults")

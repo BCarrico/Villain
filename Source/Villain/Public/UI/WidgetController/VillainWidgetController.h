@@ -6,6 +6,10 @@
 #include "UObject/NoExportTypes.h"
 #include "VillainWidgetController.generated.h"
 
+class AVillainCharacter;
+class UGameplayEffect;
+class UMutateEffectInfo;
+class UAbilityInfo;
 class UAbilitySystemComponent;
 class UAttributeSet;
 class AVillainPlayerState;
@@ -45,9 +49,16 @@ class VILLAIN_API UVillainWidgetController : public UObject
 public:
 	UFUNCTION(BlueprintCallable)
 	void SetWidgetControllerParams(const FWidgetControllerParams& WCParams);
+
+	UFUNCTION(BlueprintCallable)
+	virtual void BroadcastInitialValues();
+	virtual void BindCallbacksToDependencies();
+	
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Widget Data")
+	TObjectPtr<UMutateEffectInfo> MutateEffectInfo;
 protected:
-	//UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Widget Data")
-	//TObjectPtr<UAbilityInfo> AbilityInfo;
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category="Widget Data")
+	TObjectPtr<UAbilityInfo> AbilityInfo;
 	
 	UPROPERTY(BlueprintReadOnly, Category="WidgetController")
 	TObjectPtr<APlayerController> PlayerController;

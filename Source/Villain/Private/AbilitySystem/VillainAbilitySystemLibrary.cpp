@@ -9,7 +9,55 @@
 #include "AbilitySystemBlueprintLibrary.h"
 #include "VillainAbilityTypes.h"
 #include "VillainGameplayTags.h"
+#include "Player/VillainPlayerState.h"
+#include "UI/HUD/VillainHUD.h"
+#include "UI/WidgetController/VillainWidgetController.h"
 
+
+bool UVillainAbilitySystemLibrary::MakeWidgetControllerParams(const UObject* WorldContextObject, FWidgetControllerParams& OutWCParams, AVillainHUD*& OutVillainHUD)
+{
+	if (APlayerController* PC = UGameplayStatics::GetPlayerController(WorldContextObject, 0))
+	{
+		OutVillainHUD = Cast<AVillainHUD>(PC->GetHUD());
+		if (OutVillainHUD)
+		{
+			AVillainPlayerState* PS = PC->GetPlayerState<AVillainPlayerState>();
+			UAbilitySystemComponent* ASC = PS->GetAbilitySystemComponent();
+			UAttributeSet* AS = PS->GetAttributeSet();
+			OutWCParams.AttributeSet = AS;
+			OutWCParams.AbilitySystemComponent= ASC;
+			OutWCParams.PlayerController = PC;
+			OutWCParams.PlayerState = PS;
+
+			return true;
+		}
+	}
+	return false;
+}
+
+UOverlayWidgetController* UVillainAbilitySystemLibrary::GetOverlayWidgetController(const UObject* WorldContextObject)
+{
+	FWidgetControllerParams WCParams;
+	AVillainHUD* VillainHUD = nullptr;
+	
+	if (MakeWidgetControllerParams(WorldContextObject, WCParams, VillainHUD))
+	{
+		return VillainHUD->GetOverlayWidgetController(WCParams);
+	}
+	return nullptr;
+}
+
+UMutationOverlayWidgetController* UVillainAbilitySystemLibrary::GetMutationOverlayWidgetController(const UObject* WorldContextObject)
+{
+	FWidgetControllerParams WCParams;
+	AVillainHUD* VillainHUD = nullptr;
+	
+	if (MakeWidgetControllerParams(WorldContextObject, WCParams, VillainHUD))
+	{
+		return VillainHUD->GetMutationOverlayWidgetController(WCParams);
+	}
+	return nullptr;
+}
 
 void UVillainAbilitySystemLibrary::InitializeDefaultAttributes(ECharacterClass CharacterClass, float Level, const UObject* WorldContextObject, UAbilitySystemComponent* ASC)
 {
@@ -44,6 +92,13 @@ UCharacterClassInfo* UVillainAbilitySystemLibrary::GetCharacterClassInfo(const U
 	const AVillainGameModeBase* VillainGameMode = Cast<AVillainGameModeBase>(UGameplayStatics::GetGameMode(WorldContextObject));
 	if (VillainGameMode == nullptr) return nullptr;
 	return VillainGameMode->CharacterClassInfo;
+}
+
+UAbilityInfo* UVillainAbilitySystemLibrary::GetAbilityInfo(const UObject* WorldContextObject)
+{
+	const AVillainGameModeBase* VillainGameMode = Cast<AVillainGameModeBase>(UGameplayStatics::GetGameMode(WorldContextObject));
+	if (VillainGameMode == nullptr) return nullptr;
+	return VillainGameMode->AbilityInfo;
 }
 
 bool UVillainAbilitySystemLibrary::IsBlockedHit(const FGameplayEffectContextHandle& EffectContextHandle)

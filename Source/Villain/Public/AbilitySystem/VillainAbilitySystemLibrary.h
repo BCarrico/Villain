@@ -6,6 +6,10 @@
 #include "Kismet/BlueprintFunctionLibrary.h"
 #include "VillainAbilitySystemLibrary.generated.h"
 
+struct FWidgetControllerParams;
+class UOverlayWidgetController;
+class AVillainHUD;
+class UMutationOverlayWidgetController;
 struct FGameplayEffectContextHandle;
 class UCharacterClassInfo;
 enum class ECharacterClass : uint8;
@@ -22,11 +26,14 @@ class VILLAIN_API UVillainAbilitySystemLibrary : public UBlueprintFunctionLibrar
 
 	// Widget Controller
 	
-	//UFUNCTION(BlueprintPure, Category="VillainAbilitySystemLibray|WidgetController", meta = (DefaultToSelf = "WorldContextObject"))
-	//static bool MakeWidgetControllerParams(const UObject* WorldContextObject, FWidgetControllerParams& OutWCParams, AAuraHUD*& OutAuraHUD);
+	UFUNCTION(BlueprintPure, Category="VillainAbilitySystemLibray|WidgetController", meta = (DefaultToSelf = "WorldContextObject"))
+	static bool MakeWidgetControllerParams(const UObject* WorldContextObject, FWidgetControllerParams& OutWCParams, AVillainHUD*& OutVillainHUD);
 	
-	//UFUNCTION(BlueprintPure, Category="VillainAbilitySystemLibray|WidgetController", meta = (DefaultToSelf = "WorldContextObject"))
-	//static UOverlayWidgetController* GetOverlayWidgetController(const UObject* WorldContextObject);
+	UFUNCTION(BlueprintPure, Category="VillainAbilitySystemLibray|WidgetController", meta = (DefaultToSelf = "WorldContextObject"))
+	static UOverlayWidgetController* GetOverlayWidgetController(const UObject* WorldContextObject);
+
+	UFUNCTION(BlueprintPure, Category="VillainAbilitySystemLibray|WidgetController", meta = (DefaultToSelf = "WorldContextObject"))
+	static UMutationOverlayWidgetController* GetMutationOverlayWidgetController(const UObject* WorldContextObject);
 
 	//UFUNCTION(BlueprintPure, Category="VillainAbilitySystemLibray|WidgetController", meta = (DefaultToSelf = "WorldContextObject"))
 	//static UAttributeMenuWidgetController* GetAttributeMenuWidgetController(const UObject* WorldContextObject);
@@ -45,8 +52,8 @@ class VILLAIN_API UVillainAbilitySystemLibrary : public UBlueprintFunctionLibrar
 	UFUNCTION(BlueprintCallable, Category="VillainAbilitySystemLibray|CharacterClassDefaults")
 	static UCharacterClassInfo* GetCharacterClassInfo(const UObject* WorldContextObject);
 
-	//UFUNCTION(BlueprintCallable, Category="VillainAbilitySystemLibray|CharacterClassDefaults")
-	//static UAbilityInfo* GetAbilityInfo (const UObject* WorldContextObject);
+	UFUNCTION(BlueprintCallable, Category="VillainAbilitySystemLibray|CharacterClassDefaults")
+	static UAbilityInfo* GetAbilityInfo (const UObject* WorldContextObject);
 
 	// Effect Context Getters
 	
