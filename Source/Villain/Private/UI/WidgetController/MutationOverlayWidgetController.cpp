@@ -2,8 +2,6 @@
 
 
 #include "UI/WidgetController/MutationOverlayWidgetController.h"
-#include "AbilitySystemBlueprintLibrary.h"
-#include "Actor/VillainEffectActor.h"
 #include "Character/VillainCharacter.h"
 #include "Data/MutateEffectInfo.h"
 

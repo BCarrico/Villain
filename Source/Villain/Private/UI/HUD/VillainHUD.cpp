@@ -113,14 +113,14 @@ void AVillainHUD::InitOverlay(APlayerController* PC, APlayerState* PS, UAbilityS
 	checkf(OverlayWidgetClass, TEXT("Overlay Widget Class uninitialized, please fill out BP_AuraHUD"))
 	checkf(OverlayWidgetControllerClass, TEXT("Overlay Widget Controller Class unititiailzied, please fill out BP_AuraHUD"))
 	
-UUserWidget* Widget = CreateWidget<UUserWidget>(GetWorld(), OverlayWidgetClass);
+	UUserWidget* Widget = CreateWidget<UUserWidget>(GetWorld(), OverlayWidgetClass);
 	OverlayWidget = Cast<UVillainUserWidget>(Widget);
 
 	const FWidgetControllerParams WidgetControllerParams(PC, PS, ASC, AS);
 	UOverlayWidgetController* WidgetController = GetOverlayWidgetController(WidgetControllerParams);
 
 	OverlayWidget->SetWidgetController(WidgetController);
-	//WidgetController->BroadcastInitialValues();
+	WidgetController->BroadcastInitialValues();
 	Widget->AddToViewport();
 }
 

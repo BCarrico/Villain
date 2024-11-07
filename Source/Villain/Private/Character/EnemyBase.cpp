@@ -4,10 +4,13 @@
 #include "Character/EnemyBase.h"
 
 #include "AbilitySystemComponent.h"
+#include "VillainGameplayTags.h"
 #include "AbilitySystem/VillainAbilitySystemComponent.h"
 #include "AbilitySystem/VillainAbilitySystemLibrary.h"
 #include "AbilitySystem/VillainAttributeSet.h"
+#include "Components/WidgetComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "UI/Widget/VillainUserWidget.h"
 #include "Villain/Villain.h"
 
 AEnemyBase::AEnemyBase()
@@ -27,6 +30,9 @@ AEnemyBase::AEnemyBase()
 	AttributeSet = CreateDefaultSubobject<UVillainAttributeSet>("AttributeSet");
 
 	CharacterClass = ECharacterClass::EnemyClass;
+
+	HealthBar = CreateDefaultSubobject<UWidgetComponent>("HealthBar");
+	HealthBar->SetupAttachment(GetRootComponent());
 }
 
 void AEnemyBase::HighlightActor()
@@ -56,8 +62,39 @@ void AEnemyBase::BeginPlay()
 {
 	Super::BeginPlay();
 	
+	//GetCharacterMovement()->MaxWalkSpeed = BaseWalkSpeed;
 	InitAbilityActorInfo();
+	/*if (HasAuthority())
+	{
+		UVillainAbilitySystemLibrary::GiveStartupAbilities(this, AbilitySystemComponent, CharacterClass);
+	}*/
 	
+	if(UVillainUserWidget* VillainUserWidget = Cast<UVillainUserWidget>(HealthBar->GetUserWidgetObject()))
+	{
+		VillainUserWidget->SetWidgetController(this);
+	};
+	
+	if (const UVillainAttributeSet* VillainAS = CastChecked<UVillainAttributeSet>(AttributeSet))
+	{
+		AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(VillainAS->GetHealthAttribute()).AddLambda(
+		[this](const FOnAttributeChangeData& Data)
+	{
+			OnHealthChanged.Broadcast(Data.NewValue);
+	});
+
+		AbilitySystemComponent->GetGameplayAttributeValueChangeDelegate(VillainAS->GetMaxHealthAttribute()).AddLambda(
+	[this](const FOnAttributeChangeData& Data)
+	{
+			OnMaxHealthChanged.Broadcast(Data.NewValue);
+	});
+		
+		/*AbilitySystemComponent->RegisterGameplayTagEvent(FVillainGameplayTags::Get().Effects_HitReact, EGameplayTagEventType::NewOrRemoved).AddUObject(
+			this,
+			&AEnemyBase::HitReactTagChanged
+		);*/
+		OnHealthChanged.Broadcast(VillainAS->GetHealth());
+		OnMaxHealthChanged.Broadcast(VillainAS->GetMaxHealth());
+	}
 }
 
 void AEnemyBase::InitAbilityActorInfo()
