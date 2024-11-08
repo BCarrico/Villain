@@ -81,13 +81,14 @@ void UVillainAttributeSet::HandleIncomingDamage(const FEffectProperties& Props)
 		const bool bFatal = NewHealth <= 0.f;
 		if (bFatal)
 		{
-			/*ICombatInterface* CombatInterface = Cast<ICombatInterface>(Props.TargetAvatarActor);
+			ICombatInterface* CombatInterface = Cast<ICombatInterface>(Props.TargetAvatarActor);
 			if (CombatInterface)
 			{
-				CombatInterface->Die(UAuraAbilitySystemLibrary::GetDeathImpulse(Props.EffectContextHandle));
+				//CombatInterface->Die(UVillainAbilitySystemLibrary::GetDeathImpulse(Props.EffectContextHandle));
+				CombatInterface->Die(FVector::Zero());
 			}
-			SendXPEvent(Props);
-			*/
+			//SendXPEvent(Props);
+			
 		}
 		else
 		{

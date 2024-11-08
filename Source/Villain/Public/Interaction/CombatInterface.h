@@ -52,4 +52,6 @@ public:
 	
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent)
 	FVector GetCombatSocketLocation(const FGameplayTag& MontageTag);
+
+	virtual void Die(const FVector& DeathImpulse) = 0;
 };

@@ -51,7 +51,8 @@ public:
 
  // Mutation Tags
  FGameplayTag Mutation_WellFed;
-
+ FGameplayTag Mutation_IncreaseFireRateTest;
+ 
  // Damage Type Tags
  FGameplayTag Damage;
  FGameplayTag Damage_TestDamageType;

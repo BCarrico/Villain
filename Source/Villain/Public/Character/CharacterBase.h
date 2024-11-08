@@ -35,6 +35,11 @@ public:
 	// Combat Interface
 	virtual FVector GetCombatSocketLocation_Implementation(const FGameplayTag& MontageTag) override;
 	virtual TArray<FTaggedMontage> GetAttackMontages_Implementation() override;
+	virtual void Die(const FVector& DeathImpulse) override;
+
+
+	UFUNCTION(NetMulticast, Reliable)
+	virtual void MulticastHandleDeath(const FVector& DeathImpulse);
 	
 	UPROPERTY(EditAnywhere, Category="Combat")
 	TArray<FTaggedMontage> AttackMontages;

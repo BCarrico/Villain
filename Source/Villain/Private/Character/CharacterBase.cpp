@@ -6,6 +6,7 @@
 #include "VillainGameplayTags.h"
 #include "AbilitySystem/VillainAbilitySystemComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 
 // Sets default values
@@ -42,8 +43,42 @@ TArray<FTaggedMontage> ACharacterBase::GetAttackMontages_Implementation()
 	return AttackMontages;
 }
 
+void ACharacterBase::Die(const FVector& DeathImpulse)
+{
+	if (Weapon)
+	{
+		Weapon->DetachFromComponent(FDetachmentTransformRules(EDetachmentRule::KeepWorld, true));
+	}
+	MulticastHandleDeath(DeathImpulse);
+}
+
+void ACharacterBase::MulticastHandleDeath_Implementation(const FVector& DeathImpulse)
+{
+	//UGameplayStatics::PlaySoundAtLocation(this, DeathSound, GetActorLocation(), GetActorRotation());
+	if (Weapon)
+	{
+		Weapon->SetSimulatePhysics(true);
+		Weapon->SetEnableGravity(true);
+		Weapon->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
+
+		Weapon->AddImpulse(DeathImpulse * 0.1f, NAME_None, true); //bVelChange to true = no longer uses mass
+	}
+	
+	GetMesh()->SetSimulatePhysics(true);
+	GetMesh()->SetEnableGravity(true);
+	GetMesh()->SetCollisionEnabled(ECollisionEnabled::PhysicsOnly);
+	GetMesh()->SetCollisionResponseToChannel(ECC_WorldStatic, ECR_Block);
+	GetMesh()->AddImpulse(DeathImpulse, NAME_None, true); //bVelChange to true = no longer uses mass
+	GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+	//Dissolve();
+	//bDead = true;
+	//BurnDebuffComponent->Deactivate();
+	//StunDebuffComponent->Deactivate();
+	//OnDeathDelegate.Broadcast(this);
+}
+
 void ACharacterBase::ApplyEffectToSelf_Implementation(TSubclassOf<UGameplayEffect> GameplayEffectClass,
-	float Level) const
+                                                      float Level) const
 {
 	check(IsValid(GetAbilitySystemComponent()));
 	check (GameplayEffectClass);

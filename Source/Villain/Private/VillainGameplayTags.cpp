@@ -44,7 +44,7 @@ void FVillainGameplayTags::InitializeNativeGameplayTags()
 
 	// Mutation Tags
 	GameplayTags.Mutation_WellFed = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Mutation.WellFed"), FString("Increase character size scale"));
-
+	GameplayTags.Mutation_IncreaseFireRateTest = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Mutation.IncreaseFireRateTest"), FString("Increase fire rate for rifle by 50%"));
 	// Damage Types
 	GameplayTags.Damage = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage"), FString("Damage"));
 	GameplayTags.Damage_TestDamageType = UGameplayTagsManager::Get().AddNativeGameplayTag(FName("Damage.TestDamageType"), FString("Test Damage Type"));
